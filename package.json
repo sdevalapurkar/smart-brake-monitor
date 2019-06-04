@@ -1,0 +1,28 @@
+{
+  "name": "smart-brake-monitor",
+  "version": "1.0.0",
+  "description": "A device and mechanism to monitor braking patterns, prevent accidents, and also allow users to easily analyze their driving behaviours with a beautiful interface.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next",
+   "build": "next build",
+   "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdevalapurkar/smart-brake-monitor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sdevalapurkar/smart-brake-monitor/issues"
+  },
+  "homepage": "https://github.com/sdevalapurkar/smart-brake-monitor#readme",
+  "dependencies": {
+    "next": "^8.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
