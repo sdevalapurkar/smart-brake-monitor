@@ -3,5 +3,5 @@ const Index = () => (
         <p>Smart Braking System</p>
     </div>
 );
-  
+
 export default Index;
