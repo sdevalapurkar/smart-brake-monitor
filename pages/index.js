@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavbarBootstrap from '../components/NavbarBootstrap';
+import Cards from '../components/Cards';
 
 class Index extends Component {
     render() {
@@ -12,6 +13,7 @@ class Index extends Component {
                     crossorigin="anonymous"
                 />
                 <NavbarBootstrap />
+                <Cards />
             </div>
         )
     }
