@@ -113,66 +113,31 @@ function (_Component) {
           lineNumber: 35
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_7___default.a.Link, {
-        href: "#link",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 36
-        },
-        __self: this
-      }, "Link"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_NavDropdown__WEBPACK_IMPORTED_MODULE_8___default.a, {
-        title: "Dropdown",
-        id: "basic-nav-dropdown",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 37
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_NavDropdown__WEBPACK_IMPORTED_MODULE_8___default.a.Item, {
-        href: "#action/3.1",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 38
-        },
-        __self: this
-      }, "Action"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_NavDropdown__WEBPACK_IMPORTED_MODULE_8___default.a.Divider, {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 39
-        },
-        __self: this
-      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_NavDropdown__WEBPACK_IMPORTED_MODULE_8___default.a.Item, {
-        href: "#action/3.4",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 40
-        },
-        __self: this
-      }, "Separated link"))), !isAuthenticated && react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_9___default.a, {
+      }), !isAuthenticated && react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_9___default.a, {
         inline: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 44
+          lineNumber: 37
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11___default.a, {
         size: "sm",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 45
+          lineNumber: 38
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11___default.a.Prepend, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 46
+          lineNumber: 39
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11___default.a.Text, {
         id: "basic-addon1",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 47
+          lineNumber: 40
         },
         __self: this
       }, "@")), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_FormControl__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -181,27 +146,27 @@ function (_Component) {
         "aria-describedby": "basic-addon1",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 49
+          lineNumber: 42
         },
         __self: this
       })), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11___default.a, {
         size: "sm",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 56
+          lineNumber: 49
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11___default.a.Prepend, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 57
+          lineNumber: 50
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11___default.a.Text, {
         id: "basic-addon1",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 58
+          lineNumber: 51
         },
         __self: this
       }, "*")), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_FormControl__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -210,10 +175,20 @@ function (_Component) {
         "aria-describedby": "basic-addon1",
         __source: {
           fileName: _jsxFileName,
+          lineNumber: 53
+        },
+        __self: this
+      })), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_12___default.a, {
+        size: "sm",
+        as: "input",
+        type: "submit",
+        value: "Submit",
+        __source: {
+          fileName: _jsxFileName,
           lineNumber: 60
         },
         __self: this
-      })))));
+      }))));
     }
   }]);
 

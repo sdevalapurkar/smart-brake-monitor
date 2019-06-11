@@ -32,14 +32,7 @@ class NavbarBootstrap extends Component {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
-                    <Nav.Link href="#link">Link</Nav.Link>
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                    </NavDropdown>
-                    </Nav>
+                    <Nav className="mr-auto" />
                     {!isAuthenticated && (
                         <Form inline>
                             <InputGroup size="sm">
@@ -63,6 +56,8 @@ class NavbarBootstrap extends Component {
                                     aria-describedby="basic-addon1"
                                 />
                             </InputGroup>
+
+                            <Button size="sm" as="input" type="submit" value="Submit" />
                         </Form>
                     )}
                 </Navbar.Collapse>
