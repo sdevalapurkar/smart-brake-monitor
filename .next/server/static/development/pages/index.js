@@ -119,8 +119,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var react_bootstrap_FormControl__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-bootstrap/FormControl */ "react-bootstrap/FormControl");
 /* harmony import */ var react_bootstrap_FormControl__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_FormControl__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-bootstrap/Button */ "react-bootstrap/Button");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-bootstrap/InputGroup */ "react-bootstrap/InputGroup");
+/* harmony import */ var react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-bootstrap/Button */ "react-bootstrap/Button");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_12__);
 
 
 
@@ -135,68 +137,80 @@ var _jsxFileName = "/Users/shreyasdevalapurkar/Documents/smart-brake-monitor/com
 
 
 
+
 var NavbarBootstrap =
 /*#__PURE__*/
 function (_Component) {
   Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(NavbarBootstrap, _Component);
 
-  function NavbarBootstrap() {
+  function NavbarBootstrap(props) {
+    var _this;
+
     Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, NavbarBootstrap);
 
-    return Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(NavbarBootstrap).apply(this, arguments));
+    _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(NavbarBootstrap).call(this, props));
+    _this.state = {
+      isAuthenticated: false
+    };
+    return _this;
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(NavbarBootstrap, [{
     key: "render",
     value: function render() {
+      var isAuthenticated = this.state.isAuthenticated;
       return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_6___default.a, {
         bg: "light",
         expand: "lg",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 12
+          lineNumber: 23
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_6___default.a.Brand, {
         href: "#home",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 13
+          lineNumber: 24
         },
         __self: this
-      }, "React-Bootstrap"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_6___default.a.Toggle, {
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("img", {
+        alt: "",
+        src: __webpack_require__(/*! ../img/logo.png */ "./img/logo.png"),
+        width: "100",
+        height: "50",
+        className: "d-inline-block align-top",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 25
+        },
+        __self: this
+      })), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_6___default.a.Toggle, {
         "aria-controls": "basic-navbar-nav",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 14
+          lineNumber: 33
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_6___default.a.Collapse, {
         id: "basic-navbar-nav",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 15
+          lineNumber: 34
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_7___default.a, {
         className: "mr-auto",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 16
+          lineNumber: 35
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_7___default.a.Link, {
-        href: "#home",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 17
-        },
-        __self: this
-      }, "Home"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_7___default.a.Link, {
         href: "#link",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 18
+          lineNumber: 36
         },
         __self: this
       }, "Link"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_NavDropdown__WEBPACK_IMPORTED_MODULE_8___default.a, {
@@ -204,67 +218,95 @@ function (_Component) {
         id: "basic-nav-dropdown",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 19
+          lineNumber: 37
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_NavDropdown__WEBPACK_IMPORTED_MODULE_8___default.a.Item, {
         href: "#action/3.1",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 20
+          lineNumber: 38
         },
         __self: this
-      }, "Action"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_NavDropdown__WEBPACK_IMPORTED_MODULE_8___default.a.Item, {
-        href: "#action/3.2",
+      }, "Action"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_NavDropdown__WEBPACK_IMPORTED_MODULE_8___default.a.Divider, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 21
-        },
-        __self: this
-      }, "Another action"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_NavDropdown__WEBPACK_IMPORTED_MODULE_8___default.a.Item, {
-        href: "#action/3.3",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 22
-        },
-        __self: this
-      }, "Something"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_NavDropdown__WEBPACK_IMPORTED_MODULE_8___default.a.Divider, {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 23
+          lineNumber: 39
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_NavDropdown__WEBPACK_IMPORTED_MODULE_8___default.a.Item, {
         href: "#action/3.4",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 24
+          lineNumber: 40
         },
         __self: this
-      }, "Separated link"))), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_9___default.a, {
+      }, "Separated link"))), !isAuthenticated && react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_9___default.a, {
         inline: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 27
+          lineNumber: 44
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_FormControl__WEBPACK_IMPORTED_MODULE_10___default.a, {
-        type: "text",
-        placeholder: "Search",
-        className: "mr-sm-2",
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11___default.a, {
+        size: "sm",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 28
+          lineNumber: 45
         },
         __self: this
-      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_11___default.a, {
-        variant: "outline-success",
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11___default.a.Prepend, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 29
+          lineNumber: 46
         },
         __self: this
-      }, "Search"))));
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11___default.a.Text, {
+        id: "basic-addon1",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 47
+        },
+        __self: this
+      }, "@")), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_FormControl__WEBPACK_IMPORTED_MODULE_10___default.a, {
+        placeholder: "Username",
+        "aria-label": "Username",
+        "aria-describedby": "basic-addon1",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 49
+        },
+        __self: this
+      })), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11___default.a, {
+        size: "sm",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 56
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11___default.a.Prepend, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 57
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_InputGroup__WEBPACK_IMPORTED_MODULE_11___default.a.Text, {
+        id: "basic-addon1",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 58
+        },
+        __self: this
+      }, "*")), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap_FormControl__WEBPACK_IMPORTED_MODULE_10___default.a, {
+        placeholder: "Password",
+        "aria-label": "Password",
+        "aria-describedby": "basic-addon1",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 60
+        },
+        __self: this
+      })))));
     }
   }]);
 
@@ -272,6 +314,17 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_5__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (NavbarBootstrap);
+
+/***/ }),
+
+/***/ "./img/logo.png":
+/*!**********************!*\
+  !*** ./img/logo.png ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/_next/static/images/logo-efb4945d9337c55b893d067e0f50a526.png";
 
 /***/ }),
 
@@ -744,6 +797,17 @@ module.exports = require("react-bootstrap/Form");
 /***/ (function(module, exports) {
 
 module.exports = require("react-bootstrap/FormControl");
+
+/***/ }),
+
+/***/ "react-bootstrap/InputGroup":
+/*!*********************************************!*\
+  !*** external "react-bootstrap/InputGroup" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-bootstrap/InputGroup");
 
 /***/ }),
 

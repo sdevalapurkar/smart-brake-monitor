@@ -26,6 +26,7 @@
     "@zeit/next-stylus": "^1.0.1",
     "bootstrap": "^4.3.1",
     "next": "^8.1.0",
+    "next-images": "^1.1.1",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",
