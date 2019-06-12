@@ -19,9 +19,9 @@ app.use((req, res, next) => {
 });
 
 app.get('/users', db.getUsers);
-app.get('/users/:id', db.getUserById);
 app.post('/authenticate', db.authenticateUser);
 app.post('/createuser', db.createUser);
+app.post('/users/getUserByEmail', db.getUserByEmail);
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)

@@ -44,8 +44,8 @@ class SignupModal extends Component {
             'password': password,
         })
         .then(response => {
+            Router.push({ pathname: '/dashboard', query: { name: name, email: email } });
             this.setState({ email: '', name: '', password: '', emailUsed: false });
-            Router.push({ pathname: '/dashboard' });
         })
         .catch(error => {
             this.setState({ emailUsed: true });
