@@ -13,8 +13,8 @@ app.use(
 );
 
 app.get('/users', db.getUsers);
-
 app.get('/users/:id', db.getUserById);
+app.get('/authenticate', db.authenticateUser);
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)

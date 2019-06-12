@@ -13,7 +13,6 @@ class Index extends Component {
                     crossorigin="anonymous"
                 />
                 <NavbarBootstrap />
-                <Cards />
             </div>
         )
     }

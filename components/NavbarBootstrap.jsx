@@ -13,7 +13,15 @@ class NavbarBootstrap extends Component {
 
         this.state = {
             isAuthenticated: false,
+            email: '',
+            password: '',
         };
+
+        this.authenticateUser = this.authenticateUser.bind(this);
+    }
+
+    authenticateUser() {
+        const { email, password } = this.state;
     }
 
     render() {
@@ -40,9 +48,11 @@ class NavbarBootstrap extends Component {
                                     <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
                                 </InputGroup.Prepend>
                                 <FormControl
-                                    placeholder="Username"
-                                    aria-label="Username"
+                                    placeholder="Email"
+                                    aria-label="Email"
+                                    type="email"
                                     aria-describedby="basic-addon1"
+                                    onChange={evt => this.setState({ email: evt.target.value })}
                                 />
                             </InputGroup>
 
@@ -52,12 +62,14 @@ class NavbarBootstrap extends Component {
                                 </InputGroup.Prepend>
                                 <FormControl
                                     placeholder="Password"
+                                    type="password"
                                     aria-label="Password"
                                     aria-describedby="basic-addon1"
+                                    onChange={evt => this.setState({ password: evt.target.value })}
                                 />
                             </InputGroup>
 
-                            <Button size="sm" as="input" type="submit" value="Submit" />
+                            <Button size="sm" as="input" value="Submit" onClick={() => this.authenticateUser()} />
                         </Form>
                     )}
                 </Navbar.Collapse>
