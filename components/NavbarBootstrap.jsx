@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import SignupModal from './SignupModal';
+import LoginModal from './LoginModal';
 
 class NavbarBootstrap extends Component {
     constructor(props) {
@@ -13,19 +12,16 @@ class NavbarBootstrap extends Component {
 
         this.state = {
             isAuthenticated: false,
-            email: '',
-            password: '',
+            showSignupModal: false,
+            showLoginModal: false,
         };
-
-        this.authenticateUser = this.authenticateUser.bind(this);
-    }
-
-    authenticateUser() {
-        const { email, password } = this.state;
     }
 
     render() {
-        const { isAuthenticated } = this.state;
+        const { isAuthenticated, showSignupModal, showLoginModal } = this.state;
+
+        let signupModalClose = () => this.setState({ showSignupModal: false });
+        let loginModalClose = () => this.setState({ showLoginModal: false });
 
         return (
             <Navbar bg="light" expand="lg">
@@ -42,37 +38,33 @@ class NavbarBootstrap extends Component {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto" />
                     {!isAuthenticated && (
-                        <Form inline>
-                            <InputGroup size="sm">
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <FormControl
-                                    placeholder="Email"
-                                    aria-label="Email"
-                                    type="email"
-                                    aria-describedby="basic-addon1"
-                                    onChange={evt => this.setState({ email: evt.target.value })}
-                                />
-                            </InputGroup>
-
-                            <InputGroup size="sm">
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon1">*</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <FormControl
-                                    placeholder="Password"
-                                    type="password"
-                                    aria-label="Password"
-                                    aria-describedby="basic-addon1"
-                                    onChange={evt => this.setState({ password: evt.target.value })}
-                                />
-                            </InputGroup>
-
-                            <Button size="sm" as="input" value="Submit" onClick={() => this.authenticateUser()} />
-                        </Form>
+                        <ButtonToolbar>
+                            <Button variant="outline-info" size="sm" as="input" value="Sign Up" onClick={() => this.setState({ showSignupModal: true })} />
+                            &nbsp;
+                            &nbsp;
+                            <Button variant="outline-success" size="sm" as="input" value="Login" onClick={() => this.setState({ showLoginModal: true })} />
+                        </ButtonToolbar>
+                    )}
+                    {isAuthenticated && (
+                        <Navbar.Brand>
+                            <img
+                                alt=""
+                                src={require('../img/profile.png')} 
+                                width="40"
+                                height="40"
+                                className="d-inline-block align-top"
+                            />
+                        </Navbar.Brand>
                     )}
                 </Navbar.Collapse>
+                <SignupModal
+                    show={showSignupModal}
+                    onHide={signupModalClose}
+                />
+                <LoginModal
+                    show={showLoginModal}
+                    onHide={loginModalClose}
+                />
             </Navbar>
         );
     }

@@ -2,18 +2,27 @@ const pool = require('./pool');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+const createUser = (request, response) => {
+    const { body } = request;
+    const password = body.password;
+    const name = body.name;
+    const email = body.email;
+
+    bcrypt.hash(password, saltRounds, (err, hash) => {
+        // Store hash in your password DB
+        pool.query('INSERT into users (name, email, password) VALUES ($1, $2, $3)', [name, email, hash], (error, results) => {
+            if (error) {
+                throw error;
+            }
+
+            response.status(201).json(results.rows);
+        });
+    });
+}
+
 const authenticateUser = (request, response) => {
-    // bcrypt.hash('shreyaspassword', saltRounds, (err, hash) => {
-    //     // Store hash in your password DB.
-    //     pool.query('insert into users (name, email, password) VALUES ($1, $2, $3)', ['Shreyas Devalapurkar', 'shreyasdevalapurkar@gmail.com', hash], (error, results) => {
-    //         if (error) {
-    //             throw error;
-    //         }
-          
-    //         response.status(201).send(`User added with ID: ${results.insertId}`)
-    //     });
-    // });
-    const email = 'shreyasdevalapurkar@gmail.com';
+    const email = request.params.email;
+    const password = request.params.password;
 
     pool.query('SELECT password from users where email = $1', [email], (error, results) => {
         if (error) {
@@ -22,19 +31,14 @@ const authenticateUser = (request, response) => {
 
         const hash = results.rows[0].password;
 
-        bcrypt.compare('adampassword', hash, function(err, res) {
-            console.log(res);
-            // res == true
+        bcrypt.compare(password, hash, function(err, res) {
+            if (res) {
+                response.status(200);
+            } else {
+                response.status(401);
+            }
         });
     });
-
-    // pool.query('select * from users', (error, results) => {
-    //     if (error) {
-    //         throw error;
-    //     }
-
-    //     console.log(results);
-    // });
 }
 
 const getUsers = (request, response) => {
@@ -62,5 +66,6 @@ const getUserById = (request, response) => {
 module.exports = {
     getUsers,
     getUserById,
-    authenticateUser
+    createUser,
+    authenticateUser,
 }
