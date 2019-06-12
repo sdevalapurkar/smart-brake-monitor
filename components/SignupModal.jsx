@@ -17,9 +17,16 @@ class SignupModal extends Component {
             name: '',
             email: '',
             password: '',
+            emailUsed: false,
         };
 
         this.signup = this.signup.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
+
+    closeModal = () => {
+        this.setState({ email: '', name: '', password: '', emailUsed: false });
+        this.props.signupModalClose();
     }
 
     signup = () => {
@@ -37,20 +44,25 @@ class SignupModal extends Component {
             'password': password,
         })
         .then(response => {
+            this.setState({ email: '', name: '', password: '', emailUsed: false });
             console.log(response);
+            //need to redirect to dashboard page
         })
         .catch(error => {
-            console.log(error);
+            this.setState({ emailUsed: true });
         });
     }
 
     render() {
+        const { emailUsed, name, password, email } = this.state;
+
         return (
             <Modal
                 {...this.props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
+                onHide={() => this.closeModal()}
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
@@ -63,6 +75,7 @@ class SignupModal extends Component {
                             <Form.Label>Name</Form.Label>
                             <Form.Control
                                 type="name"
+                                value={name}
                                 placeholder="John Smith"
                                 required
                                 onChange={evt => this.setState({ name: evt.target.value })}
@@ -73,6 +86,7 @@ class SignupModal extends Component {
                             <Form.Label>Email Address</Form.Label>
                             <Form.Control
                                 type="email"
+                                value={email}
                                 placeholder="myemail@mail.me"
                                 required
                                 onChange={evt => this.setState({ email: evt.target.value })}
@@ -86,20 +100,22 @@ class SignupModal extends Component {
                             <Form.Label>Password</Form.Label>
                             <Form.Control
                                 type="password"
+                                value={password}
                                 placeholder="************"
                                 required
                                 onChange={evt => this.setState({ password: evt.target.value })}
                             />
                         </Form.Group>
 
+                        {emailUsed && (
+                            <p style={{ color: 'red', textAlign: 'center', display: 'block' }}>
+                                Sorry, this email address is already in use. Please use a different email.
+                            </p>
+                        )}
+
                         <ButtonToolbar style={{ display: 'block', textAlign: 'center' }}>
                             <Button variant="outline-info" type="submit" onClick={() => this.signup()}>
                                 Sign Up
-                            </Button>
-                            &nbsp;
-                            &nbsp;
-                            <Button variant="outline-danger" type="submit">
-                                Cancel
                             </Button>
                         </ButtonToolbar>
                     </Form>

@@ -12,10 +12,10 @@ const createUser = (request, response) => {
         // Store hash in your password DB
         pool.query('INSERT into users (name, email, password) VALUES ($1, $2, $3)', [name, email, hash], (error, results) => {
             if (error) {
-                throw error;
+                return response.status(400).json(results);
             }
 
-            response.status(201).json(results.rows);
+            return response.status(201).json(results.rows);
         });
     });
 }

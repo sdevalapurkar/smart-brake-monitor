@@ -59,7 +59,7 @@ class NavbarBootstrap extends Component {
                 </Navbar.Collapse>
                 <SignupModal
                     show={showSignupModal}
-                    onHide={signupModalClose}
+                    signupModalClose={signupModalClose}
                 />
                 <LoginModal
                     show={showLoginModal}
