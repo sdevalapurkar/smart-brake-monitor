@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import NavbarBootstrap from '../components/NavbarBootstrap';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -13,21 +14,35 @@ class Index extends Component {
             <NavbarBootstrap isAuthenticated={false}/>
 
             <Container className="my-3">
-                <Row>
-                    <Col>
+                <Row className="justify-content-center">
+                    <Col md={6}>
                         <Card>
                             <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
+                                <Card.Title>Contact Us</Card.Title>
                                 <Card.Text>
-                                    Some quick example text to build on the card title and make up the bulk of the card's content.
+                                    <Form>
+                                        <Form.Group controlId="nameInput">
+                                            <Form.Label>Name</Form.Label>
+                                            <Form.Control type="text" placeholder="John Smith"/>
+                                        </Form.Group>
+                                        <Form.Group controlId="emailInput">
+                                            <Form.Label>Email address</Form.Label>
+                                            <Form.Control type="email" placeholder="john.smith@mail.me"/>
+                                        </Form.Group>
+                                        <Form.Group controlId="messageTextarea">
+                                            <Form.Label>Message</Form.Label>
+                                            <Form.Control as="textarea" rows="5" placeholder="Go ahead, we're listening..."/>
+                                        </Form.Group>
+                                        <Button variant="outline-info" type="submit">
+                                            Submit
+                                        </Button>
+                                    </Form>
                                 </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
                             </Card.Body>
                         </Card>
                     </Col>
                 </Row>
             </Container>
-
         </div>)
     }
 }
