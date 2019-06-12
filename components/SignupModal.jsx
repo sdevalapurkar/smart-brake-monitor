@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom'
+import Router from 'next/router';
 
 const host = 'http://localhost';
 const port = 3001;
@@ -45,8 +45,7 @@ class SignupModal extends Component {
         })
         .then(response => {
             this.setState({ email: '', name: '', password: '', emailUsed: false });
-            console.log(response);
-            //need to redirect to dashboard page
+            Router.push({ pathname: '/dashboard' });
         })
         .catch(error => {
             this.setState({ emailUsed: true });

@@ -11,14 +11,14 @@ class NavbarBootstrap extends Component {
         super(props);
 
         this.state = {
-            isAuthenticated: false,
             showSignupModal: false,
             showLoginModal: false,
         };
     }
 
     render() {
-        const { isAuthenticated, showSignupModal, showLoginModal } = this.state;
+        const { showSignupModal, showLoginModal } = this.state;
+        const { isAuthenticated } = this.props;
 
         let signupModalClose = () => this.setState({ showSignupModal: false });
         let loginModalClose = () => this.setState({ showLoginModal: false });
@@ -35,6 +35,18 @@ class NavbarBootstrap extends Component {
                     />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        <Nav.Link href="/about">About</Nav.Link>
+                        &nbsp;
+                        &nbsp;
+                        <Nav.Link href="/contact">Contact</Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto" />
                     {!isAuthenticated && (
@@ -63,7 +75,7 @@ class NavbarBootstrap extends Component {
                 />
                 <LoginModal
                     show={showLoginModal}
-                    onHide={loginModalClose}
+                    loginModalClose={loginModalClose}
                 />
             </Navbar>
         );
