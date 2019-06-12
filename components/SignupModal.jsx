@@ -86,7 +86,7 @@ class SignupModal extends Component {
                             <Form.Control
                                 type="email"
                                 value={email}
-                                placeholder="myemail@mail.me"
+                                placeholder="john.smith@mail.me"
                                 required
                                 onChange={evt => this.setState({ email: evt.target.value })}
                             />
