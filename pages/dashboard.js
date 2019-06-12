@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavbarBootstrap from '../components/NavbarBootstrap';
 
-class Index extends Component {
+class Dashboard extends Component {
     render() {
         return (
             <div>
@@ -12,11 +12,12 @@ class Index extends Component {
                     crossorigin="anonymous"
                 />
                 <NavbarBootstrap
-                    isAuthenticated={false}
+                    isAuthenticated={true}
                 />
+                <p>Main dashboard logged in!</p>
             </div>
         )
     }
 }
 
-export default Index;
+export default Dashboard;

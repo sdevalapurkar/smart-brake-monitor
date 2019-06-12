@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 
 app.get('/users', db.getUsers);
 app.get('/users/:id', db.getUserById);
-app.get('/authenticate', db.authenticateUser);
+app.post('/authenticate', db.authenticateUser);
 app.post('/createuser', db.createUser);
 
 app.listen(port, () => {
