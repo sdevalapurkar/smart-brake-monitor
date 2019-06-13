@@ -40,10 +40,8 @@ class LoginModal extends Component {
             'password': password,
         })
         .then(response => {
-            console.log(response);
+            Router.push({ pathname: '/dashboard', query: { email: email } });
             this.setState({ email: '', password: '', failedAuth: false });
-            Router.push({ pathname: '/dashboard' });
-            // Router.push('/index', '/dashboard');
         })
         .catch(error => {
             console.log(error);

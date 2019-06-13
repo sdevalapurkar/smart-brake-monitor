@@ -25,8 +25,6 @@ const authenticateUser = (request, response) => {
     const email = body.email;
     const password = body.password;
 
-    console.log(email, password);
-
     pool.query('SELECT password from users where email = $1', [email], (error, results) => {
         if (error) {
             return response.status(400).json(results);
@@ -35,11 +33,10 @@ const authenticateUser = (request, response) => {
         const hash = results.rows[0].password;
 
         bcrypt.compare(password, hash, function(err, res) {
-            console.log(res);
             if (res) {
                 return response.status(200).json({});
             } else {
-                response.status(401).json({});
+                return response.status(401).json({});
             }
         });
     });
@@ -48,28 +45,30 @@ const authenticateUser = (request, response) => {
 const getUsers = (request, response) => {
     pool.query('SELECT * FROM users ORDER BY user_id ASC', (error, results) => {
         if (error) {
-            return response.status(400).json(results);
+            return response.status(400).json({});
         }
       
-        response.status(200).json(results.rows);
+        return response.status(200).json(results.rows);
     });
 }
 
-const getUserById = (request, response) => {
-    const id = parseInt(request.params.id);
-  
-    pool.query('SELECT * FROM users WHERE user_id = $1', [id], (error, results) => {
+const getUserByEmail = (request, response) => {
+    const { body } = request;
+    const email = body.email;
+
+    pool.query('SELECT name from users where email = $1', [email], (error, results) => {
         if (error) {
             return response.status(400).json(results);
         }
 
-        response.status(200).json(results.rows);
+        const nameResultJson = results.rows[0];
+        return response.status(200).json(nameResultJson);
     });
 }
 
 module.exports = {
     getUsers,
-    getUserById,
     createUser,
     authenticateUser,
+    getUserByEmail,
 }

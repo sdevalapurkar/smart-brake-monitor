@@ -44,8 +44,8 @@ class SignupModal extends Component {
             'password': password,
         })
         .then(response => {
+            Router.push({ pathname: '/dashboard', query: { name: name, email: email } });
             this.setState({ email: '', name: '', password: '', emailUsed: false });
-            Router.push({ pathname: '/dashboard' });
         })
         .catch(error => {
             this.setState({ emailUsed: true });
@@ -113,7 +113,7 @@ class SignupModal extends Component {
                         )}
 
                         <ButtonToolbar style={{ display: 'block', textAlign: 'center' }}>
-                            <Button variant="outline-info" type="submit" onClick={() => this.signup()}>
+                            <Button variant="outline-info" onClick={() => this.signup()}>
                                 Sign Up
                             </Button>
                         </ButtonToolbar>
