@@ -113,7 +113,7 @@ class SignupModal extends Component {
                         )}
 
                         <ButtonToolbar style={{ display: 'block', textAlign: 'center' }}>
-                            <Button variant="outline-info" type="submit" onClick={() => this.signup()}>
+                            <Button variant="outline-info" onClick={() => this.signup()}>
                                 Sign Up
                             </Button>
                         </ButtonToolbar>

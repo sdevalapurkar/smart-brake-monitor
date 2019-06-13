@@ -31,8 +31,8 @@ class NavbarBootstrap extends Component {
         const { isAuthenticated, name } = this.props;
 
         const popover = (
-            <Popover id="popover-basic" title={name}>
-                <NavDropdown.Item style={{ textAlign: 'center' }}>Action</NavDropdown.Item>
+            <Popover id="popover-basic" title={name} style={{ textAlign: 'center' }}>
+                <NavDropdown.Item style={{ textAlign: 'center' }}>My Account</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item
                     style={{ color: 'red', textAlign: 'center' }}
