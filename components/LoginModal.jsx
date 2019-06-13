@@ -71,7 +71,7 @@ class LoginModal extends Component {
                             <Form.Label>Email Address</Form.Label>
                             <Form.Control
                                 type="email"
-                                placeholder="myemail@mail.me"
+                                placeholder="john.smith@mail.me"
                                 required
                                 value={email}
                                 onChange={evt => this.setState({ email: evt.target.value })}
