@@ -1,8 +1,42 @@
 import React, { Component } from 'react';
 import NavbarBootstrap from '../components/NavbarBootstrap';
+import axios from 'axios';
+
+const host = 'http://localhost';
+const port = 3001;
 
 class Dashboard extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            name: '',
+        };
+    }
+
+    componentDidMount() {
+        if (this.props.url.query.name) {
+            this.setState({ name: this.props.url.query.name });
+            return;
+        }
+
+        const email = this.props.url.query.email;
+
+        axios.post(`${host}:${port}/users/getUserByEmail`, {
+            'email': email,
+        })
+        .then(response => {
+            const { data } = response;
+            this.setState({ name: data.name });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+
     render() {
+        const { name } = this.state;
+
         return (
             <div>
                 <link
@@ -13,8 +47,8 @@ class Dashboard extends Component {
                 />
                 <NavbarBootstrap
                     isAuthenticated={true}
+                    name={name}
                 />
-                <p>Main dashboard logged in!</p>
             </div>
         )
     }
