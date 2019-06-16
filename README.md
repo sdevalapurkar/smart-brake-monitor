@@ -2,7 +2,7 @@
 
 A device and mechanism to monitor braking patterns, prevent accidents, and also allow users to easily analyze their driving behaviours with a beautiful interface.
 
-## Running the application
+## Running the Application
 
 In order to run the application locally, please follow the following instructions:
 
