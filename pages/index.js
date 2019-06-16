@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import NavbarBootstrap from '../components/NavbarBootstrap';
+import Background from '../img/background.jpeg';
 
 class Index extends Component {
     render() {
         return (
-            <div>
+            <div style={{ backgroundImage: `url(${Background})`, maxWidth: '100%', height: '100%' }}>
                 <link
                     rel="stylesheet"
                     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"

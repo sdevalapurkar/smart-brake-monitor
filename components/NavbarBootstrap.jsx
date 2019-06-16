@@ -48,7 +48,7 @@ class NavbarBootstrap extends Component {
 
         return (
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="/">
                     <img
                         alt=""
                         src={require('../img/logo.png')} 

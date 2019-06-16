@@ -5,12 +5,20 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
+import Background from '../img/background.jpeg';
 
 function Contact(props) {
     return (
-        <div>
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-            <NavbarBootstrap isAuthenticated={false}/>
+        <div style={{ backgroundImage: `url(${Background})`, maxWidth: '100%', height: '100%' }}>
+            <link
+                rel="stylesheet"
+                href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+                crossorigin="anonymous"
+            />
+
+            <NavbarBootstrap isAuthenticated={false} />
+
             <Container className="my-3">
                 <Row className="justify-content-center">
                     <Col md={6}>
