@@ -34,7 +34,7 @@ class About extends Component {
                 </h6>
               </Row>
               <Row>
-                <Col md="auto">
+                <Col className="text-center">
                   <Figure>
                     <Figure.Image
                       width={110}
@@ -47,7 +47,7 @@ class About extends Component {
                     </Figure.Caption>
                   </Figure>
                 </Col>
-                <Col md="auto">
+                <Col className="text-center">
                   <Figure>
                     <Figure.Image
                       width={110}
@@ -62,7 +62,7 @@ class About extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col md="auto">
+                <Col className="text-center">
                   <Figure>
                     <Figure.Image
                       width={110}
@@ -75,7 +75,7 @@ class About extends Component {
                     </Figure.Caption>
                   </Figure>
                 </Col>
-                <Col md="auto">
+                <Col className="text-center">
                   <Figure>
                     <Figure.Image
                       width={110}
@@ -90,7 +90,7 @@ class About extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col md="auto">
+                <Col className="text-center">
                   <Figure>
                     <Figure.Image
                       width={110}
@@ -103,7 +103,7 @@ class About extends Component {
                     </Figure.Caption>
                   </Figure>
                 </Col>
-                <Col md="auto">
+                <Col className="text-center">
                   <Figure>
                     <Figure.Image
                       width={110}
