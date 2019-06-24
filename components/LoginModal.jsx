@@ -42,8 +42,8 @@ class LoginModal extends Component {
         .then(response => {
             const token = response.data.token;
             window.localStorage.setItem('auth_token', token);
-            // Router.push({ pathname: '/dashboard', query: { email: email } });
             this.setState({ email: '', password: '', failedAuth: false });
+            Router.push({ pathname: '/dashboard' });
         })
         .catch(error => {
             console.log(error);

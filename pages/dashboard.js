@@ -10,32 +10,28 @@ class Dashboard extends Component {
         super(props);
 
         this.state = {
+            isAuthenticated: false,
             name: '',
         };
     }
 
-    componentDidMount() {
-        if (this.props.url.query.name) {
-            this.setState({ name: this.props.url.query.name });
-            return;
+    componentDidMount = () => {
+        const authToken = window.localStorage.getItem('auth_token');
+        console.log(authToken);
+
+        if (!authToken) {
+            this.setState({ isAuthenticated: false });
+        } else {
+            axios.post(`${host}:${port}/authstatus`, { headers: { 'Authorization' : `Bearer ${authToken}` } }).then(res => {
+                if (res.status === 200) {
+                    this.setState({ isAuthenticated: true, name: res.data.authData.name });
+                }
+            }).catch(err => {});
         }
-
-        const email = this.props.url.query.email;
-
-        axios.post(`${host}:${port}/users/getUserByEmail`, {
-            'email': email,
-        })
-        .then(response => {
-            const { data } = response;
-            this.setState({ name: data.name });
-        })
-        .catch(error => {
-            console.log(error);
-        });
     }
 
     render() {
-        const { name } = this.state;
+        const { isAuthenticated, name } = this.state;
 
         return (
             <div>
@@ -46,7 +42,7 @@ class Dashboard extends Component {
                     crossorigin="anonymous"
                 />
                 <NavbarBootstrap
-                    isAuthenticated={true}
+                    isAuthenticated={isAuthenticated}
                     name={name}
                 />
             </div>
