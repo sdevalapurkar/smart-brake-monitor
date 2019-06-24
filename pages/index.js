@@ -3,7 +3,32 @@ import NavbarBootstrap from '../components/NavbarBootstrap';
 import Background from '../img/background.jpeg';
 
 class Index extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isAuthenticated: false,
+            name: '',
+        };
+    }
+
+    componentDidMount = () => {
+        const authToken = window.localStorage.getItem('auth_token');
+
+        if (!authToken) {
+            this.setState({ isAuthenticated: false });
+        } else {
+            axios.post(`${host}:${port}/authstatus`, { headers: { 'Authorization' : `Bearer ${authToken}` } }).then(res => {
+                if (res.status === 200) {
+                    this.setState({ isAuthenticated: true, name: res.data.authData.name });
+                }
+            }).catch(err => {});
+        }
+    }
+
     render() {
+        const { isAuthenticated } = this.state;
+
         return (
             <div style={{ backgroundImage: `url(${Background})`, maxWidth: '100%', height: '100%' }}>
                 <link
@@ -13,7 +38,7 @@ class Index extends Component {
                     crossorigin="anonymous"
                 />
                 <NavbarBootstrap
-                    isAuthenticated={false}
+                    isAuthenticated={isAuthenticated}
                 />
             </div>
         )

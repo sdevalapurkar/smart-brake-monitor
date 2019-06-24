@@ -17,7 +17,6 @@ class Dashboard extends Component {
 
     componentDidMount = () => {
         const authToken = window.localStorage.getItem('auth_token');
-        console.log(authToken);
 
         if (!authToken) {
             this.setState({ isAuthenticated: false });
