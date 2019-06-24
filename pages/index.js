@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import NavbarBootstrap from '../components/NavbarBootstrap';
 import Background from '../img/background.jpeg';
+import axios from 'axios';
+
+const host = 'http://localhost';
+const port = 3001;
 
 class Index extends Component {
     constructor(props) {
@@ -15,6 +19,8 @@ class Index extends Component {
     componentDidMount = () => {
         const authToken = window.localStorage.getItem('auth_token');
 
+        console.log('inside did mount of index', authToken);
+
         if (!authToken) {
             this.setState({ isAuthenticated: false });
         } else {
@@ -27,7 +33,7 @@ class Index extends Component {
     }
 
     render() {
-        const { isAuthenticated } = this.state;
+        const { name, isAuthenticated } = this.state;
 
         return (
             <div style={{ backgroundImage: `url(${Background})`, maxWidth: '100%', height: '100%' }}>
@@ -39,6 +45,7 @@ class Index extends Component {
                 />
                 <NavbarBootstrap
                     isAuthenticated={isAuthenticated}
+                    name={name}
                 />
             </div>
         )
