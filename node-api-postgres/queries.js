@@ -1,6 +1,9 @@
 const pool = require('./pool');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const jwt = require('jsonwebtoken');
+const fs = require('fs');
+const privateKey  = fs.readFileSync('../../id_rsa', 'utf8');
 
 const createUser = (request, response) => {
     const { body } = request;
@@ -9,13 +12,17 @@ const createUser = (request, response) => {
     const email = body.email;
 
     bcrypt.hash(password, saltRounds, (err, hash) => {
-        // Store hash in your password DB
         pool.query('INSERT into users (name, email, password) VALUES ($1, $2, $3)', [name, email, hash], (error, results) => {
             if (error) {
                 return response.status(400).json(results);
             }
 
-            return response.status(201).json(results.rows);
+            // jwt auth
+            jwt.sign({ name, email }, privateKey, (err, token) => {
+                return response.status(200).json({
+                    token,
+                });
+            });
         });
     });
 }
@@ -25,16 +32,23 @@ const authenticateUser = (request, response) => {
     const email = body.email;
     const password = body.password;
 
-    pool.query('SELECT password from users where email = $1', [email], (error, results) => {
+    pool.query('SELECT user_id, name, password from users where email = $1', [email], (error, results) => {
         if (error) {
             return response.status(400).json(results);
         }
 
         const hash = results.rows[0].password;
+        const userName = results.rows[0].name;
+        const userID = results.rows[0].user_id;
 
         bcrypt.compare(password, hash, function(err, res) {
             if (res) {
-                return response.status(200).json({});
+                // jwt auth
+                jwt.sign({ id: userID, name: userName, email: email }, privateKey, (err, token) => {
+                    return response.status(200).json({
+                        token,
+                    });
+                });
             } else {
                 return response.status(401).json({});
             }
