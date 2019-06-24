@@ -45,8 +45,6 @@ function verifyJWTToken(req, res, next) {
     AUTHORIZATION: Bearer <access_token> */
     const bearerHeader = req.body.headers.Authorization;
 
-    console.log(bearerHeader);
-
     if (typeof bearerHeader === undefined || !bearerHeader) {
         return res.status(403).json({ message: 'unauthorized for route' });
     }

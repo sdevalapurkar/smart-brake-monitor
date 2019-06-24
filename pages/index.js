@@ -19,8 +19,6 @@ class Index extends Component {
     componentDidMount = () => {
         const authToken = window.localStorage.getItem('auth_token');
 
-        console.log('inside did mount of index', authToken);
-
         if (!authToken) {
             this.setState({ isAuthenticated: false });
         } else {
