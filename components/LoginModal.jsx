@@ -40,7 +40,9 @@ class LoginModal extends Component {
             'password': password,
         })
         .then(response => {
-            Router.push({ pathname: '/dashboard', query: { email: email } });
+            const token = response.data.token;
+            window.localStorage.setItem('auth_token', token);
+            // Router.push({ pathname: '/dashboard', query: { email: email } });
             this.setState({ email: '', password: '', failedAuth: false });
         })
         .catch(error => {

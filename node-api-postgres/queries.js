@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-const privateKey  = fs.readFileSync('../../id_rsa', 'utf8');
+const privateKey  = fs.readFileSync('../id_rsa', 'utf8');
 
 const createUser = (request, response) => {
     const { body } = request;
@@ -18,7 +18,7 @@ const createUser = (request, response) => {
             }
 
             // jwt auth
-            jwt.sign({ name, email }, privateKey, (err, token) => {
+            jwt.sign({ name, email }, privateKey, { expiresIn: '2h' }, (err, token) => {
                 return response.status(200).json({
                     token,
                 });
@@ -44,7 +44,7 @@ const authenticateUser = (request, response) => {
         bcrypt.compare(password, hash, function(err, res) {
             if (res) {
                 // jwt auth
-                jwt.sign({ id: userID, name: userName, email: email }, privateKey, (err, token) => {
+                jwt.sign({ id: userID, name: userName, email: email }, privateKey, { expiresIn: '2h' }, (err, token) => {
                     return response.status(200).json({
                         token,
                     });

@@ -4,3 +4,5 @@ node_modules
 node-api-postgres/pool.js
 node-api-postgres/node_modules
 .next
+id_rsa
+id_rsa.pub
