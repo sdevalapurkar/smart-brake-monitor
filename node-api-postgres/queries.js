@@ -20,7 +20,7 @@ const createUser = (request, response) => {
             // jwt auth
             jwt.sign({ name, email }, privateKey, { expiresIn: '2h' }, (err, token) => {
                 return response.status(200).json({
-                    token,
+                    token
                 });
             });
         });
@@ -57,7 +57,7 @@ const authenticateUser = (request, response) => {
         bcrypt.compare(password, hash, function(err, res) {
             if (res) {
                 // jwt auth
-                jwt.sign({ id: userID, name: userName, email: email, vehiclesOwned: vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
+                jwt.sign({ id: userID, name: userName, email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
                     return response.status(200).json({
                         token
                     });
