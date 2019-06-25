@@ -1,0 +1,103 @@
+/*------------- HEADER -------------------*/  
+header {
+    background: url("../img/road.jpg");
+    background-size: 100%;
+    height: 700px;
+    background-position: center;
+    position: relative;
+}
+
+header div.head {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: 90%;
+    grid-template-columns: repeat(2,1fr);
+    margin: 0 auto;
+    padding-top: 6%;
+    align-items: center;
+}
+
+header div.head  {
+    color: white;
+}
+
+header div.head h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    padding-top: 0px;
+    margin: 0;
+    letter-spacing: 4px;
+    border-right: 2px solid white;
+}
+
+header div.head p {
+    padding-left: 30px;
+}
+
+header div.head strong {
+    padding-left: 30px;
+}
+
+.signupdiv {
+    margin-top: 130px;
+}
+
+.signup {
+    background: #E0E0E0;
+    display: block;
+    color: black;
+    font-weight: bold;
+    width: 25%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none; 
+    -webkit-box-shadow: 0px 10px 54px -11px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 54px -11px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 54px -11px rgba(0,0,0,0.75);
+}
+
+/*------------- SERVICES -------------------*/
+div.services {
+    display: grid;
+    height: auto;
+    grid-template-columns: repeat(3,1fr);
+    padding: 10px;
+}
+
+.services div {
+    text-align: center;
+    background: #fff;
+    width: 90%;
+    border-radius: 10px;
+    margin: 10px auto 50px auto;
+
+    -webkit-box-shadow: 0px 10px 30px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 30px -9px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 30px -9px rgba(0,0,0,0.75);
+}
+
+.services p.service-icon {
+    font-size: 3rem;
+    padding: 10px 0px 10px 30px;
+    margin: 0px 0px 30px 0px;
+    text-align: left;
+    color: black;
+    filter: grayscale(0%);
+    border-bottom: 2px solid black;
+}
+
+.services p.service-title {
+    font-size: 3rem;
+    padding-bottom: 20px;
+    margin: 0;
+}
+
+.services p:last-of-type {
+    text-align: center;
+    padding: 0px 60px 10px 60px;
+}
