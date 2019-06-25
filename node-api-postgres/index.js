@@ -33,10 +33,8 @@ app.post('/authstatus', verifyJWTToken, (req, res) => {
     });
 });
 
-app.get('/users', verifyJWTToken, db.getUsers);
 app.post('/authenticate', db.authenticateUser);
 app.post('/createuser', db.createUser);
-app.post('/users/getUserByEmail', db.getUserByEmail);
 
 // verify JWT Token middleware
 function verifyJWTToken(req, res, next) {
