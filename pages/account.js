@@ -94,6 +94,7 @@ class Account extends Component {
                                                 name="nameProfileInput"
                                                 type="text"
                                                 placeholder="John Smith"
+                                                value={this.state.name}
                                                 required
                                             />
                                         </Form.Group>
@@ -103,6 +104,7 @@ class Account extends Component {
                                                 name="emailProfileInput"
                                                 type="text"
                                                 placeholder="john.smith@mail.me"
+                                                value={this.state.email}
                                                 required
                                             />
                                         </Form.Group>
