@@ -19,6 +19,14 @@ class Account extends Component {
         };
     }
 
+    createCarRow = () => {
+        let children = [];
+        for (let i = 0; i < 5; i++) {
+            children.push(<CarRow name={`Car ${i+1}`} />)
+        }
+        return children
+    }
+
     render() {
         return (
             <div>
@@ -116,9 +124,7 @@ class Account extends Component {
                                 </Card.Header>
                                 <Card.Body>
 
-                                    <CarRow name="Car 1" />
-                                    <CarRow name="Car 2" />
-                                    <CarRow name="Car 3" />
+                                    {this.createCarRow()}
 
                                     <Row className="justify-content-center">
                                         <Button variant="outline-success" type="submit">
