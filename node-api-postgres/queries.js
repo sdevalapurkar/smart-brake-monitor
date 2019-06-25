@@ -31,11 +31,24 @@ const authenticateUser = (request, response) => {
     const { body } = request;
     const email = body.email;
     const password = body.password;
+    const vehiclesOwned = [];
 
     pool.query('SELECT user_id, name, password from users where email = $1', [email], (error, results) => {
         if (error) {
             return response.status(400).json(results);
         }
+
+        pool.query('SELECT vehicle_name from vehicles where is_activated = $1 and email = $2', [true, email], (error, res) => {
+            if (error) {
+                console.log('could not retrieve vehicles for user');
+            } else {
+                if (res.rows.length) {
+                    res.rows.forEach(val => {
+                        vehiclesOwned.push(val.vehicle_name);
+                    });
+                }
+            }
+        });
 
         const hash = results.rows[0].password;
         const userName = results.rows[0].name;
@@ -44,9 +57,9 @@ const authenticateUser = (request, response) => {
         bcrypt.compare(password, hash, function(err, res) {
             if (res) {
                 // jwt auth
-                jwt.sign({ id: userID, name: userName, email: email }, privateKey, { expiresIn: '2h' }, (err, token) => {
+                jwt.sign({ id: userID, name: userName, email: email, vehiclesOwned: vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
                     return response.status(200).json({
-                        token,
+                        token
                     });
                 });
             } else {
