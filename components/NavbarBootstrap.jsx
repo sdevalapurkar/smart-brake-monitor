@@ -5,6 +5,11 @@ import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import SignupModal from './SignupModal';
 import LoginModal from './LoginModal';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Popover from 'react-bootstrap/Popover';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Link from 'next/link';
+import './index.css';
 
 class NavbarBootstrap extends Component {
     constructor(props) {
@@ -14,18 +19,39 @@ class NavbarBootstrap extends Component {
             showSignupModal: false,
             showLoginModal: false,
         };
+
+        this.logout = this.logout.bind(this);
+    }
+
+    logout = () => {
+        localStorage.removeItem('auth_token');
+        if (this.props.parentComponent === 'index') {
+            location.reload();
+        }
     }
 
     render() {
         const { showSignupModal, showLoginModal } = this.state;
-        const { isAuthenticated } = this.props;
+        const { isAuthenticated, name } = this.props;
+
+        const popover = (
+            <Popover id="popover-basic" title={name} style={{ textAlign: 'center' }}>
+                <NavDropdown.Item style={{ textAlign: 'center' }}>My Account</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item>
+                    <Link href="/">
+                        <a style={{ color: 'red', textAlign: 'center' }} onClick={() => this.logout()}>Logout</a>
+                    </Link>
+                </NavDropdown.Item>
+            </Popover>
+        );
 
         let signupModalClose = () => this.setState({ showSignupModal: false });
         let loginModalClose = () => this.setState({ showLoginModal: false });
 
         return (
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="/">
                     <img
                         alt=""
                         src={require('../img/logo.png')} 
@@ -58,15 +84,18 @@ class NavbarBootstrap extends Component {
                         </ButtonToolbar>
                     )}
                     {isAuthenticated && (
-                        <Navbar.Brand>
-                            <img
-                                alt=""
-                                src={require('../img/profile.png')} 
-                                width="40"
-                                height="40"
-                                className="d-inline-block align-top"
-                            />
-                        </Navbar.Brand>
+                        <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
+                            <Navbar.Brand>
+                                <img
+                                    alt=""
+                                    src={require('../img/profile.png')} 
+                                    width="40"
+                                    height="40"
+                                    className="d-inline-block align-top"
+                                    style={{ cursor: 'pointer' }}
+                                />
+                            </Navbar.Brand>
+                        </OverlayTrigger>
                     )}
                 </Navbar.Collapse>
                 <SignupModal

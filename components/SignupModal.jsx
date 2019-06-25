@@ -44,6 +44,8 @@ class SignupModal extends Component {
             'password': password,
         })
         .then(response => {
+            const token = response.data.token;
+            window.localStorage.setItem('auth_token', token);
             this.setState({ email: '', name: '', password: '', emailUsed: false });
             Router.push({ pathname: '/dashboard' });
         })
@@ -86,7 +88,7 @@ class SignupModal extends Component {
                             <Form.Control
                                 type="email"
                                 value={email}
-                                placeholder="myemail@mail.me"
+                                placeholder="john.smith@mail.me"
                                 required
                                 onChange={evt => this.setState({ email: evt.target.value })}
                             />
@@ -113,7 +115,7 @@ class SignupModal extends Component {
                         )}
 
                         <ButtonToolbar style={{ display: 'block', textAlign: 'center' }}>
-                            <Button variant="outline-info" type="submit" onClick={() => this.signup()}>
+                            <Button variant="outline-info" onClick={() => this.signup()}>
                                 Sign Up
                             </Button>
                         </ButtonToolbar>

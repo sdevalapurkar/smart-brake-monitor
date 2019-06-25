@@ -40,10 +40,10 @@ class LoginModal extends Component {
             'password': password,
         })
         .then(response => {
-            console.log(response);
+            const token = response.data.token;
+            window.localStorage.setItem('auth_token', token);
             this.setState({ email: '', password: '', failedAuth: false });
             Router.push({ pathname: '/dashboard' });
-            // Router.push('/index', '/dashboard');
         })
         .catch(error => {
             console.log(error);
@@ -73,7 +73,7 @@ class LoginModal extends Component {
                             <Form.Label>Email Address</Form.Label>
                             <Form.Control
                                 type="email"
-                                placeholder="myemail@mail.me"
+                                placeholder="john.smith@mail.me"
                                 required
                                 value={email}
                                 onChange={evt => this.setState({ email: evt.target.value })}
