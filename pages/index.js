@@ -73,19 +73,19 @@ class Index extends Component {
                     <div>
                         <div className="services">
                             <div className="service-one">
-                                <p className="service-icon"><i className="far fa-calendar-alt"></i></p>
-                                <p className="service-title">Planning</p>
-                                <p>Mauris vitae turpis ut sem blandit consequat et at ligula. Suspendisse quam lectus, tristique dapibus sapien et, tempus suscipit nisl.</p>
+                                <p className="service-icon"><i className="fas fa-car"></i></p>
+                                <p className="service-title">Brake Monitoring</p>
+                                <p>Our flagship product, Freno, provides drivers with real-time brake monitoring and reporting. Brake application severity is identified and drivers are automatically notified.</p>
                             </div>
                             <div className="service-two">
-                                <p className="service-icon"><i className="fas fa-crop"></i></p>
-                                <p className="service-title">Design</p>
-                                <p>Nulla eu metus faucibus, vehicula tortor quis, venenatis odio. Nullam purus mauris, feugiat in odio vitae, posuere volutpat libero. Sed et convallis libero.</p>
+                                <p className="service-icon"><i className="fas fa-chart-bar"></i></p>
+                                <p className="service-title">Data Analytics</p>
+                                <p>All your braking data is collected, aggregated and displayed visually on a dashboard pinpointing driving habits and trends.</p>
                             </div>
                             <div className="service-three">
-                                <p className="service-icon"><i className="fas fa-code"></i></p>
-                                <p className="service-title">Development</p>
-                                <p>Ut ornare vitae enim a rhoncus. Nullam aliquet tristique scelerisque. Sed volutpat dictum risus ac laoreet. Suspendisse id lorem in enim sollicitudin varius.</p>
+                                <p className="service-icon"><i className="fas fa-user-friends"></i></p>
+                                <p className="service-title">Fleet Management</p>
+                                <p>Many vehicles and fleets can be managed and kept track of with our simple and user-friendly interface.</p>
                             </div>
                         </div>
                     </div>
