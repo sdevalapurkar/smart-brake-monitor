@@ -25,9 +25,7 @@ class Contact extends Component {
     componentDidMount = () => {
         const authToken = window.localStorage.getItem('auth_token');
 
-        if (!authToken) {
-            this.setState({ isAuthenticated: false });
-        } else {
+        if (authToken) {
             axios.post(`${host}:${port}/authstatus`, { headers: { 'Authorization' : `Bearer ${authToken}` } }).then(res => {
                 if (res.status === 200) {
                     this.setState({ isAuthenticated: true, name: res.data.authData.name });
