@@ -8,6 +8,10 @@ import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import CarRow from '../components/CarRow';
+import axios from 'axios';
+
+const host = 'http://localhost';
+const port = 3001;
 
 class Account extends Component {
 
@@ -15,8 +19,29 @@ class Account extends Component {
         super(props);
 
         this.state = {
-            // TODO
+            isAuthenticated: false,
+            name: '',
+            email: '',
         };
+    }
+
+    componentDidMount = () => {
+        const authToken = window.localStorage.getItem('auth_token');
+
+        if (!authToken) {
+            this.setState({ isAuthenticated: false });
+        } else {
+            axios.post(`${host}:${port}/authstatus`, { headers: { 'Authorization' : `Bearer ${authToken}` } }).then(res => {
+                if (res.status === 200) {
+                    const { name, email } = res.data.authData;
+                    this.setState({
+                        isAuthenticated: true,
+                        name,
+                        email,
+                    });
+                }
+            }).catch(err => {});
+        }
     }
 
     createCarRow = () => {
@@ -28,6 +53,8 @@ class Account extends Component {
     }
 
     render() {
+        const { isAuthenticated, name, email } = this.state;
+
         return (
             <div>
                 <link
@@ -37,7 +64,8 @@ class Account extends Component {
                     crossorigin="anonymous"
                 />
                 <NavbarBootstrap
-                    isAuthenticated={false}
+                    isAuthenticated={isAuthenticated}
+                    name={name}
                 />
                 <Container className="my-3">
                     <Row>
