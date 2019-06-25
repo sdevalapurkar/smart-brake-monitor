@@ -7,12 +7,11 @@ A device and mechanism to monitor braking patterns, prevent accidents, and also 
 In order to run the application locally, please follow the following instructions:
 
 1. `git clone` the repository
-
 2. `cd` into the `smart-brake-monitoring` directory
-
 3. run `npm install`
-
-4. run `npm run dev`
+4. run `npm run dev` to start the react app
+5. `cd` into the `node-api-postgres` directory
+6. run `node index.js` to start the node server
 
 ## Team Members
 
