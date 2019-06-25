@@ -8,7 +8,8 @@ import LoginModal from './LoginModal';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Router from 'next/router';
+import Link from 'next/link';
+import './index.css';
 
 class NavbarBootstrap extends Component {
     constructor(props) {
@@ -24,7 +25,9 @@ class NavbarBootstrap extends Component {
 
     logout = () => {
         localStorage.removeItem('auth_token');
-        Router.push({ pathname: '/' });
+        if (this.props.parentComponent === 'index') {
+            location.reload();
+        }
     }
 
     render() {
@@ -35,11 +38,10 @@ class NavbarBootstrap extends Component {
             <Popover id="popover-basic" title={name} style={{ textAlign: 'center' }}>
                 <NavDropdown.Item style={{ textAlign: 'center' }}>My Account</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item
-                    style={{ color: 'red', textAlign: 'center' }}
-                    onClick={() => this.logout()}
-                >
-                    Logout
+                <NavDropdown.Item>
+                    <Link href="/">
+                        <a style={{ color: 'red', textAlign: 'center' }} onClick={() => this.logout()}>Logout</a>
+                    </Link>
                 </NavDropdown.Item>
             </Popover>
         );
