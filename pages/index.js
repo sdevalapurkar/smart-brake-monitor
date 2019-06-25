@@ -100,7 +100,8 @@ class Index extends Component {
                 <footer>
                     <h3>Brakes Supreme</h3>
                     <p></p>
-                    <p><p className="service-icon"><i className="far fa-envelope"></i><br /></p> brakessupreme@gmail.com</p>
+                    <p className="service-icon"><i className="far fa-envelope"></i><br /></p>
+                    <a className="email-name" href="mailto:brakessupreme@gmail.com"> brakessupreme@gmail.com</a>
                 </footer>
 
                 <SignupModal

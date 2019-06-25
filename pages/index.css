@@ -137,3 +137,7 @@ footer {
 footer ul li a {
     font-size: 1.8rem;
 }
+
+.email-name {
+    color: white;
+}
