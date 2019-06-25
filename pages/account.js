@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import NavbarBootstrap from '../components/NavbarBootstrap';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Nav from 'react-bootstrap/Nav';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import CarRow from '../components/CarRow';
 
 class Account extends Component {
 
@@ -26,14 +32,104 @@ class Account extends Component {
                     isAuthenticated={false}
                 />
                 <Container className="my-3">
-                    <Card>
-                        <Card.Header>
-                            My Account
-                        </Card.Header>
-                        <Card.Body>
-                            Test
-                        </Card.Body>
-                    </Card>
+                    <Row>
+
+                        { /* Left nav */ }
+                        <Col md={2}>
+                            <Nav defaultActiveKey="/home" className="flex-column">
+                                <Nav.Link href="#profile">Profile</Nav.Link>
+                                <Nav.Link href="#password">Password</Nav.Link>
+                                <Nav.Link href="#manage-vehicles">Manage Vehicles</Nav.Link>
+                            </Nav>
+                        </Col>
+
+                        { /* Main column */ }
+                        <Col>
+
+                            <Card className="mb-3">
+                                <Card.Header id="profile">
+                                    <b>Profile</b>
+                                </Card.Header>
+                                <Card.Body>
+                                    <Form>
+                                        <Form.Group controlId="nameProfileInput">
+                                            <Form.Label>Name</Form.Label>
+                                            <Form.Control
+                                                name="nameProfileInput"
+                                                type="text"
+                                                placeholder="John Smith"
+                                                required
+                                            />
+                                        </Form.Group>
+                                        <Form.Group controlId="emailProfileInput">
+                                            <Form.Label>E-mail</Form.Label>
+                                            <Form.Control
+                                                name="emailProfileInput"
+                                                type="text"
+                                                placeholder="john.smith@mail.me"
+                                                required
+                                            />
+                                        </Form.Group>
+                                        <Row className="justify-content-center">
+                                            <Button variant="outline-success" type="submit">
+                                                Update Profile
+                                            </Button>
+                                        </Row>
+                                    </Form>
+                                </Card.Body>
+                            </Card>
+
+                            <Card className="mb-3">
+                                <Card.Header id="password">
+                                    <b>Password</b>
+                                </Card.Header>
+                                <Card.Body>
+                                    <Form>
+                                        <Form.Group controlId="oldPasswordInput">
+                                            <Form.Label>Old password</Form.Label>
+                                            <Form.Control
+                                                name="oldPasswordInput"
+                                                type="password"
+                                                required
+                                            />
+                                        </Form.Group>
+                                        <Form.Group controlId="newPasswordInput">
+                                            <Form.Label>New password</Form.Label>
+                                            <Form.Control
+                                                name="newPasswordInput"
+                                                type="password"
+                                                required
+                                            />
+                                        </Form.Group>
+                                        <Row className="justify-content-center">
+                                            <Button variant="outline-success" type="submit">
+                                                Change Password
+                                            </Button>
+                                        </Row>
+                                    </Form>
+                                </Card.Body>
+                            </Card>
+
+                            <Card className="mb-3">
+                                <Card.Header id="manage-vehicles">
+                                    <b>Manage Vehicles</b>
+                                </Card.Header>
+                                <Card.Body>
+
+                                    <CarRow name="Car 1" />
+                                    <CarRow name="Car 2" />
+                                    <CarRow name="Car 3" />
+
+                                    <Row className="justify-content-center">
+                                        <Button variant="outline-success" type="submit">
+                                            Add Vehicle
+                                        </Button>
+                                    </Row>
+                                </Card.Body>
+                            </Card>
+
+                        </Col>
+                    </Row>
                 </Container>
             </div>
         );
