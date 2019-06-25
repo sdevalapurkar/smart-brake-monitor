@@ -22,6 +22,7 @@ class Account extends Component {
             isAuthenticated: false,
             name: '',
             email: '',
+            failedProfileUpdate: false,
         };
     }
 
@@ -44,16 +45,34 @@ class Account extends Component {
         }
     }
 
+    updateProfile = () => {
+        const { name, email } = this.state;
+
+        axios.post(`${host}:${port}/updateProfile`, {
+            'name': name,
+            'email': email,
+        })
+        .then(response => {
+            const { name, email, token } = response.data;
+            window.localStorage.setItem('auth_token', token);
+            this.setState({ name, email });
+        })
+        .catch(error => {
+            console.log(error);
+            this.setState({ failedProfileUpdate: true });
+        });
+    }
+
     createCarRow = () => {
         let children = [];
         for (let i = 0; i < 5; i++) {
-            children.push(<CarRow name={`Car ${i+1}`} />)
+            children.push(<CarRow name={`Car ${i+1}`} />);
         }
-        return children
+        return children;
     }
 
     render() {
-        const { isAuthenticated, name, email } = this.state;
+        const { isAuthenticated, name, email, failedProfileUpdate } = this.state;
 
         return (
             <div>
@@ -61,7 +80,7 @@ class Account extends Component {
                     rel="stylesheet"
                     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
                     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-                    crossorigin="anonymous"
+                    crossOrigin="anonymous"
                 />
                 <NavbarBootstrap
                     isAuthenticated={isAuthenticated}
@@ -94,22 +113,28 @@ class Account extends Component {
                                                 name="nameProfileInput"
                                                 type="text"
                                                 placeholder="John Smith"
-                                                value={this.state.name}
+                                                value={name}
+                                                onChange={evt => this.setState({ name: evt.target.value })}
                                                 required
                                             />
                                         </Form.Group>
                                         <Form.Group controlId="emailProfileInput">
-                                            <Form.Label>E-mail</Form.Label>
+                                            <Form.Label>Email</Form.Label>
                                             <Form.Control
                                                 name="emailProfileInput"
                                                 type="text"
                                                 placeholder="john.smith@mail.me"
-                                                value={this.state.email}
+                                                value={email}
                                                 required
                                             />
                                         </Form.Group>
+                                        {failedProfileUpdate && (
+                                            <p style={{ color: 'red', textAlign: 'center', display: 'block' }}>
+                                                Could not update profile. Please try again.
+                                            </p>
+                                        )}
                                         <Row className="justify-content-center">
-                                            <Button variant="outline-success" type="submit">
+                                            <Button variant="outline-success" onClick={() => this.updateProfile()}>
                                                 Update Profile
                                             </Button>
                                         </Row>
