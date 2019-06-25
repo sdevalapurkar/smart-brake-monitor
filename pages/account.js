@@ -23,6 +23,7 @@ class Account extends Component {
             name: '',
             email: '',
             failedProfileUpdate: false,
+            succeededProfileUpdate: false,
         };
     }
 
@@ -55,7 +56,7 @@ class Account extends Component {
         .then(response => {
             const { name, email, token } = response.data;
             window.localStorage.setItem('auth_token', token);
-            this.setState({ name, email });
+            this.setState({ name, email, succeededProfileUpdate: true });
         })
         .catch(error => {
             console.log(error);
@@ -72,7 +73,7 @@ class Account extends Component {
     }
 
     render() {
-        const { isAuthenticated, name, email, failedProfileUpdate } = this.state;
+        const { isAuthenticated, name, email, failedProfileUpdate, succeededProfileUpdate } = this.state;
 
         return (
             <div>
@@ -131,6 +132,11 @@ class Account extends Component {
                                         {failedProfileUpdate && (
                                             <p style={{ color: 'red', textAlign: 'center', display: 'block' }}>
                                                 Could not update profile. Please try again.
+                                            </p>
+                                        )}
+                                        {succeededProfileUpdate && (
+                                            <p style={{ color: 'green', textAlign: 'center', display: 'block' }}>
+                                                Profile updated successfully.
                                             </p>
                                         )}
                                         <Row className="justify-content-center">
