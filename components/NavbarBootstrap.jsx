@@ -23,6 +23,7 @@ class NavbarBootstrap extends Component {
     }
 
     logout = () => {
+        localStorage.removeItem('auth_token');
         Router.push({ pathname: '/' });
     }
 
