@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavbarBootstrap from '../components/NavbarBootstrap';
+import SignupModal from '../components/SignupModal';
 import Background from '../img/background.jpeg';
 import axios from 'axios';
 import './index.css';
@@ -14,6 +15,7 @@ class Index extends Component {
         this.state = {
             isAuthenticated: false,
             name: '',
+            showSignupModal: false,
         };
     }
 
@@ -32,7 +34,9 @@ class Index extends Component {
     }
 
     render() {
-        const { name, isAuthenticated } = this.state;
+        const { name, isAuthenticated, showSignupModal } = this.state;
+
+        let signupModalClose = () => this.setState({ showSignupModal: false });
 
         return (
             <div style={{ backgroundImage: `url(${Background})`, maxWidth: '100%', height: '100%' }}>
@@ -66,7 +70,9 @@ class Index extends Component {
                             <p>With real-time brake monitoring and reporting, we not only give you an insight on your driving habits and behaviours but also keep you and other drivers safe on the road.</p>
                         </div>
                     </div>
-                    <div className="signupdiv"><a className="signup">Sign Up Now!</a></div>
+                    <div className="signupdiv" >
+                        <button className="signup" onClick={() => this.setState({ showSignupModal: true })}>Sign Up Now!</button>
+                    </div>
                 </header>
 
                 <main>
@@ -90,6 +96,17 @@ class Index extends Component {
                         </div>
                     </div>
                 </main>
+
+                <footer>
+                    <h3>Brakes Supreme</h3>
+                    <p></p>
+                    <p><p className="service-icon"><i className="far fa-envelope"></i><br /></p> brakessupreme@gmail.com</p>
+                </footer>
+
+                <SignupModal
+                    show={showSignupModal}
+                    signupModalClose={signupModalClose}
+                />
             </div>
         )
     }
