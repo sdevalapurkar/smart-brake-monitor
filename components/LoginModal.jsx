@@ -6,9 +6,9 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import axios from 'axios';
 import Router from 'next/router';
 
-const host = 'http://smart-brake-monitor.herokuapp.com' || 'http://localhost';
+const host = 'http://smart-brake-monitor.herokuapp.com';
 // const port = 3001;
-const port = process.env.PORT || 3001;
+const port = process.env.PORT;
 
 class LoginModal extends Component {
     constructor(props) {
