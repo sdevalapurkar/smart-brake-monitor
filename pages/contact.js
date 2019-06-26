@@ -11,7 +11,7 @@ import axios from 'axios';
 
 // const host = 'http://localhost';
 // const port = 3001;
-const host = '0.0.0.0';
+const host = 'https://smart-brake-monitor-server.herokuapp.com';
 const port = process.env.PORT || 3001;
 
 class Contact extends Component {
@@ -28,7 +28,7 @@ class Contact extends Component {
         const authToken = window.localStorage.getItem('auth_token');
 
         if (authToken) {
-            axios.post(`${host}:${port}/authstatus`, { headers: { 'Authorization' : `Bearer ${authToken}` } }).then(res => {
+            axios.post(`${host}/authstatus`, { headers: { 'Authorization' : `Bearer ${authToken}` } }).then(res => {
                 if (res.status === 200) {
                     this.setState({ isAuthenticated: true, name: res.data.authData.name });
                 }
