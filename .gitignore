@@ -6,3 +6,4 @@ node-api-postgres/node_modules
 .next
 id_rsa
 id_rsa.pub
+.env

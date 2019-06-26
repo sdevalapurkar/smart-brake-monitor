@@ -5,6 +5,7 @@ const port = 3001;
 const db = require('./queries');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 const privateKey  = fs.readFileSync('../id_rsa', 'utf8');
 
 app.use(bodyParser.json());
@@ -52,6 +53,6 @@ function verifyJWTToken(req, res, next) {
     next();
 }
 
-app.listen(port, () => {
-    console.log(`App running on port ${port}.`)
+app.listen(process.env.PORT || port, () => {
+    console.log(`Node app running...`)
 });
