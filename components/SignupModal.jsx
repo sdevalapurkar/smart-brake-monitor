@@ -8,7 +8,7 @@ import Router from 'next/router';
 
 // const host = 'http://localhost';
 // const port = 3001;
-const host = '0.0.0.0';
+const host = 'https://smart-brake-monitor-server.herokuapp.com';
 const port = process.env.PORT || 3001;
 
 class SignupModal extends Component {
@@ -40,7 +40,7 @@ class SignupModal extends Component {
         if (!password) return;
         if (/\d/.test(name)) return;
 
-        axios.post(`${host}:${port}/createuser`, {
+        axios.post(`${host}/createuser`, {
             'name': name,
             'email': email,
             'password': password,
