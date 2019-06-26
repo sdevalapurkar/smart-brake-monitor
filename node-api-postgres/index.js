@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 const db = require('./queries');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
@@ -52,6 +52,6 @@ function verifyJWTToken(req, res, next) {
     next();
 }
 
-app.listen(process.env.PORT || port, () => {
+app.listen(port, () => {
     console.log(`App running on port ${port}.`);
 });

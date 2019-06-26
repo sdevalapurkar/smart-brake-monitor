@@ -9,8 +9,10 @@ import Container from 'react-bootstrap/Container';
 import Background from '../img/background.jpeg';
 import axios from 'axios';
 
-const host = 'http://localhost';
-const port = 3001;
+// const host = 'http://localhost';
+// const port = 3001;
+const host = '0.0.0.0';
+const port = process.env.PORT || 3001;
 
 class Contact extends Component {
     constructor(props) {

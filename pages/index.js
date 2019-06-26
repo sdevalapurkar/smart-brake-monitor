@@ -5,8 +5,10 @@ import Background from '../img/background.jpeg';
 import axios from 'axios';
 import './index.css';
 
-const host = 'http://localhost';
-const port = 3001;
+// const host = 'http://localhost';
+// const port = 3001;
+const host = '0.0.0.0';
+const port = process.env.PORT || 3001;
 
 class Index extends Component {
     constructor(props) {
