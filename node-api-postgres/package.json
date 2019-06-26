@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "publishheroku": "cd ../ && git subtree push --prefix node-api-postgres smart-brake-server master || true"
   },
   "keywords": [],
   "author": "",
