@@ -80,8 +80,39 @@ const updateProfile = (request, response) => {
     });
 }
 
+const updatePassword = (request, response) => {
+    const { body } = request;
+    const email = body.email;
+    const oldPassword = body.oldPassword;
+    const newPassword = body.newPassword;
+
+    pool.query('SELECT password FROM users WHERE email = $1', [email], (error, results) => {
+        if (error) {
+            return response.status(400).json(results);
+        }
+
+        const passHashInDB = results.rows[0].password;
+        bcrypt.compare(oldPassword, passHashInDB, function(err, res) {
+            if (res) {
+                bcrypt.hash(newPassword, saltRounds, (err, newPasswordHash) => {
+                    pool.query('UPDATE users SET password=$1 WHERE email=$2', [newPasswordHash, email], (error, results) => {
+                        if (error) {
+                            return response.status(400).json(results);
+                        } else {
+                            return response.status(200).json({});
+                        }
+                    });
+                });
+            } else {
+                return response.status(401).json({});
+            }
+        });
+    });
+}
+
 module.exports = {
     createUser,
     authenticateUser,
     updateProfile,
+    updatePassword,
 }

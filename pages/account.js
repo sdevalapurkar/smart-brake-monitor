@@ -24,8 +24,12 @@ class Account extends Component {
             email: '',
             newName: '',
             newEmail: '',
-            failedProfileUpdate: false,
             succeededProfileUpdate: false,
+            failedProfileUpdate: false,
+            oldPasswordInput: '',
+            newPasswordInput: '',
+            succeededPasswordUpdate: false,
+            failedPasswordUpdate: false,
         };
     }
 
@@ -69,6 +73,23 @@ class Account extends Component {
         });
     }
 
+    updatePassword = () => {
+        const { email, oldPassword, newPassword } = this.state;
+
+        axios.post(`${host}:${port}/updatePassword`, {
+            email,
+            oldPassword,
+            newPassword,
+        })
+        .then(response => {
+            this.setState({ succeededPasswordUpdate: true });
+        })
+        .catch(error => {
+            console.log(error);
+            this.setState({ failedPasswordUpdate: true });
+        });
+    }
+
     createCarRow = () => {
         let children = [];
         for (let i = 0; i < 5; i++) {
@@ -78,7 +99,16 @@ class Account extends Component {
     }
 
     render() {
-        const { isAuthenticated, name, newName, newEmail, failedProfileUpdate, succeededProfileUpdate } = this.state;
+        const {
+            isAuthenticated,
+            name,
+            newName,
+            newEmail,
+            succeededProfileUpdate,
+            failedProfileUpdate,
+            succeededPasswordUpdate,
+            failedPasswordUpdate,
+        } = this.state;
 
         return (
             <div>
@@ -165,6 +195,7 @@ class Account extends Component {
                                             <Form.Control
                                                 name="oldPasswordInput"
                                                 type="password"
+                                                onChange={evt => this.setState({ oldPassword: evt.target.value })}
                                                 required
                                             />
                                         </Form.Group>
@@ -173,11 +204,22 @@ class Account extends Component {
                                             <Form.Control
                                                 name="newPasswordInput"
                                                 type="password"
+                                                onChange={evt => this.setState({ newPassword: evt.target.value })}
                                                 required
                                             />
                                         </Form.Group>
+                                        {succeededPasswordUpdate && (
+                                            <p style={{ color: 'green', textAlign: 'center', display: 'block' }}>
+                                                Password updated successfully.
+                                            </p>
+                                        )}
+                                        {failedPasswordUpdate && (
+                                            <p style={{ color: 'red', textAlign: 'center', display: 'block' }}>
+                                                Could not update password. Please try again.
+                                            </p>
+                                        )}
                                         <Row className="justify-content-center">
-                                            <Button variant="outline-success" type="submit">
+                                            <Button variant="outline-success" onClick={() => this.updatePassword()}>
                                                 Change Password
                                             </Button>
                                         </Row>
