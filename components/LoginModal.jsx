@@ -36,7 +36,7 @@ class LoginModal extends Component {
         if (!expression.test(String(email).toLowerCase())) return;
         if (!password) return;
 
-        axios.post(`${host}:${port}/authenticate`, {
+        axios.post(`${host}/authenticate`, {
             'email': email,
             'password': password,
         })
