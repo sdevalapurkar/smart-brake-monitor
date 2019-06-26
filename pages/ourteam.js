@@ -64,8 +64,8 @@ class Ourteam extends Component {
               <h1>Our Team</h1>
               <div>
                 <p>
-                  We are a team of five University of Victoria Engineering students.
-                  Brakes Supreme was created as part of our capstone project course: ECE/SENG 499.
+                  We are a team of six University of Victoria Engineering students who formed
+                  Brakes Supreme as part of our capstone project course: ECE/SENG 499.<br/>
                   Our group was formed in May 2019.
                 </p>
               </div>
@@ -169,7 +169,8 @@ class Ourteam extends Component {
 
 
           </main>
-          <div className="m-5"/>
+          <div className="m-5">
+          </div>
       </div>
 
     )
