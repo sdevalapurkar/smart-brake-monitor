@@ -49,7 +49,7 @@ class SignupModal extends Component {
             const token = response.data.token;
             window.localStorage.setItem('auth_token', token);
             this.setState({ email: '', name: '', password: '', emailUsed: false });
-            Router.push({ pathname: '/dashboard' });
+            Router.push({ pathname: '/contact' });
         })
         .catch(error => {
             this.setState({ emailUsed: true });
