@@ -22,6 +22,8 @@ class Account extends Component {
             isAuthenticated: false,
             name: '',
             email: '',
+            newName: '',
+            newEmail: '',
             failedProfileUpdate: false,
             succeededProfileUpdate: false,
         };
@@ -40,6 +42,8 @@ class Account extends Component {
                         isAuthenticated: true,
                         name,
                         email,
+                        newName: name,
+                        newEmail: email,
                     });
                 }
             }).catch(err => {});
@@ -47,16 +51,17 @@ class Account extends Component {
     }
 
     updateProfile = () => {
-        const { name, email } = this.state;
+        const { email, newName, newEmail } = this.state;
 
         axios.post(`${host}:${port}/updateProfile`, {
-            'name': name,
-            'email': email,
+            oldEmail: email,
+            newName,
+            newEmail,
         })
         .then(response => {
-            const { name, email, token } = response.data;
+            const { newName, newEmail, token } = response.data;
             window.localStorage.setItem('auth_token', token);
-            this.setState({ name, email, succeededProfileUpdate: true });
+            this.setState({ name: newName, email: newEmail, newName, newEmail, succeededProfileUpdate: true });
         })
         .catch(error => {
             console.log(error);
@@ -73,7 +78,7 @@ class Account extends Component {
     }
 
     render() {
-        const { isAuthenticated, name, email, failedProfileUpdate, succeededProfileUpdate } = this.state;
+        const { isAuthenticated, name, newName, newEmail, failedProfileUpdate, succeededProfileUpdate } = this.state;
 
         return (
             <div>
@@ -114,8 +119,8 @@ class Account extends Component {
                                                 name="nameProfileInput"
                                                 type="text"
                                                 placeholder="John Smith"
-                                                value={name}
-                                                onChange={evt => this.setState({ name: evt.target.value })}
+                                                value={newName}
+                                                onChange={evt => this.setState({ newName: evt.target.value })}
                                                 required
                                             />
                                         </Form.Group>
@@ -125,7 +130,8 @@ class Account extends Component {
                                                 name="emailProfileInput"
                                                 type="text"
                                                 placeholder="john.smith@mail.me"
-                                                value={email}
+                                                value={newEmail}
+                                                onChange={evt => this.setState({ newEmail: evt.target.value })}
                                                 required
                                             />
                                         </Form.Group>

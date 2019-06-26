@@ -58,13 +58,17 @@ const authenticateUser = (request, response) => {
 
 const updateProfile = (request, response) => {
     const { body } = request;
-    const name = body.name;
-    const email = body.email;
+    const oldEmail = body.oldEmail;
+    const newName = body.newName;
+    const newEmail = body.newEmail;
 
-    pool.query('UPDATE users SET name=$1, email=$2', [name, email], (error, results) => {
+    pool.query('UPDATE users SET name=$1, email=$2 WHERE email=$3', [newName, newEmail, oldEmail], (error, results) => {
         if (error) {
             return response.status(400).json(results);
         }
+
+        const name = newName;
+        const email = newEmail;
 
         jwt.sign({ name, email }, privateKey, { expiresIn: '2h' }, (err, token) => {
             return response.status(200).json({
