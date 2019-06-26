@@ -6,9 +6,8 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import axios from 'axios';
 import Router from 'next/router';
 
-// const host = 'http://localhost';
+const host = 'http://localhost';
 // const port = 3001;
-const host = '0.0.0.0';
 const port = process.env.PORT || 3001;
 
 class LoginModal extends Component {
