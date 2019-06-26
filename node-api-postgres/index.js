@@ -53,5 +53,5 @@ function verifyJWTToken(req, res, next) {
 }
 
 app.listen(process.env.PORT || port, () => {
-    console.log(`App running on port ${port}.`)
+    console.log(`App running on port ${port}.`);
 });
