@@ -1,9 +1,9 @@
 node_modules
 .gitsecret/keys/random_seed
 !*.secret
-node-api-postgres/pool.js
+# node-api-postgres/pool.js
 node-api-postgres/node_modules
 .next
-id_rsa
+# id_rsa
 id_rsa.pub
 .env
