@@ -53,6 +53,6 @@ function verifyJWTToken(req, res, next) {
     next();
 }
 
-app.listen(process.env.PORT || port, () => {
+app.listen((process.env.PORT, '0.0.0.0'), () => {
     console.log(`Node app running...`)
 });
