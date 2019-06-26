@@ -6,7 +6,7 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import axios from 'axios';
 import Router from 'next/router';
 
-const host = 'http://smart-brake-monitor.herokuapp.com';
+const host = 'http://smart-brake-monitor-server.herokuapp.com';
 // const port = 3001;
 const port = process.env.PORT;
 
