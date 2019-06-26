@@ -15,9 +15,7 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
-    "pg": "^7.11.0"
-  },
-  "devDependencies": {
+    "pg": "^7.11.0",
     "bcrypt": "^3.0.6"
   }
 }
