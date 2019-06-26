@@ -32,7 +32,8 @@
     "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",
     "react-sticky": "^5.0.8",
-    "stylus": "^0.54.5"
+    "stylus": "^0.54.5",
+    "webpack": "^4.33.0"
   },
   "devDependencies": {
     "@coreui/coreui-plugin-chartjs-custom-tooltips": "^1.3.1",
@@ -41,7 +42,6 @@
     "react-chartjs-2": "^2.7.6",
     "react-router-dom": "^5.0.1",
     "reactstrap": "^8.0.0",
-    "webpack": "^4.33.0"
   },
   "engines": {
     "node": "9.4.0",
