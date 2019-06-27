@@ -1,5 +1,4 @@
 /*------------- HEADER -------------------*/
-
 header div.head {
     position: relative;
     z-index: 2;
@@ -47,7 +46,6 @@ div.us {
 }
 
 /*------------- ACKNOWLEDGEMENT -------------------*/
-
 div.ack {
     position: relative;
     z-index: 2;
