@@ -54,7 +54,7 @@ class NavbarBootstrap extends Component {
                 <Navbar.Brand href="/">
                     <img
                         alt=""
-                        src={require('../img/logo.png')} 
+                        src={require('../img/logo.png')}
                         width="100"
                         height="50"
                         className="d-inline-block align-top"
@@ -67,7 +67,7 @@ class NavbarBootstrap extends Component {
                         &nbsp;
                         &nbsp;
                         &nbsp;
-                        <Nav.Link href="/about">About</Nav.Link>
+                        <Nav.Link href="/ourteam">Our Team</Nav.Link>
                         &nbsp;
                         &nbsp;
                         <Nav.Link href="/contact">Contact</Nav.Link>
@@ -88,7 +88,7 @@ class NavbarBootstrap extends Component {
                             <Navbar.Brand>
                                 <img
                                     alt=""
-                                    src={require('../img/profile.png')} 
+                                    src={require('../img/profile.png')}
                                     width="40"
                                     height="40"
                                     className="d-inline-block align-top"
