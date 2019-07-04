@@ -58,6 +58,7 @@ class Index extends Component {
                     <NavbarBootstrap
                         isAuthenticated={isAuthenticated}
                         name={name}
+                        parentComponent={'index'}
                     />
 
                     <div className="head">
