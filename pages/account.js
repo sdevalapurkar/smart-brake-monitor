@@ -8,6 +8,7 @@ import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import CarRow from '../components/CarRow';
+import AddVehicleModal from '../components/AddVehicleModal';
 import axios from 'axios';
 
 const host = 'http://localhost';
@@ -30,6 +31,7 @@ class Account extends Component {
             newPasswordInput: '',
             succeededPasswordUpdate: false,
             failedPasswordUpdate: false,
+            showAddVehicleModal: false,
         };
     }
 
@@ -108,7 +110,10 @@ class Account extends Component {
             failedProfileUpdate,
             succeededPasswordUpdate,
             failedPasswordUpdate,
+            showAddVehicleModal
         } = this.state;
+
+        let closeAddVehicleModal = () => this.setState({showAddVehicleModal: false});
 
         return (
             <div>
@@ -236,7 +241,11 @@ class Account extends Component {
                                     {this.createCarRow()}
 
                                     <Row className="justify-content-center">
-                                        <Button variant="outline-success" type="submit">
+                                        <Button
+                                            variant="outline-success"
+                                            type="submit"
+                                            onClick={() => this.setState({ showAddVehicleModal: true })}
+                                        >
                                             Add Vehicle
                                         </Button>
                                     </Row>
@@ -246,6 +255,10 @@ class Account extends Component {
                         </Col>
                     </Row>
                 </Container>
+                <AddVehicleModal
+                    show={this.state.showAddVehicleModal}
+                    onHide={closeAddVehicleModal}
+                />
             </div>
         );
     }
