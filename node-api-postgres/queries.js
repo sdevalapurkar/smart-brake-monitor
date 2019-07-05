@@ -124,9 +124,33 @@ const updatePassword = (request, response) => {
     });
 }
 
+const addVehicle = (request, response) => {
+    const { body } = request;
+    const email = body.email;
+    const carName = body.carName;
+    const arduinoID = body.arduinoID;
+    const vehiclesOwned = body.vehiclesOwned;
+
+    pool.query('INSERT into vehicles (vehicle_name, email, is_activated, vehicle_id) VALUES ($1, $2, $3, $4)', [carName, email, true, arduinoID], (error, results) => {
+        if (error) {
+            return response.status(400).json(results);
+        }
+
+        vehiclesOwned.push(carName);
+
+        jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
+            return response.status(200).json({
+                token,
+                vehiclesOwned
+            });
+        });
+    });
+}
+
 module.exports = {
     createUser,
     authenticateUser,
     updateProfile,
     updatePassword,
+    addVehicle,
 }

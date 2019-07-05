@@ -31,6 +31,7 @@ class Account extends Component {
             succeededPasswordUpdate: false,
             failedPasswordUpdate: false,
             showAddVehicleModal: false,
+            vehiclesOwned: [],
         };
     }
 
@@ -40,13 +41,14 @@ class Account extends Component {
         if (authToken) {
             axios.post(`${host}:${port}/authstatus`, { headers: { 'Authorization' : `Bearer ${authToken}` } }).then(res => {
                 if (res.status === 200) {
-                    const { name, email } = res.data.authData;
+                    const { name, email, vehiclesOwned } = res.data.authData;
                     this.setState({
                         isAuthenticated: true,
                         name,
                         email,
                         newName: name,
                         newEmail: email,
+                        vehiclesOwned,
                     });
                 }
             }).catch(err => {});
@@ -54,7 +56,7 @@ class Account extends Component {
     }
 
     updateProfile = () => {
-        const { email, newName, newEmail, email, name } = this.state;
+        const { email, newName, newEmail, name } = this.state;
 
         if (!newName || !newEmail) {
             this.setState({ failedProfileUpdate: true });
@@ -103,12 +105,14 @@ class Account extends Component {
     }
 
     createCarRow = () => {
-        let vehiclesOwned = [];
+        const { vehiclesOwned } = this.state;
+        let myVehicles = [];
 
-        for (let i = 0; i < 5; i++) {
-            vehiclesOwned.push(<CarRow name={`Car ${i+1}`} />);
+        for (let i = 0; i < vehiclesOwned.length; i++) {
+            myVehicles.push(<CarRow name={vehiclesOwned[i]} />);
         }
-        return vehiclesOwned;
+
+        return myVehicles;
     }
 
     render() {
@@ -121,10 +125,15 @@ class Account extends Component {
             failedProfileUpdate,
             succeededPasswordUpdate,
             failedPasswordUpdate,
-            showAddVehicleModal
+            showAddVehicleModal,
+            email,
+            vehiclesOwned
         } = this.state;
 
-        let closeAddVehicleModal = () => this.setState({showAddVehicleModal: false});
+        let closeAddVehicleModal = () => {
+            this.setState({ showAddVehicleModal: false });
+            location.reload();
+        }
 
         return (
             <div>
@@ -246,13 +255,10 @@ class Account extends Component {
                                     <b>Manage Vehicles</b>
                                 </Card.Header>
                                 <Card.Body>
-
                                     {this.createCarRow()}
-
                                     <Row className="justify-content-center">
                                         <Button
                                             variant="outline-success"
-                                            type="submit"
                                             onClick={() => this.setState({ showAddVehicleModal: true })}
                                         >
                                             Add Vehicle
@@ -264,8 +270,10 @@ class Account extends Component {
                     </Row>
                 </Container>
                 <AddVehicleModal
-                    show={this.state.showAddVehicleModal}
+                    show={showAddVehicleModal}
                     onHide={closeAddVehicleModal}
+                    email={email}
+                    vehiclesOwned={vehiclesOwned}
                 />
             </div>
         );
