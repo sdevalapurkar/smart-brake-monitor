@@ -36,7 +36,7 @@ class NavbarBootstrap extends Component {
 
         const popover = (
             <Popover id="popover-basic" title={name} style={{ textAlign: 'center' }}>
-                <NavDropdown.Item style={{ textAlign: 'center' }}>My Account</NavDropdown.Item>
+                <NavDropdown.Item href="/account" style={{ textAlign: 'center' }}>My Account</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item>
                     <Link href="/">

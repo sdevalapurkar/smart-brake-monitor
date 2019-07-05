@@ -69,7 +69,148 @@ const authenticateUser = (request, response) => {
     });
 }
 
+const updateProfile = (request, response) => {
+    const { body } = request;
+    const oldEmail = body.oldEmail;
+    const newName = body.newName;
+    const newEmail = body.newEmail;
+
+    pool.query('UPDATE users SET name=$1, email=$2 WHERE email=$3', [newName, newEmail, oldEmail], (error, results) => {
+        if (error) {
+            return response.status(400).json(results);
+        }
+
+        const name = newName;
+        const email = newEmail;
+
+        jwt.sign({ name, email }, privateKey, { expiresIn: '2h' }, (err, token) => {
+            return response.status(200).json({
+                name,
+                email,
+                token,
+            });
+        });
+    });
+}
+
+const updatePassword = (request, response) => {
+    const { body } = request;
+    const email = body.email;
+    const oldPassword = body.oldPassword;
+    const newPassword = body.newPassword;
+
+    pool.query('SELECT password FROM users WHERE email = $1', [email], (error, results) => {
+        if (error) {
+            return response.status(400).json(results);
+        }
+
+        const passHashInDB = results.rows[0].password;
+
+        bcrypt.compare(oldPassword, passHashInDB, function(err, res) {
+            if (res) {
+                bcrypt.hash(newPassword, saltRounds, (err, newPasswordHash) => {
+                    pool.query('UPDATE users SET password=$1 WHERE email=$2', [newPasswordHash, email], (error, results) => {
+                        if (error) {
+                            return response.status(400).json(results);
+                        }
+
+                        return response.status(200).json({});
+                    });
+                });
+            }
+
+            return response.status(401).json({});
+        });
+    });
+}
+
+const addVehicle = (request, response) => {
+    const { body } = request;
+    const email = body.email;
+    const carName = body.carName;
+    const arduinoID = body.arduinoID;
+    const vehiclesOwned = body.vehiclesOwned;
+
+    pool.query('INSERT into vehicles (vehicle_name, email, is_activated, vehicle_id) VALUES ($1, $2, $3, $4)', [carName, email, true, arduinoID], (error, results) => {
+        if (error) {
+            return response.status(400).json(results);
+        }
+
+        vehiclesOwned.push(carName);
+
+        jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
+            return response.status(200).json({
+                token,
+                vehiclesOwned
+            });
+        });
+    });
+}
+
+const deleteVehicle = (request, response) => {
+    const { body } = request;
+    const carName = body.carName;
+    let vehiclesOwned = body.vehiclesOwned;
+    const email = body.email;
+
+    pool.query('DELETE from vehicles WHERE vehicle_name=$1 and email=$2', [carName, email], (error, results) => {
+        if (error) {
+            return response.status(400).json(results);
+        }
+
+        vehiclesOwned = vehiclesOwned.filter(e => e !== carName);
+
+        jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
+            return response.status(200).json({
+                token,
+                vehiclesOwned
+            });
+        });
+    });
+}
+
+const editVehicle = (request, response) => {
+    const { body } = request;
+    const email = body.email;
+    const carName = body.carName;
+    const arduinoID = body.arduinoID;
+    const oldCarName = body.oldCarName;
+    let vehiclesOwned = body.vehiclesOwned;
+
+    pool.query('SELECT vehicle_id FROM vehicles WHERE email=$1 and vehicle_name=$2', [email, oldCarName], (error, results) => {
+        if (error) {
+            return response.status(400).json(results);
+        }
+
+        const oldID = results.rows[0].vehicle_id;
+
+        pool.query('UPDATE vehicles SET vehicle_name=$1, vehicle_id=$2 WHERE email=$3 and vehicle_id=$4', [carName, arduinoID, email, oldID], (error, resu) => {
+            if (error) {
+                return response.status(400).json(resu);
+            }
+
+            vehiclesOwned.forEach((item, i) => {
+                if (item === oldCarName) {
+                    vehiclesOwned[i] = carName;
+                }
+            });
+
+            jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
+                return response.status(200).json({
+                    token,
+                    vehiclesOwned
+                });
+            });
+        });
+    });
+}
+
 module.exports = {
     createUser,
     authenticateUser,
+    updateProfile,
+    updatePassword,
+    addVehicle,
+    deleteVehicle,
+    editVehicle,
 }
