@@ -9,33 +9,34 @@ import axios from 'axios';
 const host = 'http://localhost';
 const port = 3001;
 
-class AddVehicleModal extends Component {
+class EditVehicleModal extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             carName: '',
             arduinoID: null,
-            failedAddingVehicle: false,
+            failedEditingVehicle: false,
         };
 
-        this.addVehicle = this.addVehicle.bind(this);
+        this.editVehicle = this.editVehicle.bind(this);
     }
 
-    addVehicle = () => {
+    editVehicle = () => {
         const { carName, arduinoID } = this.state;
         const { email, vehiclesOwned, onHide } = this.props;
 
         if (!carName || !arduinoID || vehiclesOwned.includes(carName)) {
-            this.setState({ failedAddingVehicle: true });
+            this.setState({ failedEditingVehicle: true });
             return false;
         }
 
-        axios.post(`${host}:${port}/addVehicle`, {
+        axios.post(`${host}:${port}/editVehicle`, {
             email,
             carName,
             arduinoID,
-            vehiclesOwned
+            vehiclesOwned,
+            oldCarName: this.props.carName,
         })
         .then(response => {
             const { token } = response.data;
@@ -43,12 +44,12 @@ class AddVehicleModal extends Component {
             onHide();
         })
         .catch(error => {
-            this.setState({ failedAddingVehicle: true });
+            this.setState({ failedEditingVehicle: true });
         });
     }
 
     render() {
-        const { carName, arduinoID, failedAddingVehicle } = this.state;
+        const { carName, arduinoID, failedEditingVehicle } = this.state;
 
         return (
             <div>
@@ -60,7 +61,7 @@ class AddVehicleModal extends Component {
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="add-vehicle-modal-title">
-                            Add a New Vehicle
+                            Edit Vehicle
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -89,9 +90,9 @@ class AddVehicleModal extends Component {
                             </Form.Group>
                         </Form>
 
-                        {failedAddingVehicle && (
+                        {failedEditingVehicle && (
                             <p style={{ color: 'red', textAlign: 'center', display: 'block' }}>
-                                Could not add vehicle. Please try again.
+                                Could not edit vehicle. Please try again.
                             </p>
                         )}
 
@@ -99,7 +100,7 @@ class AddVehicleModal extends Component {
                             <Col>
                                 <Button
                                     className="mr-3"variant="outline-danger" onClick={this.props.onHide}>Cancel</Button>
-                                <Button variant="outline-success" onClick={() => this.addVehicle()}>Add</Button>
+                                <Button variant="outline-success" onClick={() => this.editVehicle()}>Edit</Button>
                             </Col>
                         </Row>
                     </Modal.Body>
@@ -109,4 +110,4 @@ class AddVehicleModal extends Component {
     }
 }
 
-export default AddVehicleModal;
+export default EditVehicleModal;

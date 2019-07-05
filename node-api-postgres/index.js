@@ -39,6 +39,7 @@ app.post('/updateProfile', db.updateProfile);
 app.post('/updatePassword', db.updatePassword);
 app.post('/addVehicle', db.addVehicle);
 app.post('/deleteVehicle', db.deleteVehicle);
+app.post('/editVehicle', db.editVehicle);
 
 // verify JWT Token middleware
 function verifyJWTToken(req, res, next) {

@@ -169,6 +169,42 @@ const deleteVehicle = (request, response) => {
     });
 }
 
+const editVehicle = (request, response) => {
+    const { body } = request;
+    const email = body.email;
+    const carName = body.carName;
+    const arduinoID = body.arduinoID;
+    const oldCarName = body.oldCarName;
+    let vehiclesOwned = body.vehiclesOwned;
+
+    pool.query('SELECT vehicle_id FROM vehicles WHERE email=$1 and vehicle_name=$2', [email, oldCarName], (error, results) => {
+        if (error) {
+            return response.status(400).json(results);
+        }
+
+        const oldID = results.rows[0].vehicle_id;
+
+        pool.query('UPDATE vehicles SET vehicle_name=$1, vehicle_id=$2 WHERE email=$3 and vehicle_id=$4', [carName, arduinoID, email, oldID], (error, resu) => {
+            if (error) {
+                return response.status(400).json(resu);
+            }
+
+            vehiclesOwned.forEach((item, i) => {
+                if (item === oldCarName) {
+                    vehiclesOwned[i] = carName;
+                }
+            });
+
+            jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
+                return response.status(200).json({
+                    token,
+                    vehiclesOwned
+                });
+            });
+        });
+    });
+}
+
 module.exports = {
     createUser,
     authenticateUser,
@@ -176,4 +212,5 @@ module.exports = {
     updatePassword,
     addVehicle,
     deleteVehicle,
+    editVehicle,
 }
