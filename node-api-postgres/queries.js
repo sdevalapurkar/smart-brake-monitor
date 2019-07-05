@@ -147,10 +147,33 @@ const addVehicle = (request, response) => {
     });
 }
 
+const deleteVehicle = (request, response) => {
+    const { body } = request;
+    const carName = body.carName;
+    let vehiclesOwned = body.vehiclesOwned;
+    const email = body.email;
+
+    pool.query('DELETE from vehicles WHERE vehicle_name=$1 and email=$2', [carName, email], (error, results) => {
+        if (error) {
+            return response.status(400).json(results);
+        }
+
+        vehiclesOwned = vehiclesOwned.filter(e => e !== carName);
+
+        jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
+            return response.status(200).json({
+                token,
+                vehiclesOwned
+            });
+        });
+    });
+}
+
 module.exports = {
     createUser,
     authenticateUser,
     updateProfile,
     updatePassword,
     addVehicle,
+    deleteVehicle,
 }

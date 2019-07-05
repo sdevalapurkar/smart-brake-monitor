@@ -105,11 +105,11 @@ class Account extends Component {
     }
 
     createCarRow = () => {
-        const { vehiclesOwned } = this.state;
+        const { vehiclesOwned, email } = this.state;
         let myVehicles = [];
 
         for (let i = 0; i < vehiclesOwned.length; i++) {
-            myVehicles.push(<CarRow name={vehiclesOwned[i]} />);
+            myVehicles.push(<CarRow name={vehiclesOwned[i]} vehiclesOwned={vehiclesOwned} email={email} />);
         }
 
         return myVehicles;

@@ -24,7 +24,7 @@ class AddVehicleModal extends Component {
 
     addVehicle = () => {
         const { carName, arduinoID } = this.state;
-        const { email, vehiclesOwned } = this.props;
+        const { email, vehiclesOwned, onHide } = this.props;
 
         if (!carName || !arduinoID || vehiclesOwned.includes(carName)) {
             this.setState({ failedAddingVehicle: true });
@@ -40,7 +40,7 @@ class AddVehicleModal extends Component {
         .then(response => {
             const { token } = response.data;
             window.localStorage.setItem('auth_token', token);
-            this.props.onHide();
+            onHide();
         })
         .catch(error => {
             this.setState({ failedProfileUpdate: true });
