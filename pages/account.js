@@ -15,7 +15,6 @@ const host = 'http://localhost';
 const port = 3001;
 
 class Account extends Component {
-
     constructor(props) {
         super(props);
 
@@ -38,9 +37,7 @@ class Account extends Component {
     componentDidMount = () => {
         const authToken = window.localStorage.getItem('auth_token');
 
-        if (!authToken) {
-            this.setState({ isAuthenticated: false });
-        } else {
+        if (authToken) {
             axios.post(`${host}:${port}/authstatus`, { headers: { 'Authorization' : `Bearer ${authToken}` } }).then(res => {
                 if (res.status === 200) {
                     const { name, email } = res.data.authData;
@@ -57,7 +54,17 @@ class Account extends Component {
     }
 
     updateProfile = () => {
-        const { email, newName, newEmail } = this.state;
+        const { email, newName, newEmail, email, name } = this.state;
+
+        if (!newName || !newEmail) {
+            this.setState({ failedProfileUpdate: true });
+            return false;
+        }
+
+        if (newName === name && newEmail === email) {
+            this.setState({ failedProfileUpdate: true });
+            return false;
+        }
 
         axios.post(`${host}:${port}/updateProfile`, {
             oldEmail: email,
@@ -70,13 +77,17 @@ class Account extends Component {
             this.setState({ name: newName, email: newEmail, newName, newEmail, succeededProfileUpdate: true });
         })
         .catch(error => {
-            console.log(error);
             this.setState({ failedProfileUpdate: true });
         });
     }
 
     updatePassword = () => {
         const { email, oldPassword, newPassword } = this.state;
+
+        if (!oldPassword || !newPassword || oldPassword === newPassword) {
+            this.setState({ failedPasswordUpdate: true });
+            return false;
+        }
 
         axios.post(`${host}:${port}/updatePassword`, {
             email,
@@ -87,17 +98,17 @@ class Account extends Component {
             this.setState({ succeededPasswordUpdate: true });
         })
         .catch(error => {
-            console.log(error);
             this.setState({ failedPasswordUpdate: true });
         });
     }
 
     createCarRow = () => {
-        let children = [];
+        let vehiclesOwned = [];
+
         for (let i = 0; i < 5; i++) {
-            children.push(<CarRow name={`Car ${i+1}`} />);
+            vehiclesOwned.push(<CarRow name={`Car ${i+1}`} />);
         }
-        return children;
+        return vehiclesOwned;
     }
 
     render() {
@@ -129,7 +140,6 @@ class Account extends Component {
                 />
                 <Container className="my-3">
                     <Row>
-
                         { /* Left nav */ }
                         <Col md={2}>
                             <Nav defaultActiveKey="/home" className="flex-column">
@@ -141,7 +151,6 @@ class Account extends Component {
 
                         { /* Main column */ }
                         <Col>
-
                             <Card className="mb-3">
                                 <Card.Header id="profile">
                                     <b>Profile</b>
@@ -251,7 +260,6 @@ class Account extends Component {
                                     </Row>
                                 </Card.Body>
                             </Card>
-
                         </Col>
                     </Row>
                 </Container>
@@ -262,7 +270,6 @@ class Account extends Component {
             </div>
         );
     }
-
 }
 
 export default Account;

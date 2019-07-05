@@ -6,13 +6,12 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
 class AddVehicleModal extends Component {
-
     constructor(props) {
         super(props);
 
         this.state = {
             carName: '',
-            arduinoID: ''
+            arduinoID: null,
         };
     }
 
@@ -46,11 +45,11 @@ class AddVehicleModal extends Component {
                                 />
                             </Form.Group>
                             <Form.Group controlId="todo">
-                                <Form.Label>Hardware ID</Form.Label>
+                                <Form.Label>Freno ID</Form.Label>
                                 <Form.Control
                                     name="carName"
                                     type="text"
-                                    placeholder="0000-0000-0000-0000"
+                                    placeholder="XXXXXXXXX"
                                     value={arduinoID}
                                     onChange={evt => this.setState({ arduinoID: evt.target.value })}
                                     required
