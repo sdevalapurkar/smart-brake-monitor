@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-const privateKey  = fs.readFileSync('./id_rsa', 'utf8');
+const privateKey  = fs.readFileSync('../id_rsa', 'utf8');
 
 const createUser = (request, response) => {
     const { body } = request;

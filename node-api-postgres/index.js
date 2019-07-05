@@ -5,7 +5,7 @@ const port = process.env.PORT || 3001;
 const db = require('./queries');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
-const privateKey  = fs.readFileSync('./id_rsa', 'utf8');
+const privateKey  = fs.readFileSync('../id_rsa', 'utf8');
 
 app.use(bodyParser.json());
 
