@@ -29,6 +29,7 @@ const createUser = (request, response) => {
 
 const authenticateUser = (request, response) => {
     const { body } = request;
+    console.log(body);
     const email = body.email;
     const password = body.password;
     const vehiclesOwned = [];

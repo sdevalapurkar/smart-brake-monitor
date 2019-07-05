@@ -6,10 +6,8 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import axios from 'axios';
 import Router from 'next/router';
 
-// const host = 'http://localhost';
-// const port = 3001;
-const host = 'https://smart-brake-monitor-server.herokuapp.com';
-const port = process.env.PORT || 3001;
+const host = 'http://localhost';
+const port = 3001;
 
 class SignupModal extends Component {
     constructor(props) {
@@ -40,7 +38,7 @@ class SignupModal extends Component {
         if (!password) return;
         if (/\d/.test(name)) return;
 
-        axios.post(`${host}/createuser`, {
+        axios.post(`${host}:${port}/createuser`, {
             'name': name,
             'email': email,
             'password': password,
@@ -49,7 +47,8 @@ class SignupModal extends Component {
             const token = response.data.token;
             window.localStorage.setItem('auth_token', token);
             this.setState({ email: '', name: '', password: '', emailUsed: false });
-            Router.push({ pathname: '/contact' });
+            Router.push({ pathname: '/' });
+            location.reload();
         })
         .catch(error => {
             this.setState({ emailUsed: true });

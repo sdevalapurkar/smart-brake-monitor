@@ -6,9 +6,8 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import axios from 'axios';
 import Router from 'next/router';
 
-const host = 'https://smart-brake-monitor-server.herokuapp.com';
-// const port = 3001;
-const port = process.env.PORT;
+const host = 'http://localhost';
+const port = 3001;
 
 class LoginModal extends Component {
     constructor(props) {
@@ -36,7 +35,7 @@ class LoginModal extends Component {
         if (!expression.test(String(email).toLowerCase())) return;
         if (!password) return;
 
-        axios.post(`${host}/authenticate`, {
+        axios.post(`${host}:${port}/authenticate`, {
             'email': email,
             'password': password,
         })
@@ -44,10 +43,10 @@ class LoginModal extends Component {
             const token = response.data.token;
             window.localStorage.setItem('auth_token', token);
             this.setState({ email: '', password: '', failedAuth: false });
-            Router.push({ pathname: '/contact' });
+            Router.push({ pathname: '/' });
+            location.reload();
         })
         .catch(error => {
-            console.log(error);
             this.setState({ failedAuth: true });
         });
     }

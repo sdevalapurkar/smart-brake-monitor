@@ -3,10 +3,8 @@ import NavbarBootstrap from '../components/NavbarBootstrap';
 import axios from 'axios';
 import Router from 'next/router';
 
-// const host = 'http://localhost';
-// const port = 3001;
-const host = '0.0.0.0';
-const port = process.env.PORT || 3001;
+const host = 'http://localhost';
+const port = 3001;
 
 class Dashboard extends Component {
     constructor(props) {
@@ -32,10 +30,6 @@ class Dashboard extends Component {
 
     render() {
         const { isAuthenticated, name } = this.state;
-
-        if (!isAuthenticated) {
-            Router.push({ pathname: '/' });
-        }
 
         return (
             <div>
