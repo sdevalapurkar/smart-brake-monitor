@@ -6,6 +6,9 @@ import Background from '../img/background.jpeg';
 import axios from 'axios';
 import './ourteam.css';
 
+const host = 'http://localhost';
+const port = 3001;
+
 class Ourteam extends Component {
     constructor(props) {
         super(props);
