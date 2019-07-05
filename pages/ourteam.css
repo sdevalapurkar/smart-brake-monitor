@@ -1,0 +1,66 @@
+/*------------- OURTEAM -------------------*/
+div.ourteam {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: 90%;
+    grid-template-columns: repeat(2,1fr);
+    margin: 0 auto;
+    padding-top: 6%;
+    align-items: center;
+}
+
+div.ourteam h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    padding-left: 20%;
+}
+
+div.ourteam p {
+    padding-left: 20%;
+    border-left: 2px solid black;
+    font-size: 1.2rem;
+}
+
+/*------------- US -------------------*/
+div.us {
+    align-items: baseline;
+    display: grid;
+    height: auto;
+    grid-template-columns: repeat(3,1fr);
+    padding-top: 50px;
+}
+
+.us div {
+    text-align: center;
+    width: 90%;
+    margin: 10px auto 0px auto;
+}
+
+.us p.us-title {
+    font-size: 2.4rem;
+    padding-bottom: 5px;
+    margin: 0;
+}
+
+/*------------- ACKNOWLEDGEMENT -------------------*/
+div.ack {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: 90%;
+    grid-template-columns: repeat(2,1fr);
+    margin: 0 auto;
+    padding-top: 2%;
+    align-items: center;
+}
+
+.ack h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding-left: 20%;
+}
