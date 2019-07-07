@@ -4,6 +4,10 @@ import SignupModal from '../components/SignupModal';
 import Background from '../img/background.jpeg';
 import axios from 'axios';
 import './index.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
 
 const host = 'http://localhost';
 const port = 3001;
@@ -73,29 +77,63 @@ class Index extends Component {
                         <button className="signup" onClick={() => this.setState({ showSignupModal: true })}>Sign Up Now!</button>
                     </div>
                 </header>
-
-                <main>
-                    <div>
-                        <div className="services">
-                            <div className="service-one">
-                                <p className="service-icon"><i className="fas fa-car"></i></p>
-                                <p className="service-title">Brake Monitoring</p>
-                                <p>Our flagship product, Freno, provides drivers with real-time brake monitoring and reporting. Brake application severity is identified and drivers are automatically notified.</p>
-                            </div>
-                            <div className="service-two">
-                                <p className="service-icon"><i className="fas fa-chart-bar"></i></p>
-                                <p className="service-title">Data Analytics</p>
-                                <p>All your braking data is collected, aggregated and displayed visually on a dashboard pinpointing driving habits and trends.</p>
-                            </div>
-                            <div className="service-three">
-                                <p className="service-icon"><i className="fas fa-user-friends"></i></p>
-                                <p className="service-title">Fleet Management</p>
-                                <p>Many vehicles and fleets can be managed and kept track of with our simple and user-friendly interface.</p>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-
+                <div className="m-4"></div>
+                <Container>
+                    <Row>
+                        <Col className="d-flex align-items-stretch">
+                            <Card className="my-3" style={{borderRadius: '1em', boxShadow: '0px 16px 32px -16px'}}>
+                                <Card.Header>
+                                    <h1>
+                                        <i className="fas fa-car" />
+                                    </h1>
+                                </Card.Header>
+                                <Card.Body className="text-center">
+                                    <h2 className="mb-3">
+                                        Brake Monitoring
+                                    </h2>
+                                    <p>
+                                        Our flagship product, Freno, provides drivers with real-time brake monitoring and reporting. Brake application severity is identified and drivers are automatically notified.
+                                    </p>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col className="d-flex align-items-stretch">
+                            <Card className="my-3" style={{borderRadius: '1em', boxShadow: '0px 16px 32px -16px'}}>
+                                <Card.Header>
+                                    <h1>
+                                        <i className="fas fa-chart-bar" />
+                                    </h1>
+                                </Card.Header>
+                                <Card.Body className="text-center">
+                                    <h2 className="mb-3">
+                                        Data Analytics
+                                    </h2>
+                                    <p>
+                                        All your braking data is collected, aggregated and displayed visually on a dashboard pinpointing driving habits and trends.
+                                    </p>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col className="d-flex align-items-stretch">
+                            <Card className="my-3" style={{borderRadius: '1em', boxShadow: '0px 16px 32px -16px'}}>
+                                <Card.Header>
+                                    <h1>
+                                        <i className="fas fa-user-friends" />
+                                    </h1>
+                                </Card.Header>
+                                <Card.Body className="text-center">
+                                    <h2 className="mb-3">
+                                        Fleet Management
+                                    </h2>
+                                    <p>
+                                        Many vehicles and fleets can be managed and kept track of with our simple and user-friendly interface.
+                                    </p>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+                <div className="m-5"></div>
                 <footer>
                     <h3>Brakes Supreme</h3>
                     <p></p>
