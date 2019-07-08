@@ -58,25 +58,33 @@ class Index extends Component {
                     href="https://fonts.googleapis.com/css?family=Raleway"
                     rel="stylesheet"
                 />
-                <header>
-                    <NavbarBootstrap
-                        isAuthenticated={isAuthenticated}
-                        name={name}
-                        parentComponent={'index'}
-                    />
-
-                    <div className="head">
-                        <h1>You Brake <br/>We Monitor</h1>
-                        <div>
-                            <strong>Focus on driving and leave the rest to us.</strong>
-                            <p></p>
+                <NavbarBootstrap
+                    isAuthenticated={isAuthenticated}
+                    name={name}
+                    parentComponent={'index'}
+                />
+                <Container fluid className="background-image">
+                    <Row>
+                        <Col xs={12} md={6} className="mt-5 m-md-0 p-md-5 text-left text-md-center">
+                            <h1>You Brake</h1>
+                            <h1>We Monitor</h1>
+                        </Col>
+                        <Col xs={12} md={6} className="m-md-0 p-md-5">
+                            <div>
+                                <strong>Focus on driving</strong>
+                            </div>
+                            <div>
+                                <strong>and leave the rest to us.</strong>
+                            </div>
                             <p>With real-time brake monitoring and reporting, we not only give you an insight on your driving habits and behaviours but also keep you and other drivers safe on the road.</p>
-                        </div>
-                    </div>
-                    <div className="signupdiv" >
-                        <button className="signup" onClick={() => this.setState({ showSignupModal: true })}>Sign Up Now!</button>
-                    </div>
-                </header>
+                        </Col>
+                    </Row>
+                    <Row className="text-center">
+                        <Col className="mt-3 mb-5">
+                            <button className="btn btn-light" onClick={() => this.setState({ showSignupModal: true })}>Sign Up Now!</button>
+                        </Col>
+                    </Row>
+                </Container>
                 <div className="m-4"></div>
                 <Container>
                     <Row>
@@ -134,13 +142,23 @@ class Index extends Component {
                     </Row>
                 </Container>
                 <div className="m-5"></div>
-                <footer>
-                    <h3>Brakes Supreme</h3>
-                    <p></p>
-                    <p className="service-icon"><i className="far fa-envelope"></i><br /></p>
-                    <a className="email-name" href="mailto:brakessupreme@gmail.com"> brakessupreme@gmail.com</a>
-                </footer>
-
+                <Container fluid className="background-black color-white text-center py-3">
+                    <Row>
+                        <Col>
+                            <h3 >Brakes Supreme</h3>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <i className="far fa-envelope"></i>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <a className="color-white" href="mailto:brakessupreme@gmail.com">brakessupreme@gmail.com</a>
+                        </Col>
+                    </Row>
+                </Container>
                 <SignupModal
                     show={showSignupModal}
                     signupModalClose={signupModalClose}
