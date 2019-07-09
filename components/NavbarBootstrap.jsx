@@ -67,6 +67,9 @@ class NavbarBootstrap extends Component {
                         &nbsp;
                         &nbsp;
                         &nbsp;
+                        <Nav.Link href="/freno">Freno</Nav.Link>
+                        &nbsp;
+                        &nbsp;
                         <Nav.Link href="/ourteam">Our Team</Nav.Link>
                         &nbsp;
                         &nbsp;
