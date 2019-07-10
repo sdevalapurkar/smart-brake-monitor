@@ -66,8 +66,8 @@ class Index extends Component {
                 <Container fluid className="background-image">
                     <Row>
                         <Col xs={12} md={6} className="mt-5 m-md-0 p-md-5 text-left text-center mb-5">
-                            <h1 className="you-break-we-monitor">YOU BRAKE</h1>
-                            <h1 className="you-break-we-monitor">WE MONITOR</h1>
+                            <h1 className="you-brake-we-monitor">YOU BRAKE</h1>
+                            <h1 className="you-brake-we-monitor">WE MONITOR</h1>
                         </Col>
                         <Col xs={12} md={6} className="m-md-0 p-md-5">
                             <div>
