@@ -65,25 +65,24 @@ class Index extends Component {
                 />
                 <Container fluid className="background-image">
                     <Row>
-                        <Col xs={12} md={6} className="mt-5 m-md-0 p-md-5 text-left text-md-center">
-                            <h1>You Brake</h1>
-                            <h1>We Monitor</h1>
+                        <Col xs={12} md={6} className="mt-5 m-md-0 p-md-5 text-left text-center mb-5">
+                            <h1 className="you-break-we-monitor">YOU BRAKE</h1>
+                            <h1 className="you-break-we-monitor">WE MONITOR</h1>
                         </Col>
                         <Col xs={12} md={6} className="m-md-0 p-md-5">
                             <div>
-                                <strong>Focus on driving</strong>
+                                <strong>Focus on driving and leave the rest to us.</strong>
                             </div>
-                            <div>
-                                <strong>and leave the rest to us.</strong>
-                            </div>
-                            <p>With real-time brake monitoring and reporting, we not only give you an insight on your driving habits and behaviours but also keep you and other drivers safe on the road.</p>
+                            <p className="mt-4">With real-time brake monitoring and reporting, we not only give you an insight on your driving habits and behaviours but also keep you and other drivers safe on the road.</p>
                         </Col>
                     </Row>
+                    <div className="p-5"></div>
                     <Row className="text-center">
                         <Col className="mt-3 mb-5">
-                            <button className="btn btn-light" onClick={() => this.setState({ showSignupModal: true })}>Sign Up Now!</button>
+                            <button className="btn btn-light btn-lg" onClick={() => this.setState({ showSignupModal: true })}>Sign Up Now!</button>
                         </Col>
                     </Row>
+                    <div className="p-5"></div>
                 </Container>
                 <div className="m-4"></div>
                 <Container>
