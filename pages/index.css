@@ -26,3 +26,14 @@
 .color-white {
     color: white;
 }
+
+.you-brake-we-monitor {
+    font-size: 3.5em;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+    .you-brake-we-monitor {
+        font-size: 2.5em;
+    }
+}
