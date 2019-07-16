@@ -40,6 +40,8 @@
 
 .team-image {
     border: 6px solid #ADAFB2;
+    height: 100%;
+    max-height: 250px;
     max-width: 250px;
     width: 100%;
 }
@@ -54,7 +56,26 @@
         font-size: 1.4rem;
     }
 
+    .team-image {
+        max-height: 196px;
+        max-width: 196px;
+    }
+
     .text-sima {
         font-size: 1.4rem;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .team-image {
+        max-height: 176px;
+        max-width: 176px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .team-image {
+        max-height: 196px;
+        max-width: 196px;
     }
 }
