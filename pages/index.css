@@ -27,13 +27,34 @@
     color: white;
 }
 
-.you-brake-we-monitor {
+.font-35-bold {
     font-size: 3.5em;
     font-weight: bold;
 }
 
 @media only screen and (max-width: 768px) {
-    .you-brake-we-monitor {
+    .font-35-bold {
         font-size: 2.5em;
+    }
+}
+
+.team-image {
+    border: 6px solid #ADAFB2;
+    max-width: 250px;
+    width: 100%;
+}
+
+.text-acknowledgements {
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+
+@media only screen and (max-width: 576px) {
+    .text-acknowledgements {
+        font-size: 1.4rem;
+    }
+
+    .text-sima {
+        font-size: 1.4rem;
     }
 }
