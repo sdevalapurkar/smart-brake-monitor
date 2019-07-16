@@ -38,7 +38,7 @@ class Ourteam extends Component {
         const { isAuthenticated, name } = this.state;
 
         return (
-              <div style={{ maxWidth: '100%', height: '100%' }}>
+            <div>
                 <link
                     rel="stylesheet"
                     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -71,7 +71,7 @@ class Ourteam extends Component {
                                     <p>
                                         Frontend Website Developer
                                         <br/>
-                                        Microprocessor Programer
+                                        Microprocessor Programmer
                                     </p>
                                 </Col>
                                 <Col md={4} className="text-center mb-3 mb-md-0">
