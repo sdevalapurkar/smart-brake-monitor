@@ -126,7 +126,7 @@ class Ourteam extends Component {
                         </Card.Body>
                     </Card>
                     <Card className="mt-5">
-                        <Card.Body>
+                        <Card.Body className="text-center">
                             <Row className="mb-3">
                                 <Col>
                                     <div className="text-acknowledgements">
@@ -134,20 +134,31 @@ class Ourteam extends Component {
                                     </div>
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col md={6} lg={4} className="mb-3 m-md-0">
+                            <Row className="mb-3">
+                                <Col>
                                     <Image
+                                        className="team-image"
+                                        roundedCircle
                                         src={require('../img/sima.jpg')}
-                                        width={'100%'}
                                     />
                                 </Col>
-                                <Col md={6} lg={8}>
+                            </Row>
+                            <Row>
+                                <Col>
                                     <h2 className="text-sima">
                                         Dr. Mihai Sima
                                     </h2>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
                                     <h5 className="text-secondary">
                                         Supervisor
                                     </h5>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm={{ span: 6, offset: 3}}>
                                     <p>
                                         We would like to thank Dr. Mihai Sima for his help with the grading
                                         and design of our project. He is a professor of Electrical and
