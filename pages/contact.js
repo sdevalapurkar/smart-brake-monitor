@@ -6,7 +6,6 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import Background from '../img/background.jpeg';
 import axios from 'axios';
 
 const host = 'http://localhost';
@@ -38,7 +37,7 @@ class Contact extends Component {
         const { isAuthenticated, name } = this.state;
 
         return (
-            <div style={{ backgroundImage: `url(${Background})`, maxWidth: '100%', height: '100%' }}>
+            <div>
                 <link
                     rel="stylesheet"
                     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
