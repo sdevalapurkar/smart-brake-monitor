@@ -109,7 +109,16 @@ class Account extends Component {
         let myVehicles = [];
 
         for (let i = 0; i < vehiclesOwned.length; i++) {
-            myVehicles.push(<CarRow name={vehiclesOwned[i]} vehiclesOwned={vehiclesOwned} email={email} />);
+            myVehicles.push(
+                <CarRow
+                    name={vehiclesOwned[i].name}
+                    weight={vehiclesOwned[i].weight}
+                    arduinoID={vehiclesOwned[i].id}
+                    tireSpecs={vehiclesOwned[i].tireSpecs}
+                    vehiclesOwned={vehiclesOwned}
+                    email={email}
+                />
+            );
         }
 
         return myVehicles;

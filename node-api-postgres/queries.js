@@ -39,13 +39,18 @@ const authenticateUser = (request, response) => {
             return response.status(400).json(results);
         }
 
-        pool.query('SELECT vehicle_name from vehicles where is_activated = $1 and email = $2', [true, email], (error, res) => {
+        pool.query('SELECT vehicle_name, vehicle_weight, tire_specs, vehicle_id from vehicles where is_activated = $1 and email = $2', [true, email], (error, res) => {
             if (error) {
                 console.log('could not retrieve vehicles for user');
             } else {
                 if (res.rows.length) {
                     res.rows.forEach(val => {
-                        vehiclesOwned.push(val.vehicle_name);
+                        vehiclesOwned.push({
+                            name: val.vehicle_name,
+                            id: val.vehicle_id,
+                            weight: val.vehicle_weight,
+                            tireSpecs: val.tire_specs
+                        });
                     });
                 }
             }
@@ -139,7 +144,12 @@ const addVehicle = (request, response) => {
             return response.status(400).json(results);
         }
 
-        vehiclesOwned.push(carName);
+        vehiclesOwned.push({
+            name: carName,
+            id: arduinoID,
+            weight: carWeight,
+            tireSpecs: tireSpecs
+        });
 
         jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
             return response.status(200).json({
@@ -161,7 +171,7 @@ const deleteVehicle = (request, response) => {
             return response.status(400).json(results);
         }
 
-        vehiclesOwned = vehiclesOwned.filter(e => e !== carName);
+        vehiclesOwned = vehiclesOwned.filter(e => e.name !== carName);
 
         jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
             return response.status(200).json({
@@ -177,32 +187,26 @@ const editVehicle = (request, response) => {
     const email = body.email;
     const carName = body.carName;
     const arduinoID = body.arduinoID;
-    const oldCarName = body.oldCarName;
+    const carWeight = body.carWeight;
+    const tireSpecs = body.tireSpecs;
     let vehiclesOwned = body.vehiclesOwned;
 
-    pool.query('SELECT vehicle_id FROM vehicles WHERE email=$1 and vehicle_name=$2', [email, oldCarName], (error, results) => {
+    pool.query('UPDATE vehicles SET vehicle_name=$1, vehicle_weight=$2, tire_specs=$3 WHERE email=$4 and vehicle_id=$5', [carName, carWeight, tireSpecs, email, arduinoID], (error, resu) => {
         if (error) {
-            return response.status(400).json(results);
+            return response.status(400).json(resu);
         }
 
-        const oldID = results.rows[0].vehicle_id;
+        vehiclesOwned.forEach((item, i) => {
+            vehiclesOwned[i].name = carName;
+            vehiclesOwned[i].id = arduinoID;
+            vehiclesOwned[i].weight = carWeight;
+            vehiclesOwned[i].tireSpecs = tireSpecs;
+        });
 
-        pool.query('UPDATE vehicles SET vehicle_name=$1, vehicle_id=$2 WHERE email=$3 and vehicle_id=$4', [carName, arduinoID, email, oldID], (error, resu) => {
-            if (error) {
-                return response.status(400).json(resu);
-            }
-
-            vehiclesOwned.forEach((item, i) => {
-                if (item === oldCarName) {
-                    vehiclesOwned[i] = carName;
-                }
-            });
-
-            jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
-                return response.status(200).json({
-                    token,
-                    vehiclesOwned
-                });
+        jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
+            return response.status(200).json({
+                token,
+                vehiclesOwned
             });
         });
     });

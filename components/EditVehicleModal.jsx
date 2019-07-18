@@ -14,7 +14,7 @@ class EditVehicleModal extends Component {
         super(props);
 
         this.state = {
-            carName: '',
+            carName: null,
             arduinoID: null,
             failedEditingVehicle: false,
             carWeight: null,
@@ -38,7 +38,8 @@ class EditVehicleModal extends Component {
             carName,
             arduinoID,
             vehiclesOwned,
-            oldCarName: this.props.carName,
+            carWeight,
+            tireSpecs
         })
         .then(response => {
             const { token } = response.data;
@@ -72,8 +73,8 @@ class EditVehicleModal extends Component {
                                 <Form.Label>Car Name</Form.Label>
                                 <Form.Control
                                     name="carName"
+                                    defaultValue={this.props.name}
                                     type="text"
-                                    placeholder="Red Tesla Model X"
                                     value={carName}
                                     onChange={evt => this.setState({ carName: evt.target.value })}
                                     required
@@ -82,20 +83,20 @@ class EditVehicleModal extends Component {
                             <Form.Group>
                                 <Form.Label>Freno ID</Form.Label>
                                 <Form.Control
-                                    name="carName"
+                                    name="arduinoID"
+                                    defaultValue={this.props.arduinoID}
                                     type="text"
-                                    placeholder="XXXXXXXXX"
                                     value={arduinoID}
                                     onChange={evt => this.setState({ arduinoID: evt.target.value })}
-                                    required
+                                    disabled
                                 />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Vehicle Weight (kg)</Form.Label>
                                 <Form.Control
                                     name="carWeight"
+                                    defaultValue={this.props.weight}
                                     type="number"
-                                    placeholder="300"
                                     value={carWeight}
                                     onChange={evt => this.setState({ carWeight: evt.target.value })}
                                     required
@@ -105,8 +106,8 @@ class EditVehicleModal extends Component {
                                 <Form.Label>Tire Size</Form.Label>
                                 <Form.Control
                                     name="tireSpecs"
+                                    defaultValue={this.props.tireSpecs}
                                     type="text"
-                                    placeholder="P225/50/R1798H"
                                     value={tireSpecs}
                                     onChange={evt => this.setState({ tireSpecs: evt.target.value })}
                                     required
