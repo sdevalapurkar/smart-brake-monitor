@@ -17,16 +17,19 @@ class AddVehicleModal extends Component {
             carName: '',
             arduinoID: null,
             failedAddingVehicle: false,
+            carWeight: null,
+            tireSpecs: null,
         };
 
         this.addVehicle = this.addVehicle.bind(this);
     }
 
     addVehicle = () => {
-        const { carName, arduinoID } = this.state;
+        const { carName, arduinoID, carWeight, tireSpecs } = this.state;
         const { email, vehiclesOwned, onHide } = this.props;
+        const tireSpecFormat = /^[A-Z][0-9]{3}\/[0-9]{2}\/[A-Z][0-9]{2}$/;
 
-        if (!carName || !arduinoID || vehiclesOwned.includes(carName)) {
+        if (!carName || !arduinoID || !carWeight || !tireSpecs || vehiclesOwned.includes(carName) || isNaN(carWeight) || !tireSpecFormat.test('P225/50/R17')) {
             this.setState({ failedAddingVehicle: true });
             return false;
         }
@@ -35,6 +38,8 @@ class AddVehicleModal extends Component {
             email,
             carName,
             arduinoID,
+            carWeight,
+            tireSpecs,
             vehiclesOwned
         })
         .then(response => {
@@ -48,7 +53,7 @@ class AddVehicleModal extends Component {
     }
 
     render() {
-        const { carName, arduinoID, failedAddingVehicle } = this.state;
+        const { carName, arduinoID, failedAddingVehicle, carWeight, tireSpecs } = this.state;
 
         return (
             <div>
@@ -65,7 +70,7 @@ class AddVehicleModal extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
-                            <Form.Group controlId="todo">
+                            <Form.Group>
                                 <Form.Label>Car Name</Form.Label>
                                 <Form.Control
                                     name="carName"
@@ -76,14 +81,36 @@ class AddVehicleModal extends Component {
                                     required
                                 />
                             </Form.Group>
-                            <Form.Group controlId="todo">
+                            <Form.Group>
                                 <Form.Label>Freno ID</Form.Label>
                                 <Form.Control
-                                    name="carName"
+                                    name="arduinoID"
                                     type="text"
                                     placeholder="XXXXXXXXX"
                                     value={arduinoID}
                                     onChange={evt => this.setState({ arduinoID: evt.target.value })}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Vehicle Weight (kg)</Form.Label>
+                                <Form.Control
+                                    name="carWeight"
+                                    type="number"
+                                    placeholder="300"
+                                    value={carWeight}
+                                    onChange={evt => this.setState({ carWeight: evt.target.value })}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Tire Size</Form.Label>
+                                <Form.Control
+                                    name="tireSpecs"
+                                    type="text"
+                                    placeholder="P225/50/R1798H"
+                                    value={tireSpecs}
+                                    onChange={evt => this.setState({ tireSpecs: evt.target.value })}
                                     required
                                 />
                             </Form.Group>
