@@ -17,13 +17,15 @@ class EditVehicleModal extends Component {
             carName: '',
             arduinoID: null,
             failedEditingVehicle: false,
+            carWeight: null,
+            tireSpecs: null,
         };
 
         this.editVehicle = this.editVehicle.bind(this);
     }
 
     editVehicle = () => {
-        const { carName, arduinoID } = this.state;
+        const { carName, arduinoID, carWeight, tireSpecs } = this.state;
         const { email, vehiclesOwned, onHide } = this.props;
 
         if (!carName || !arduinoID || vehiclesOwned.includes(carName)) {
@@ -49,7 +51,7 @@ class EditVehicleModal extends Component {
     }
 
     render() {
-        const { carName, arduinoID, failedEditingVehicle } = this.state;
+        const { carName, arduinoID, failedEditingVehicle, carWeight, tireSpecs } = this.state;
 
         return (
             <div>
@@ -66,7 +68,7 @@ class EditVehicleModal extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
-                            <Form.Group controlId="todo">
+                            <Form.Group>
                                 <Form.Label>Car Name</Form.Label>
                                 <Form.Control
                                     name="carName"
@@ -77,7 +79,7 @@ class EditVehicleModal extends Component {
                                     required
                                 />
                             </Form.Group>
-                            <Form.Group controlId="todo">
+                            <Form.Group>
                                 <Form.Label>Freno ID</Form.Label>
                                 <Form.Control
                                     name="carName"
@@ -85,6 +87,28 @@ class EditVehicleModal extends Component {
                                     placeholder="XXXXXXXXX"
                                     value={arduinoID}
                                     onChange={evt => this.setState({ arduinoID: evt.target.value })}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Vehicle Weight (kg)</Form.Label>
+                                <Form.Control
+                                    name="carWeight"
+                                    type="number"
+                                    placeholder="300"
+                                    value={carWeight}
+                                    onChange={evt => this.setState({ carWeight: evt.target.value })}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Tire Size</Form.Label>
+                                <Form.Control
+                                    name="tireSpecs"
+                                    type="text"
+                                    placeholder="P225/50/R1798H"
+                                    value={tireSpecs}
+                                    onChange={evt => this.setState({ tireSpecs: evt.target.value })}
                                     required
                                 />
                             </Form.Group>
