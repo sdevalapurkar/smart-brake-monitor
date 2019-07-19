@@ -29,7 +29,7 @@ class AddVehicleModal extends Component {
         const { email, vehiclesOwned, onHide } = this.props;
         const tireSpecFormat = /^[A-Z][0-9]{3}\/[0-9]{2}\/[A-Z][0-9]{2}$/;
 
-        if (!carName || !arduinoID || !carWeight || !tireSpecs || vehiclesOwned.includes(carName) || isNaN(carWeight) || !tireSpecFormat.test('P225/50/R17')) {
+        if (!carName || !arduinoID || !carWeight || !tireSpecs || isNaN(carWeight) || !tireSpecFormat.test(tireSpecs)) {
             this.setState({ failedAddingVehicle: true });
             return false;
         }
