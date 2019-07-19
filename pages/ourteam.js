@@ -125,7 +125,7 @@ class Ourteam extends Component {
                         </Card.Body>
                     </Card>
                     <Card className="mt-5">
-                        <Card.Body className="text-center">
+                        <Card.Body className="text-center mb-3">
                             <Row className="mb-3">
                                 <Col>
                                     <div className="text-acknowledgements">
@@ -133,40 +133,142 @@ class Ourteam extends Component {
                                     </div>
                                 </Col>
                             </Row>
-                            <Row className="mb-3">
-                                <Col>
-                                    <Image
-                                        className="team-image"
-                                        roundedCircle
-                                        src={require('../img/sima.jpg')}
-                                    />
+
+
+
+
+
+                            <Row>
+                                <Col sm={{ span: 6, offset: 3}} className="d-flex align-items-stretch">
+                                    <Container fluid>
+                                        <Row>
+                                            <Col>
+                                                <Image
+                                                    className="team-image"
+                                                    roundedCircle
+                                                    src={require('../img/sima.jpg')}
+                                                />
+                                            </Col>
+                                        </Row>
+                                        <Row className="mt-3">
+                                            <Col>
+                                                <h2 className="text-sima">
+                                                    { /* TODO @arshi classname */ }
+                                                    Dr. Mihai Sima
+                                                </h2>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <h5 className="text-secondary">
+                                                    Supervisor
+                                                </h5>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <p>
+                                                    We would like to thank Dr. Mihai Sima for his help with the grading
+                                                    and design of our project. He is a professor of Electrical and
+                                                    Computer Engineering at the University of Victoria who specializes
+                                                    in embedded systems and microprocessors.
+                                                </p>
+                                                <a href="https://www.ece.uvic.ca/~msima/">{"Dr. Sima's Website"}</a>
+                                            </Col>
+                                        </Row>
+                                    </Container>
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col>
-                                    <h2 className="text-sima">
-                                        Dr. Mihai Sima
-                                    </h2>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h5 className="text-secondary">
-                                        Supervisor
-                                    </h5>
-                                </Col>
-                            </Row>
-                            <Row>
+
+
+
+                            <Row className="mt-4">
                                 <Col sm={{ span: 6, offset: 3}}>
-                                    <p>
-                                        We would like to thank Dr. Mihai Sima for his help with the grading
-                                        and design of our project. He is a professor of Electrical and
-                                        Computer Engineering at the University of Victoria who specializes
-                                        in embedded systems and microprocessors.
-                                    </p>
-                                    <a href="https://www.ece.uvic.ca/~msima/">Website</a>
+                                    <Container fluid>
+                                        <Row>
+                                            <Col>
+                                                <Image
+                                                    className="team-image-ack-dr-cheng"
+                                                    roundedCircle
+                                                    src={require('../img/sima.jpg')}
+                                                />
+                                                <h2>
+                                                    Dr. Mantis Cheng
+                                                </h2>
+                                                <h5 className="text-secondary">
+                                                    Title 1
+                                                </h5>
+                                            </Col>
+                                            <Col>
+                                                <Image
+                                                    className="team-image-ack-dr-cheng"
+                                                    roundedCircle
+                                                    src={require('../img/sima.jpg')}
+                                                />
+                                                <h2>
+                                                    Priya Angara
+                                                </h2>
+                                                <h5 className="text-secondary">
+                                                    Title 2
+                                                </h5>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <p>
+                                                    We would also like to thank Dr. Mantis Cheng and Priya Angara
+                                                    from the University of Victoria for providing us with access
+                                                    to a lab working space and hardware equipment such as
+                                                    Arduino Mega 2560 microcontrollers. We are very grateful
+                                                    for their support.
+                                                </p>
+                                                <a href="http://webhome.csc.uvic.ca/~mcheng">{"Dr. Cheng's Website"}</a>
+                                            </Col>
+                                        </Row>
+                                    </Container>
                                 </Col>
                             </Row>
+
+
+
+
+
+                            {
+                            // <Row className="mb-3">
+                            //     <Col>
+                            //         <Image
+                            //             className="team-image"
+                            //             roundedCircle
+                            //             src={require('../img/sima.jpg')}
+                            //         />
+                            //     </Col>
+                            // </Row>
+                            // <Row>
+                            //     <Col>
+                            //         <h2 className="text-sima">
+                            //             Dr. Mihai Sima
+                            //         </h2>
+                            //     </Col>
+                            // </Row>
+                            // <Row>
+                            //     <Col>
+                            //         <h5 className="text-secondary">
+                            //             Supervisor
+                            //         </h5>
+                            //     </Col>
+                            // </Row>
+                            // <Row>
+                            //     <Col sm={{ span: 6, offset: 3}}>
+                            //         <p>
+                            //             We would like to thank Dr. Mihai Sima for his help with the grading
+                            //             and design of our project. He is a professor of Electrical and
+                            //             Computer Engineering at the University of Victoria who specializes
+                            //             in embedded systems and microprocessors.
+                            //         </p>
+                            //         <a href="https://www.ece.uvic.ca/~msima/">Website</a>
+                            //     </Col>
+                            // </Row>
+                            }
                         </Card.Body>
                     </Card>
                 </Container>

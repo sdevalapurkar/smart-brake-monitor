@@ -38,6 +38,13 @@
     }
 }
 
+.team-image-ack-dr-cheng {
+    height: 100%;
+    max-height: 250px;
+    max-width: 250px;
+    width: 100%;
+}
+
 .team-image {
     border: 6px solid #ADAFB2;
     height: 100%;
