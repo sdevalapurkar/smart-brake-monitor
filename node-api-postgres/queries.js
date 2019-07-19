@@ -138,6 +138,7 @@ const addVehicle = (request, response) => {
     const carWeight = body.carWeight;
     const tireSpecs = body.tireSpecs;
     const vehiclesOwned = body.vehiclesOwned;
+    const name = body.name;
 
     pool.query('INSERT into vehicles (vehicle_name, email, is_activated, vehicle_id, vehicle_weight, tire_specs) VALUES ($1, $2, $3, $4, $5, $6)', [carName, email, true, arduinoID, carWeight, tireSpecs], (error, results) => {
         if (error) {
@@ -151,7 +152,7 @@ const addVehicle = (request, response) => {
             tireSpecs: tireSpecs
         });
 
-        jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
+        jwt.sign({ name, email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
             return response.status(200).json({
                 token,
                 vehiclesOwned
@@ -165,6 +166,7 @@ const deleteVehicle = (request, response) => {
     const carName = body.carName;
     let vehiclesOwned = body.vehiclesOwned;
     const email = body.email;
+    const name = body.name;
 
     pool.query('DELETE from vehicles WHERE vehicle_name=$1 and email=$2', [carName, email], (error, results) => {
         if (error) {
@@ -173,7 +175,7 @@ const deleteVehicle = (request, response) => {
 
         vehiclesOwned = vehiclesOwned.filter(e => e.name !== carName);
 
-        jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
+        jwt.sign({ name, email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
             return response.status(200).json({
                 token,
                 vehiclesOwned
@@ -190,6 +192,7 @@ const editVehicle = (request, response) => {
     const carWeight = body.carWeight;
     const tireSpecs = body.tireSpecs;
     let vehiclesOwned = body.vehiclesOwned;
+    const name = body.userName;
 
     pool.query('UPDATE vehicles SET vehicle_name=$1, vehicle_weight=$2, tire_specs=$3 WHERE email=$4 and vehicle_id=$5', [carName, carWeight, tireSpecs, email, arduinoID], (error, resu) => {
         if (error) {
@@ -197,13 +200,14 @@ const editVehicle = (request, response) => {
         }
 
         vehiclesOwned.forEach((item, i) => {
-            vehiclesOwned[i].name = carName;
-            vehiclesOwned[i].id = arduinoID;
-            vehiclesOwned[i].weight = carWeight;
-            vehiclesOwned[i].tireSpecs = tireSpecs;
+            if (item.id === arduinoID) {
+                vehiclesOwned[i].name = carName;
+                vehiclesOwned[i].weight = carWeight;
+                vehiclesOwned[i].tireSpecs = tireSpecs;
+            }
         });
 
-        jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
+        jwt.sign({ name, email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
             return response.status(200).json({
                 token,
                 vehiclesOwned

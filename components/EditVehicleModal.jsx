@@ -26,7 +26,7 @@ class EditVehicleModal extends Component {
 
     editVehicle = () => {
         const { carName, arduinoID, carWeight, tireSpecs } = this.state;
-        const { email, vehiclesOwned, onHide } = this.props;
+        const { email, vehiclesOwned, onHide, userName } = this.props;
         const tireSpecFormat = /^[A-Z][0-9]{3}\/[0-9]{2}\/[A-Z][0-9]{2}$/;
 
         if (
@@ -49,7 +49,8 @@ class EditVehicleModal extends Component {
             arduinoID,
             vehiclesOwned,
             carWeight,
-            tireSpecs
+            tireSpecs,
+            userName,
         })
         .then(response => {
             const { token } = response.data;

@@ -18,12 +18,13 @@ class DeleteVehicleModal extends Component {
     }
 
     deleteVehicle = () => {
-        const { carName, vehiclesOwned, email, onHide } = this.props;
+        const { carName, vehiclesOwned, email, onHide, name } = this.props;
 
         axios.post(`${host}:${port}/deleteVehicle`, {
             carName,
             vehiclesOwned,
-            email
+            email,
+            name,
         })
         .then(response => {
             const { token } = response.data;

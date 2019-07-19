@@ -105,12 +105,13 @@ class Account extends Component {
     }
 
     createCarRow = () => {
-        const { vehiclesOwned, email } = this.state;
+        const { vehiclesOwned, email, name } = this.state;
         let myVehicles = [];
 
         for (let i = 0; i < vehiclesOwned.length; i++) {
             myVehicles.push(
                 <CarRow
+                    userName={name}
                     name={vehiclesOwned[i].name}
                     weight={vehiclesOwned[i].weight}
                     arduinoID={vehiclesOwned[i].id}
@@ -283,6 +284,7 @@ class Account extends Component {
                     onHide={closeAddVehicleModal}
                     email={email}
                     vehiclesOwned={vehiclesOwned}
+                    name={name}
                 />
             </div>
         );

@@ -26,7 +26,7 @@ class AddVehicleModal extends Component {
 
     addVehicle = () => {
         const { carName, arduinoID, carWeight, tireSpecs } = this.state;
-        const { email, vehiclesOwned, onHide } = this.props;
+        const { email, vehiclesOwned, onHide, name } = this.props;
         const tireSpecFormat = /^[A-Z][0-9]{3}\/[0-9]{2}\/[A-Z][0-9]{2}$/;
 
         if (!carName || !arduinoID || !carWeight || !tireSpecs || isNaN(carWeight) || !tireSpecFormat.test(tireSpecs)) {
@@ -40,7 +40,8 @@ class AddVehicleModal extends Component {
             arduinoID,
             carWeight,
             tireSpecs,
-            vehiclesOwned
+            vehiclesOwned,
+            name
         })
         .then(response => {
             const { token } = response.data;
