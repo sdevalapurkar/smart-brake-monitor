@@ -25,7 +25,6 @@ class EditVehicleModal extends Component {
     }
 
     editVehicle = () => {
-        console.log('in here');
         const { carName, arduinoID, carWeight, tireSpecs } = this.state;
         const { email, vehiclesOwned, onHide } = this.props;
         const tireSpecFormat = /^[A-Z][0-9]{3}\/[0-9]{2}\/[A-Z][0-9]{2}$/;
