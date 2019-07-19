@@ -108,7 +108,7 @@ class AddVehicleModal extends Component {
                                 <Form.Control
                                     name="tireSpecs"
                                     type="text"
-                                    placeholder="P225/50/R1798H"
+                                    placeholder="P225/50/R17"
                                     value={tireSpecs}
                                     onChange={evt => this.setState({ tireSpecs: evt.target.value })}
                                     required
