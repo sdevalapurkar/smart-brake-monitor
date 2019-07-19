@@ -194,9 +194,9 @@ const editVehicle = (request, response) => {
     let vehiclesOwned = body.vehiclesOwned;
     const name = body.userName;
 
-    pool.query('UPDATE vehicles SET vehicle_name=$1, vehicle_weight=$2, tire_specs=$3 WHERE email=$4 and vehicle_id=$5', [carName, carWeight, tireSpecs, email, arduinoID], (error, resu) => {
+    pool.query('UPDATE vehicles SET vehicle_name=$1, vehicle_weight=$2, tire_specs=$3 WHERE email=$4 and vehicle_id=$5', [carName, carWeight, tireSpecs, email, arduinoID], (error, results) => {
         if (error) {
-            return response.status(400).json(resu);
+            return response.status(400).json(results);
         }
 
         vehiclesOwned.forEach((item, i) => {
