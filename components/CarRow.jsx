@@ -19,7 +19,7 @@ class CarRow extends Component {
 
     render() {
         const { showDeleteVehicleModal, showEditVehicleModal } = this.state;
-        const { name, vehiclesOwned, email } = this.props;
+        const { name, vehiclesOwned, email, weight, tireSpecs, arduinoID, userName } = this.props;
 
         let closeDeleteVehicleModal = () => {
             this.setState({ showDeleteVehicleModal: false });
@@ -60,9 +60,13 @@ class CarRow extends Component {
                 <EditVehicleModal
                     show={showEditVehicleModal}
                     onHide={closeEditVehicleModal}
-                    carName={name}
+                    name={name}
+                    arduinoID={arduinoID}
+                    weight={weight}
+                    tireSpecs={tireSpecs}
                     vehiclesOwned={vehiclesOwned}
                     email={email}
+                    userName={userName}
                 />
             </Card>
         );

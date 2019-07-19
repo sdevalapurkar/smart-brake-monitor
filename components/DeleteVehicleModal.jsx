@@ -18,12 +18,13 @@ class DeleteVehicleModal extends Component {
     }
 
     deleteVehicle = () => {
-        const { carName, vehiclesOwned, email, onHide } = this.props;
+        const { carName, vehiclesOwned, email, onHide, name } = this.props;
 
         axios.post(`${host}:${port}/deleteVehicle`, {
             carName,
             vehiclesOwned,
-            email
+            email,
+            name,
         })
         .then(response => {
             const { token } = response.data;
@@ -36,7 +37,7 @@ class DeleteVehicleModal extends Component {
     }
 
     render() {
-        const { carName, vehiclesOwned, onHide, email } = this.props;
+        const { carName, onHide } = this.props;
         const { deleteVehicleFailed } = this.state;
 
         return (
@@ -54,7 +55,7 @@ class DeleteVehicleModal extends Component {
                     </Modal.Header>
 
                     <Modal.Body>
-                        <p>Are you sure you want to delete this vehicle?</p>
+                        <p>{`Are you sure you want to delete vehicle ${carName}?`}</p>
 
                         {deleteVehicleFailed && (
                             <p style={{ color: 'red', textAlign: 'center', display: 'block' }}>
