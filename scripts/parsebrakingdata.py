@@ -46,6 +46,12 @@ with open('../data/testbrakingdata.csv') as csv_file:
 
         line_count += 1
 
+    total_avg_decx = round(avg_decx/num_values_seen, 3)
+    total_avg_decy = round(avg_decy/num_values_seen, 3)
+    total_avg_decz = round(avg_decz/num_values_seen, 3)
+    total_avg_gyx = round(avg_gyx/num_values_seen, 3)
+    total_avg_gyy = round(avg_gyy/num_values_seen, 3)
+    total_avg_gyz = round(avg_gyz/num_values_seen, 3)
     list_of_parsed_values.append([counter, total_avg_decx, total_avg_decy, total_avg_decz, total_avg_gyx, total_avg_gyy, total_avg_gyz])
 
     with open('../data/parsed_braking_data.csv', mode='w') as braking_file:
