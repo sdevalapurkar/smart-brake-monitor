@@ -47,7 +47,7 @@ class Contact extends Component {
 
                 <NavbarBootstrap isAuthenticated={isAuthenticated} name={name} />
 
-                <Container className="my-3">
+                <Container className="my-5">
                     <Row className="justify-content-center">
                         <Col>
                             <Card>
