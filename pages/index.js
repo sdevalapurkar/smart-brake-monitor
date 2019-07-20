@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import Router from 'next/router';
 
 const host = 'http://localhost';
 const port = 3001;
@@ -79,7 +80,12 @@ class Index extends Component {
                     <div className="p-5"></div>
                     <Row className="text-center">
                         <Col className="mt-3 mb-5">
-                            <button className="btn btn-light btn-lg" onClick={() => this.setState({ showSignupModal: true })}>Sign Up Now!</button>
+                            {!isAuthenticated && (
+                                <button className="btn btn-light btn-lg" onClick={() => this.setState({ showSignupModal: true })}>Sign Up Now!</button>
+                            )}
+                            {isAuthenticated && (
+                                <button className="btn btn-light btn-lg" onClick={() => Router.push({ pathname: '/dashboard' })}>View Your Dashboard</button>
+                            )}
                         </Col>
                     </Row>
                     <div className="p-5"></div>
