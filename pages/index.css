@@ -38,13 +38,6 @@
     }
 }
 
-.team-image-ack-dr-cheng {
-    height: 100%;
-    max-height: 250px;
-    max-width: 250px;
-    width: 100%;
-}
-
 .team-image {
     border: 6px solid #ADAFB2;
     height: 100%;
@@ -55,12 +48,12 @@
 
 .text-acknowledgements {
     font-size: 2.5rem;
-    font-weight: 500;
+    font-weight: bold;
 }
 
 @media only screen and (max-width: 576px) {
     .text-acknowledgements {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
 
     .team-image {
@@ -68,8 +61,12 @@
         max-width: 196px;
     }
 
-    .text-sima {
-        font-size: 1.4rem;
+    .text-ack-name {
+        font-size: 1.3rem;
+    }
+
+    .text-ack-title {
+        font-size: 1.1rem;
     }
 }
 
