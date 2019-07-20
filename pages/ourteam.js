@@ -66,7 +66,7 @@ class Ourteam extends Component {
                                         className="p-1 team-image"
                                         src={require('../img/eli.jpg')}
                                     />
-                                    <h1>Eli</h1>
+                                    <h1 className="mt-3">Eli</h1>
                                     <p>
                                         Frontend Website Developer
                                         <br/>
@@ -79,7 +79,7 @@ class Ourteam extends Component {
                                         className="p-1 team-image"
                                         src={require('../img/shreyas.png')}
                                     />
-                                    <h1>Shreyas</h1>
+                                    <h1 className="mt-3">Shreyas</h1>
                                     <p>Front and Backend Website Architect</p>
                                 </Col>
                                 <Col md={4} className="text-center mb-3 mb-md-0">
@@ -88,7 +88,7 @@ class Ourteam extends Component {
                                         className="p-1 team-image"
                                         src={require('../img/arshi.jpg')}
                                     />
-                                    <h1>Arshi</h1>
+                                    <h1 className="mt-3">Arshi</h1>
                                     <p>Front and Backend Website Architect</p>
                                 </Col>
                             </Row>
@@ -100,7 +100,7 @@ class Ourteam extends Component {
                                         className="p-1 team-image"
                                         src={require('../img/rickus.jpg')}
                                     />
-                                    <h1>Rickus</h1>
+                                    <h1 className="mt-3">Rickus</h1>
                                     <p>Microprocessor System Engineer</p>
                                 </Col>
                                 <Col md={4} className="text-center mb-3 mb-md-0">
@@ -109,7 +109,7 @@ class Ourteam extends Component {
                                         className="p-1 team-image"
                                         src={require('../img/sajan.png')}
                                     />
-                                    <h1>Sajan</h1>
+                                    <h1 className="mt-3">Sajan</h1>
                                     <p>Microprocessor System Engineer</p>
                                 </Col>
                                 <Col md={4} className="text-center mb-3 mb-md-0">
@@ -118,14 +118,14 @@ class Ourteam extends Component {
                                         className="p-1 team-image"
                                         src={require('../img/adam.jpg')}
                                     />
-                                    <h1>Adam</h1>
+                                    <h1 className="mt-3">Adam</h1>
                                     <p>Backend Website Developer<br/>Microprocessor Programmer</p>
                                 </Col>
                             </Row>
                         </Card.Body>
                     </Card>
                     <Card className="mt-5">
-                        <Card.Body className="text-center">
+                        <Card.Body className="text-center mb-3">
                             <Row className="mb-3">
                                 <Col>
                                     <div className="text-acknowledgements">
@@ -133,38 +133,125 @@ class Ourteam extends Component {
                                     </div>
                                 </Col>
                             </Row>
-                            <Row className="mb-3">
-                                <Col>
-                                    <Image
-                                        className="team-image"
-                                        roundedCircle
-                                        src={require('../img/sima.jpg')}
-                                    />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h2 className="text-sima">
-                                        Dr. Mihai Sima
-                                    </h2>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h5 className="text-secondary">
-                                        Supervisor
-                                    </h5>
-                                </Col>
-                            </Row>
                             <Row>
                                 <Col sm={{ span: 6, offset: 3}}>
-                                    <p>
-                                        We would like to thank Dr. Mihai Sima for his help with the grading
-                                        and design of our project. He is a professor of Electrical and
-                                        Computer Engineering at the University of Victoria who specializes
-                                        in embedded systems and microprocessors.
-                                    </p>
-                                    <a href="https://www.ece.uvic.ca/~msima/">Website</a>
+                                    <Container fluid>
+                                        <Row>
+                                            <Col>
+                                                <Image
+                                                    className="p-1 team-image"
+                                                    roundedCircle
+                                                    src={require('../img/sima.jpg')}
+                                                />
+                                            </Col>
+                                        </Row>
+                                        <Row className="mt-3">
+                                            <Col>
+                                                <h2 className="text-ack-name">
+                                                    Dr. Mihai Sima
+                                                </h2>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <h5 className="text-secondary text-ack-title">
+                                                    Supervisor
+                                                </h5>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <p>
+                                                    <a href="https://www.ece.uvic.ca/~msima/">{"Dr. Sima's Website"}</a>
+                                                </p>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <p>
+                                                    We would like to thank Dr. Mihai Sima for his help with the grading
+                                                    and design of our project. He is a professor of Electrical and
+                                                    Computer Engineering at the University of Victoria who specializes
+                                                    in embedded systems and microprocessors.
+                                                </p>
+                                            </Col>
+                                        </Row>
+                                    </Container>
+                                </Col>
+                            </Row>
+                            <Row className="mt-5">
+                                <Col sm={{ span: 6, offset: 3}}>
+                                    <Row>
+                                        <Col>
+                                            <Image
+                                                roundedCircle
+                                                className="p-1 team-image"
+                                                src={require('../img/mantis.png')}
+                                            />
+                                        </Col>
+                                    </Row>
+                                    <Row className="mt-3">
+                                        <Col>
+                                            <h2 className="text-ack-name">
+                                                Dr. Mantis Cheng
+                                            </h2>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <h5 className="text-secondary text-ack-title">
+                                                Principal Investigator
+                                            </h5>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <p>
+                                                <a href="http://webhome.csc.uvic.ca/~mcheng">{"Dr. Cheng's Website"}</a>
+                                            </p>
+                                        </Col>
+                                    </Row>
+                                    <Row className="mt-2">
+                                        <Col>
+                                            <Image
+                                                roundedCircle
+                                                className="p-1 team-image"
+                                                src={require('../img/priya.png')}
+                                            />
+                                        </Col>
+                                    </Row>
+                                    <Row className="mt-3">
+                                        <Col>
+                                            <h2 className="text-ack-name">
+                                                Priya Angara
+                                            </h2>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <h5 className="text-secondary text-ack-title">
+                                                Lab Assistant
+                                            </h5>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <p>
+                                                <a href="https://sites.google.com/a/rigiresearch.com/rigi-research/people/priya-angara">{"Priya's Website"}</a>
+                                            </p>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <p>
+                                                We would also like to thank Dr. Mantis Cheng and Priya Angara
+                                                from the University of Victoria for providing us with access
+                                                to a lab working space and hardware equipment such as
+                                                Arduino Mega 2560 microcontrollers. We are very grateful
+                                                for their support.
+                                            </p>
+                                        </Col>
+                                    </Row>
                                 </Col>
                             </Row>
                         </Card.Body>
