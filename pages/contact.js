@@ -49,7 +49,7 @@ class Contact extends Component {
 
                 <Container className="my-3">
                     <Row className="justify-content-center">
-                        <Col md={6}>
+                        <Col>
                             <Card>
                                 <Card.Body>
                                     <Card.Title>Contact Us</Card.Title>
