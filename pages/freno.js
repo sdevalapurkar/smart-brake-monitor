@@ -84,12 +84,24 @@ class Freno extends Component {
                     <Row className="justify-content-center">
                         <Col>
                             <h1>
-                                Installation
+                                How It Works
                             </h1><hr />
                             <p>
-                            Freno is easy to install, simply put the electronics into a box or use one of the boxes we
+                            Freno uses an accelerometer to monitor deceleration. When deceleration is detected
+                            past a certain threshold the LED Strip will light up depending on the amount of
+                            deceleration. A soft brake with low deceleration would show 25% of the LED Strip lights
+                            lit up, whereas an emergency brake would show 100%. Freno also records any deceleration
+                            to the USB. Upload the text file on the USB to your account on this website. Now all
+                            of your braking data is displayed on the dashboard.
+
+                            </p>
+                            <h1>
+                                Set Up
+                            </h1><hr />
+                            <p>
+                            Freno is easy to set up, simply put the electronics into a box or use one of the boxes we
                             have provided. Lay this box down flat into the trunk of back seat of your vehicle.
-                            Ensure the wire that the LED strip is attached to can reach your rear window
+                            Ensure the wire that the LED strip is attached to can reach your rear window.
                             </p>
                             <h1>
                                 Specs
@@ -97,9 +109,22 @@ class Freno extends Component {
                             <h2>
                                 Dimensions
                             </h2><hr/>
+                            <p>
+                                Contained in a 5 x 10 inch box<br/>
+                                LED strip: 10 cm<br/>
+                                LED strip connecting wire: 50 cm<br/>
+                            </p>
                             <h2>
                                 Parts
                             </h2><hr/>
+                            <p>
+                                Microprocessor - Arduino Mega<br/>
+                                Accelerometer  - MPU 6050<br/>
+                                USB Module     -<br/>
+                                LED Strip      -<br/>
+                                Battery Pack   -<br/>
+                                USB Stick      -<br/>
+                            </p>
                             <h2>
                                 Documentation
                             </h2><hr/>
