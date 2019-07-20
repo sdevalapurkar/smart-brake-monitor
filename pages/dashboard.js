@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import NavbarBootstrap from '../components/NavbarBootstrap';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import Router from 'next/router';
 
@@ -28,6 +32,30 @@ class Dashboard extends Component {
         }
     }
 
+    getDataGraph1 = () => {
+        return {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Average Break Torque',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [7,8,6,7,6,3,3]
+            }]
+        }
+    }
+
+    getOptionsGraph1 = () => {
+        return {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    }
+
     render() {
         const { isAuthenticated, name } = this.state;
 
@@ -43,6 +71,24 @@ class Dashboard extends Component {
                     isAuthenticated={isAuthenticated}
                     name={name}
                 />
+                <Container className="my-5">
+                    <Row>
+                        <Col lg={4}>
+                            <Line data={this.getDataGraph1()} options={this.getOptionsGraph1()} />
+                        </Col>
+                        <Col lg={4}>
+                            <Line data={this.getDataGraph1()} options={this.getOptionsGraph1()} />
+                        </Col>
+                        <Col lg={4}>
+                            <Line data={this.getDataGraph1()} options={this.getOptionsGraph1()} />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Line data={this.getDataGraph1()} options={this.getOptionsGraph1()} />
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         )
     }
