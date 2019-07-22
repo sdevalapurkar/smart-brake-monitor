@@ -108,6 +108,10 @@ class Account extends Component {
         const { vehiclesOwned, email, name } = this.state;
         let myVehicles = [];
 
+        if (!vehiclesOwned) {
+            return myVehicles;
+        }
+
         for (let i = 0; i < vehiclesOwned.length; i++) {
             myVehicles.push(
                 <CarRow
