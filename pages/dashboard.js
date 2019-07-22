@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Line } from 'react-chartjs-2';
+import Graph from '../components/dashboard/Graph'
 import axios from 'axios';
 import Router from 'next/router';
 
@@ -74,19 +75,13 @@ class Dashboard extends Component {
                 />
                 <Container className="my-5">
                     <Row>
-                        <Col lg={4}>
-                            <Line data={this.getDataGraph1()} options={this.getOptionsGraph1()} />
-                        </Col>
-                        <Col lg={4}>
-                            <Line data={this.getDataGraph1()} options={this.getOptionsGraph1()} />
-                        </Col>
-                        <Col lg={4}>
-                            <Line data={this.getDataGraph1()} options={this.getOptionsGraph1()} />
-                        </Col>
-                    </Row>
-                    <Row>
                         <Col>
-                            <Line data={this.getDataGraph1()} options={this.getOptionsGraph1()} />
+                            {
+
+                            // <Line data={this.getDataGraph1()} options={this.getOptionsGraph1()} />
+                        }
+
+                            <Graph />
                         </Col>
                     </Row>
                 </Container>
