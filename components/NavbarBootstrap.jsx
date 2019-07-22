@@ -23,10 +23,9 @@ class NavbarBootstrap extends Component {
     }
 
     logout = () => {
+        this.setState({ isAuthenticated: false });
         localStorage.removeItem('auth_token');
-        if (this.props.parentComponent === 'index') {
-            location.reload();
-        }
+        location.replace('/');
     }
 
     render() {
