@@ -9,6 +9,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Link from 'next/link';
+import Router from 'next/router';
 
 class NavbarBootstrap extends Component {
     constructor(props) {
@@ -23,10 +24,9 @@ class NavbarBootstrap extends Component {
     }
 
     logout = () => {
+        this.setState({ isAuthenticated: false });
         localStorage.removeItem('auth_token');
-        if (this.props.parentComponent === 'index') {
-            location.reload();
-        }
+        location.replace('/');
     }
 
     render() {

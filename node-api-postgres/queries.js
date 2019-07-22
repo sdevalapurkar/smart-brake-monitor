@@ -137,7 +137,7 @@ const addVehicle = (request, response) => {
     const arduinoID = body.arduinoID;
     const carWeight = body.carWeight;
     const tireSpecs = body.tireSpecs;
-    const vehiclesOwned = body.vehiclesOwned;
+    let vehiclesOwned = body.vehiclesOwned;
     const name = body.name;
 
     pool.query('INSERT into vehicles (vehicle_name, email, is_activated, vehicle_id, vehicle_weight, tire_specs) VALUES ($1, $2, $3, $4, $5, $6)', [carName, email, true, arduinoID, carWeight, tireSpecs], (error, results) => {
