@@ -26,6 +26,7 @@ class Dashboard extends Component {
         if (authToken) {
             axios.post(`${host}:${port}/authstatus`, { headers: { 'Authorization' : `Bearer ${authToken}` } }).then(res => {
                 if (res.status === 200) {
+                    console.log(res.data.authData);
                     this.setState({ isAuthenticated: true, name: res.data.authData.name });
                 }
             }).catch(err => {});
