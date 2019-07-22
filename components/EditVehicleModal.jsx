@@ -96,7 +96,7 @@ class EditVehicleModal extends Component {
                                     name="arduinoID"
                                     type="text"
                                     value={arduinoID}
-                                    onChange={evt => this.setState({ arduinoID: evt.target.value })}
+                                    onChange={evt => this.setState({ arduinoID: parseFloat(evt.target.value) })}
                                     disabled
                                 />
                             </Form.Group>
@@ -106,7 +106,7 @@ class EditVehicleModal extends Component {
                                     name="carWeight"
                                     type="number"
                                     value={carWeight}
-                                    onChange={evt => this.setState({ carWeight: evt.target.value })}
+                                    onChange={evt => this.setState({ carWeight: parseFloat(evt.target.value) })}
                                     required
                                 />
                             </Form.Group>
