@@ -9,7 +9,7 @@ while True:
         txt = input("Please enter your Freno ID: ")
         freno_id = int(txt)
     except ValueError:
-        print("Sorry, please enter a valid Freno ID.")
+        print("Sorry, please enter a valid Freno ID that has been registered.")
         continue
     else:
         break
