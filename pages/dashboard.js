@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import NavbarBootstrap from '../components/NavbarBootstrap';
 import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Line } from 'react-chartjs-2';
 import Graph from '../components/dashboard/Graph'
 import axios from 'axios';
 import Router from 'next/router';
@@ -18,6 +18,24 @@ class Dashboard extends Component {
         this.state = {
             isAuthenticated: false,
             name: '',
+            data: {
+               labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+               datasets: [{
+                   label: 'Average Break Torque',
+                   backgroundColor: 'rgba(252, 161, 3, 0.5)',
+                   borderColor: 'rgb(252, 161, 3)',
+                   data: [7,8,6,7,6,3,3]
+               }]
+           },
+           options: {
+               scales: {
+                   yAxes: [{
+                       ticks: {
+                           beginAtZero: true
+                       }
+                   }]
+               }
+           }
         };
     }
 
@@ -34,32 +52,8 @@ class Dashboard extends Component {
         }
     }
 
-    getDataGraph1 = () => {
-        return {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            datasets: [{
-                label: 'Average Break Torque',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [7,8,6,7,6,3,3]
-            }]
-        }
-    }
-
-    getOptionsGraph1 = () => {
-        return {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    }
-
     render() {
-        const { isAuthenticated, name } = this.state;
+        const { isAuthenticated, name, data, options } = this.state;
 
         return (
             <div>
@@ -74,16 +68,36 @@ class Dashboard extends Component {
                     name={name}
                 />
                 <Container className="my-5">
-                    <Row>
-                        <Col>
-                            {
-
-                            // <Line data={this.getDataGraph1()} options={this.getOptionsGraph1()} />
-                        }
-
-                            <Graph />
-                        </Col>
-                    </Row>
+                    <Card>
+                        <Card.Header>
+                            Torque
+                        </Card.Header>
+                        <Card.Body>
+                            <Row>
+                                <Col>
+                                    <Graph
+                                        data={data}
+                                        options={options}
+                                    />
+                                </Col>
+                            </Row>
+                        </Card.Body>
+                    </Card>
+                    <Card className="mt-3">
+                        <Card.Header>
+                            Deceleration
+                        </Card.Header>
+                        <Card.Body>
+                            <Row>
+                                <Col>
+                                    <Graph
+                                        data={data}
+                                        options={options}
+                                    />
+                                </Col>
+                            </Row>
+                        </Card.Body>
+                    </Card>
                 </Container>
             </div>
         )
