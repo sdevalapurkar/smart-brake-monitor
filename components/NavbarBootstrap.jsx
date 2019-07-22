@@ -9,7 +9,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Link from 'next/link';
-import Router from 'next/router';
 
 class NavbarBootstrap extends Component {
     constructor(props) {
