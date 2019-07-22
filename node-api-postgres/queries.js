@@ -145,6 +145,10 @@ const addVehicle = (request, response) => {
             return response.status(400).json(results);
         }
 
+        if (!vehiclesOwned) {
+            vehiclesOwned = [];
+        }
+
         vehiclesOwned.push({
             name: carName,
             id: arduinoID,
