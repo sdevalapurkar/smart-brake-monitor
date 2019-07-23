@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 import Graph from '../components/dashboard/Graph'
 import axios from 'axios';
 import Router from 'next/router';
@@ -106,7 +107,19 @@ class Dashboard extends Component {
                                 Torque
                             </Card.Header>
                             <Card.Body>
-                                <Row>
+                                <Row className="justify-content-end">
+                                    <Col sm={'auto'} className="px-1">
+                                        <Button variant="outline-primary">
+                                            Day
+                                        </Button>
+                                    </Col>
+                                    <Col sm={'auto'} className="px-1 pr-3">
+                                        <Button variant="outline-primary">
+                                            Date Range
+                                        </Button>
+                                    </Col>
+                                </Row>
+                                <Row className="mt-3">
                                     <Col>
                                         <Graph
                                             data={data}
