@@ -8,8 +8,8 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Graph from '../components/dashboard/Graph'
 import axios from 'axios';
-import Router from 'next/router';
 import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 
 const host = 'http://localhost';
 const port = 3001;
@@ -24,17 +24,19 @@ class Dashboard extends Component {
             email: '',
             vehiclesOwned: [],
             arduinoID: 12345,
+            currDate: null,
             vehicleSelected: false,
             brakingData: [],
+            parsedBrakingData: [],
             data: {
-               labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-               datasets: [{
-                   label: 'Average Break Torque',
-                   backgroundColor: 'rgba(252, 161, 3, 0.5)',
-                   borderColor: 'rgb(252, 161, 3)',
-                   data: [7,8,6,7,6,3,3]
-               }]
-           },
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Average Break Torque',
+                    backgroundColor: 'rgba(252, 161, 3, 0.5)',
+                    borderColor: 'rgb(252, 161, 3)',
+                    data: [7,8,6,7,6,3,3]
+                }]
+            },
             options: {
                 scales: {
                     yAxes: [{
@@ -55,7 +57,7 @@ class Dashboard extends Component {
         startDate = startDate || this.state.startDate;
         endDate = endDate || this.state.endDate;
         this.setState({ startDate, endDate });
-    };
+    }
 
     handleChangeStart = startDate => this.setState({ startDate });
 
@@ -71,7 +73,17 @@ class Dashboard extends Component {
             vehiclesOwned
         })
         .then(res => {
-            this.setState({ vehicleSelected: true, brakingData: res.data.brakingData });
+            this.setState({ vehicleSelected: true, brakingData: res.data.brakingData }, () => {
+                const parsed = [];
+                this.state.brakingData.forEach(element => {
+                    let date = moment(element.drive_date).format('YYYY-MM-DD');
+                    if (date === this.state.currDate) {
+                        parsed.push(element);
+                    }
+                });
+
+                this.setState({ parsedBrakingData: parsed });
+            });
         })
         .catch(err => {});
     }
@@ -82,18 +94,18 @@ class Dashboard extends Component {
         if (authToken) {
             axios.post(`${host}:${port}/authstatus`, { headers: { 'Authorization' : `Bearer ${authToken}` } }).then(res => {
                 if (res.status === 200) {
+                    console.log(res.data);
                     const { name, email, vehiclesOwned } = res.data.authData;
-                    this.setState({ isAuthenticated: true, name, email, vehiclesOwned });
+                    this.setState({ isAuthenticated: true, name, email, vehiclesOwned, currDate: moment().format('YYYY-MM-DD') });
                 }
-            }).catch(err => {
-                location.replace('/');
-            });
+            }).catch(err => {});
         } else {
             location.replace('/');
         }
     }
 
     render() {
+        console.log(this.state.parsedBrakingData);
         const { isAuthenticated, name, data, options, vehicleSelected } = this.state;
 
         return (
