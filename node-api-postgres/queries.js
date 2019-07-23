@@ -227,7 +227,7 @@ const getBrakingData = (request, response) => {
     const email = body.email;
     const vehiclesOwned = body.vehiclesOwned;
 
-    pool.query('SELECT dec_x, dec_y, dec_z, gy_x, gy_y, gy_z, drive_date, relative_time_count from brakingdata where vehicle_id = $1 order by drive_date asc', [arduinoID], (error, results) => {
+    pool.query('SELECT dec_x, drive_date, relative_time_count from brakingdata where vehicle_id = $1 order by drive_date asc', [arduinoID], (error, results) => {
         if (error) {
             return response.status(400).json(results);
         }
