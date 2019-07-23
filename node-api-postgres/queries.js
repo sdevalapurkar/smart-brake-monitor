@@ -220,6 +220,30 @@ const editVehicle = (request, response) => {
     });
 }
 
+const getBrakingData = (request, response) => {
+    const { body } = request;
+    const arduinoID = body.arduinoID;
+    const name = body.name;
+    const email = body.email;
+    const vehiclesOwned = body.vehiclesOwned;
+
+    pool.query('SELECT dec_x, dec_y, dec_z, gy_x, gy_y, gy_z, drive_date, relative_time_count from brakingdata where vehicle_id = $1 order by drive_date asc', [arduinoID], (error, results) => {
+        if (error) {
+            return response.status(400).json(results);
+        }
+
+        const brakingData = results.rows;
+
+        jwt.sign({ name, email, vehiclesOwned, brakingData }, privateKey, { expiresIn: '2h' }, (err, token) => {
+            return response.status(200).json({
+                token,
+                vehiclesOwned,
+                brakingData,
+            });
+        });
+    });
+}
+
 module.exports = {
     createUser,
     authenticateUser,
@@ -228,4 +252,5 @@ module.exports = {
     addVehicle,
     deleteVehicle,
     editVehicle,
+    getBrakingData,
 }
