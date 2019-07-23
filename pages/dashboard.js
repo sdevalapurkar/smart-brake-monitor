@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import Graph from '../components/dashboard/Graph'
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
@@ -51,6 +52,42 @@ class Dashboard extends Component {
         };
 
         this.getBrakingData = this.getBrakingData.bind(this);
+    }
+
+    createCarRow = () => {
+        const { vehiclesOwned } = this.state;
+        let myVehicles = [];
+
+        for (let v in vehiclesOwned) {
+            myVehicles.push(
+                <Card className="mt-3">
+                    <Card.Body className="p-2">
+                        <Row>
+                            <Col>
+                                <Form.Check
+                                    type='radio'
+                                    name="selectVehicleRadioButtons"
+                                />
+                            </Col>
+                            <Col>
+                                {vehiclesOwned[v].id}
+                            </Col>
+                            <Col>
+                                {vehiclesOwned[v].name}
+                            </Col>
+                            <Col>
+                                {vehiclesOwned[v].weight}
+                            </Col>
+                            <Col>
+                                {vehiclesOwned[v].tireSpecs}
+                            </Col>
+                        </Row>
+                    </Card.Body>
+                </Card>
+            );
+        }
+
+        return myVehicles;
     }
 
     handleChange = ({ startDate, endDate }) => {
@@ -119,9 +156,30 @@ class Dashboard extends Component {
                     name={name}
                 />
                 {!vehicleSelected && (
-                    <div>
-                        <button onClick={() => this.getBrakingData()}>Click for Vehicle with Freno ID = 12345</button>
-                    </div>
+                    <Container className="my-5">
+                        <Card>
+                            <Card.Header>
+                                <h4 className="m-0">
+                                    Pick a Vehicle
+                                </h4>
+                            </Card.Header>
+                            <Card.Body>
+                                <Form.Group>
+                                    {
+                                        // <button onClick={() => this.getBrakingData()}>Click for Vehicle with Freno ID = 12345</button>
+                                    }
+                                    {this.createCarRow()}
+                                </Form.Group>
+                                <Row className="text-right">
+                                    <Col>
+                                        <Button variant="outline-success">
+                                            View Data
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            </Card.Body>
+                        </Card>
+                    </Container>
                 )}
                 {vehicleSelected && (
                     <Container className="my-5">
