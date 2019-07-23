@@ -18,25 +18,48 @@ class Dashboard extends Component {
         this.state = {
             isAuthenticated: false,
             name: '',
-            data: {
-               labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-               datasets: [{
-                   label: 'Average Break Torque',
-                   backgroundColor: 'rgba(252, 161, 3, 0.5)',
-                   borderColor: 'rgb(252, 161, 3)',
-                   data: [7,8,6,7,6,3,3]
-               }]
-           },
-           options: {
-               scales: {
-                   yAxes: [{
-                       ticks: {
-                           beginAtZero: true
-                       }
-                   }]
-               }
-           }
+            email: '',
+            vehiclesOwned: [],
+            arduinoID: 12345,
+            vehicleSelected: false,
+            brakingData: [],
+            //     data: {
+            //        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            //        datasets: [{
+            //            label: 'Average Break Torque',
+            //            backgroundColor: 'rgba(252, 161, 3, 0.5)',
+            //            borderColor: 'rgb(252, 161, 3)',
+            //            data: [7,8,6,7,6,3,3]
+            //        }]
+            //    },
+            data: null,
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
         };
+
+        this.getBrakingData = this.getBrakingData.bind(this);
+    }
+
+    getBrakingData = () => {
+        const { arduinoID, name, email, vehiclesOwned } = this.state;
+
+        axios.post(`${host}:${port}/getBrakingData`, {
+            arduinoID,
+            name,
+            email,
+            vehiclesOwned
+        })
+        .then(res => {
+            this.setState({ vehicleSelected: true, brakingData: res.data.brakingData });
+        })
+        .catch(err => {});
     }
 
     componentDidMount = () => {
@@ -45,15 +68,19 @@ class Dashboard extends Component {
         if (authToken) {
             axios.post(`${host}:${port}/authstatus`, { headers: { 'Authorization' : `Bearer ${authToken}` } }).then(res => {
                 if (res.status === 200) {
-                    console.log(res.data.authData);
-                    this.setState({ isAuthenticated: true, name: res.data.authData.name });
+                    const { name, email, vehiclesOwned } = res.data.authData;
+                    this.setState({ isAuthenticated: true, name, email, vehiclesOwned });
                 }
-            }).catch(err => {});
+            }).catch(err => {
+                location.replace('/');
+            });
+        } else {
+            location.replace('/');
         }
     }
 
     render() {
-        const { isAuthenticated, name, data, options } = this.state;
+        const { isAuthenticated, name, data, options, vehicleSelected } = this.state;
 
         return (
             <div>
@@ -67,38 +94,45 @@ class Dashboard extends Component {
                     isAuthenticated={isAuthenticated}
                     name={name}
                 />
-                <Container className="my-5">
-                    <Card>
-                        <Card.Header>
-                            Torque
-                        </Card.Header>
-                        <Card.Body>
-                            <Row>
-                                <Col>
-                                    <Graph
-                                        data={data}
-                                        options={options}
-                                    />
-                                </Col>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                    <Card className="mt-3">
-                        <Card.Header>
-                            Deceleration
-                        </Card.Header>
-                        <Card.Body>
-                            <Row>
-                                <Col>
-                                    <Graph
-                                        data={data}
-                                        options={options}
-                                    />
-                                </Col>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                </Container>
+                {!vehicleSelected && (
+                    <div>
+                        <button onClick={() => this.getBrakingData()}>Click for Vehicle with Freno ID = 12345</button>
+                    </div>
+                )}
+                {vehicleSelected && (
+                    <Container className="my-5">
+                        <Card>
+                            <Card.Header>
+                                Torque
+                            </Card.Header>
+                            <Card.Body>
+                                <Row>
+                                    <Col>
+                                        <Graph
+                                            data={data}
+                                            options={options}
+                                        />
+                                    </Col>
+                                </Row>
+                            </Card.Body>
+                        </Card>
+                        <Card className="mt-3">
+                            <Card.Header>
+                                Deceleration
+                            </Card.Header>
+                            <Card.Body>
+                                <Row>
+                                    <Col>
+                                        <Graph
+                                            data={data}
+                                            options={options}
+                                        />
+                                    </Col>
+                                </Row>
+                            </Card.Body>
+                        </Card>
+                    </Container>
+                )}
             </div>
         )
     }
