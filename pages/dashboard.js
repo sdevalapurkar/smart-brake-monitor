@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DatePicker from "react-datepicker";;
 import NavbarBootstrap from '../components/NavbarBootstrap';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
@@ -8,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Graph from '../components/dashboard/Graph'
 import axios from 'axios';
 import Router from 'next/router';
+import "react-datepicker/dist/react-datepicker.css";
 
 const host = 'http://localhost';
 const port = 3001;
@@ -24,16 +26,15 @@ class Dashboard extends Component {
             arduinoID: 12345,
             vehicleSelected: false,
             brakingData: [],
-            //     data: {
-            //        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            //        datasets: [{
-            //            label: 'Average Break Torque',
-            //            backgroundColor: 'rgba(252, 161, 3, 0.5)',
-            //            borderColor: 'rgb(252, 161, 3)',
-            //            data: [7,8,6,7,6,3,3]
-            //        }]
-            //    },
-            data: null,
+            data: {
+               labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+               datasets: [{
+                   label: 'Average Break Torque',
+                   backgroundColor: 'rgba(252, 161, 3, 0.5)',
+                   borderColor: 'rgb(252, 161, 3)',
+                   data: [7,8,6,7,6,3,3]
+               }]
+           },
             options: {
                 scales: {
                     yAxes: [{
@@ -42,11 +43,23 @@ class Dashboard extends Component {
                         }
                     }]
                 }
-            }
+            },
+            startDate: new Date(),
+            endDate: new Date()
         };
 
         this.getBrakingData = this.getBrakingData.bind(this);
     }
+
+    handleChange = ({ startDate, endDate }) => {
+        startDate = startDate || this.state.startDate;
+        endDate = endDate || this.state.endDate;
+        this.setState({ startDate, endDate });
+    };
+
+    handleChangeStart = startDate => this.setState({ startDate });
+
+    handleChangeEnd = endDate => this.handleChange({ endDate });
 
     getBrakingData = () => {
         const { arduinoID, name, email, vehiclesOwned } = this.state;
@@ -109,13 +122,28 @@ class Dashboard extends Component {
                             <Card.Body>
                                 <Row className="justify-content-end">
                                     <Col sm={'auto'} className="px-1">
-                                        <Button variant="outline-primary">
-                                            Day
-                                        </Button>
+                                        <DatePicker
+                                            selected={this.state.startDate}
+                                            selectsStart
+                                            startDate={this.state.startDate}
+                                            endDate={this.state.endDate}
+                                            onChange={this.handleChangeStart}
+                                        />
+                                    </Col>
+                                    <Col sm={'auto'} className="px-1">
+                                        <DatePicker
+                                            selected={this.state.endDate}
+                                            selectsEnd
+                                            startDate={this.state.startDate}
+                                            endDate={this.state.endDate}
+                                            minDate={this.state.startDate}
+                                            maxDate={new Date()}
+                                            onChange={this.handleChangeEnd}
+                                        />
                                     </Col>
                                     <Col sm={'auto'} className="px-1 pr-3">
-                                        <Button variant="outline-primary">
-                                            Date Range
+                                        <Button variant="outline-success btn-sm">
+                                            Update
                                         </Button>
                                     </Col>
                                 </Row>
