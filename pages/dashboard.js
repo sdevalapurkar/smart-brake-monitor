@@ -28,8 +28,8 @@ class Dashboard extends Component {
             vehicleSelected: false,
             brakingData: [],
             parsedBrakingData: [],
+            dataExistsToDisplay: true,
             data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
                 datasets: [{
                     label: 'Average Break Torque',
                     backgroundColor: 'rgba(252, 161, 3, 0.5)',
@@ -77,8 +77,27 @@ class Dashboard extends Component {
                 const parsed = [];
                 this.state.brakingData.forEach(element => {
                     if (moment(element.drive_date).format('YYYY-MM-DD') === this.state.currDate) {
-                        parsed.push(element);
+                        parsed.push({ x: element.relative_time_count, y: element.dec_x });
                     }
+                });
+
+                if (!parsed) {
+                    this.setState({ dataExistsToDisplay: false });
+                    return;
+                }
+
+                this.setState(prevState => ({
+                    data: {
+                        datasets: [{
+                            ...prevState.datasets,
+                            data: parsed,
+                            label: 'Average Deceleration',
+                            backgroundColor: 'rgba(252, 161, 3, 0.5)',
+                            borderColor: 'rgb(252, 161, 3)',
+                        }],
+                    }
+                }), () => {
+                    console.log(this.state.data);
                 });
 
                 this.setState({ parsedBrakingData: parsed });
@@ -104,7 +123,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { isAuthenticated, name, data, options, vehicleSelected } = this.state;
+        const { isAuthenticated, name, data, options, vehicleSelected, dataExistsToDisplay } = this.state;
 
         return (
             <div>
@@ -127,7 +146,7 @@ class Dashboard extends Component {
                     <Container className="my-5">
                         <Card>
                             <Card.Header>
-                                Torque
+                                Deceleration
                             </Card.Header>
                             <Card.Body>
                                 <Row className="justify-content-end">
@@ -157,19 +176,21 @@ class Dashboard extends Component {
                                         </Button>
                                     </Col>
                                 </Row>
-                                <Row className="mt-3">
-                                    <Col>
-                                        <Graph
-                                            data={data}
-                                            options={options}
-                                        />
-                                    </Col>
-                                </Row>
+                                {dataExistsToDisplay && (
+                                    <Row className="mt-3">
+                                        <Col>
+                                            <Graph
+                                                data={data}
+                                                options={options}
+                                            />
+                                        </Col>
+                                    </Row>
+                                )}
                             </Card.Body>
                         </Card>
                         <Card className="mt-3">
                             <Card.Header>
-                                Deceleration
+                                Braking Torque
                             </Card.Header>
                             <Card.Body>
                                 <Row>
