@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import DatePicker from "react-datepicker";;
 import NavbarBootstrap from '../components/NavbarBootstrap';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 import Graph from '../components/dashboard/Graph'
 import axios from 'axios';
+import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
 
 const host = 'http://localhost';
@@ -42,11 +45,23 @@ class Dashboard extends Component {
                         }
                     }]
                 }
-            }
+            },
+            startDate: new Date(),
+            endDate: new Date()
         };
 
         this.getBrakingData = this.getBrakingData.bind(this);
     }
+
+    handleChange = ({ startDate, endDate }) => {
+        startDate = startDate || this.state.startDate;
+        endDate = endDate || this.state.endDate;
+        this.setState({ startDate, endDate });
+    }
+
+    handleChangeStart = startDate => this.setState({ startDate });
+
+    handleChangeEnd = endDate => this.handleChange({ endDate });
 
     getBrakingData = () => {
         const { arduinoID, name, email, vehiclesOwned } = this.state;
@@ -115,7 +130,34 @@ class Dashboard extends Component {
                                 Torque
                             </Card.Header>
                             <Card.Body>
-                                <Row>
+                                <Row className="justify-content-end">
+                                    <Col sm={'auto'} className="px-1">
+                                        <DatePicker
+                                            selected={this.state.startDate}
+                                            selectsStart
+                                            startDate={this.state.startDate}
+                                            endDate={this.state.endDate}
+                                            onChange={this.handleChangeStart}
+                                        />
+                                    </Col>
+                                    <Col sm={'auto'} className="px-1">
+                                        <DatePicker
+                                            selected={this.state.endDate}
+                                            selectsEnd
+                                            startDate={this.state.startDate}
+                                            endDate={this.state.endDate}
+                                            minDate={this.state.startDate}
+                                            maxDate={new Date()}
+                                            onChange={this.handleChangeEnd}
+                                        />
+                                    </Col>
+                                    <Col sm={'auto'} className="px-1 pr-3">
+                                        <Button variant="outline-success btn-sm">
+                                            Update
+                                        </Button>
+                                    </Col>
+                                </Row>
+                                <Row className="mt-3">
                                     <Col>
                                         <Graph
                                             data={data}
