@@ -61,8 +61,7 @@ class Dashboard extends Component {
             this.setState({ vehicleSelected: true, brakingData: res.data.brakingData }, () => {
                 const parsed = [];
                 this.state.brakingData.forEach(element => {
-                    let date = moment(element.drive_date).format('YYYY-MM-DD');
-                    if (date === this.state.currDate) {
+                    if (moment(element.drive_date).format('YYYY-MM-DD') === this.state.currDate) {
                         parsed.push(element);
                     }
                 });
@@ -90,7 +89,6 @@ class Dashboard extends Component {
     }
 
     render() {
-        console.log(this.state.parsedBrakingData);
         const { isAuthenticated, name, data, options, vehicleSelected } = this.state;
 
         return (
