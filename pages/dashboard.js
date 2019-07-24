@@ -44,7 +44,20 @@ class Dashboard extends Component {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
-                        }
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Deceleration'
+                          }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Minutes'
+                          }
                     }]
                 }
             },
@@ -55,6 +68,7 @@ class Dashboard extends Component {
         };
 
         this.getBrakingData = this.getBrakingData.bind(this);
+        this.updateDeceleration = this.updateDeceleration.bind(this);
     }
 
     createCarRow = () => {
@@ -109,6 +123,81 @@ class Dashboard extends Component {
     handleChangeStartTorque = startDateTorque => this.handleChangeTorque({ startDateTorque });
     handleChangeEndTorque = endDateTorque => this.handleChangeTorque({ endDateTorque });
 
+    updateDeceleration = () => {
+        const { startDate, endDate, brakingData } = this.state;
+        const startDateUTC = moment(startDate).format('YYYY-MM-DD');
+        const endDateUTC = moment(endDate).format('YYYY-MM-DD');
+
+        const parsed = [];
+        let updatedParsed = [];
+        brakingData.forEach(element => {
+            let date = moment(element.drive_date).format('YYYY-MM-DD');
+            if (moment(date).isBetween(startDateUTC, endDateUTC, null, '[]')) {
+                updatedParsed.push(element);
+                parsed.push({ x: element.relative_time_count, y: element.dec_x });
+            }
+        });
+
+        if (parsed.length === 0) {
+            this.setState({ dataExistsToDisplay: false });
+            return;
+        }
+
+        if (moment.duration(moment(endDateUTC).diff(moment(startDateUTC))).asDays() < 7) {
+            this.setState(prevState => ({
+                data: {
+                    datasets: [{
+                        ...prevState.datasets,
+                        data: parsed,
+                        label: 'Average Deceleration',
+                        backgroundColor: 'rgba(252, 161, 3, 0.5)',
+                        borderColor: 'rgb(252, 161, 3)',
+                    }],
+                }
+            }));
+        } else {
+            let finalDataObject = [];
+            let date = moment(updatedParsed[0].drive_date).format('YYYY-MM-DD');
+            let avgDecForDay = 0;
+            let counter = 0;
+            console.log('updatedparsed: ', updatedParsed);
+            updatedParsed.forEach((element, index) => {
+                console.log(date);
+                console.log(element.drive_date);
+                console.log(moment(date).isSame(moment(element.drive_date)));
+                if (moment(date).isSame(moment(element.drive_date))) {
+                    avgDecForDay += element.dec_x;
+                    counter++;
+                } else {
+                    console.log('in else case:', avgDecForDay);
+                    finalDataObject.push({ x: index + 1, y: avgDecForDay/counter });
+                    date = moment(element.drive_date);
+                    avgDecForDay = 0;
+                    counter = 0;
+                }
+            });
+
+            if (finalDataObject.length === 0) {
+                finalDataObject.push({ x: 1, y: avgDecForDay/counter });
+            }
+
+            console.log(finalDataObject);
+            this.setState(prevState => ({
+                data: {
+                    datasets: [{
+                        ...prevState.datasets,
+                        data: finalDataObject,
+                        label: 'Average Deceleration',
+                        backgroundColor: 'rgba(252, 161, 3, 0.5)',
+                        borderColor: 'rgb(252, 161, 3)',
+                    }],
+                }
+            }));
+        }
+
+        this.setState({ parsedBrakingData: parsed, dataExistsToDisplay: true });
+    }
+
     getBrakingData = () => {
         const { arduinoID, name, email, vehiclesOwned } = this.state;
 
@@ -122,7 +211,7 @@ class Dashboard extends Component {
             this.setState({ vehicleSelected: true, brakingData: res.data.brakingData }, () => {
                 const parsed = [];
                 this.state.brakingData.forEach(element => {
-                    if (moment(element.drive_date).format('YYYY-MM-DD') === this.state.currDate) {
+                    if (moment(element.drive_date).format('YYYY-MM-DD') !== this.state.currDate) {
                         parsed.push({ x: element.relative_time_count, y: element.dec_x });
                     }
                 });
@@ -253,7 +342,7 @@ class Dashboard extends Component {
                                         />
                                     </Col>
                                     <Col sm={'auto'} className="px-1 pr-3">
-                                        <Button variant="outline-success btn-sm">
+                                        <Button onClick={() => this.updateDeceleration()} variant="outline-success btn-sm">
                                             Update
                                         </Button>
                                     </Col>
