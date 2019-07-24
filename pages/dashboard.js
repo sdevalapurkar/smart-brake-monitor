@@ -37,7 +37,8 @@ class Dashboard extends Component {
                 scales: {
                     xAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            stepSize: 5
                         }
                     }],
                     yAxes: [{
