@@ -167,7 +167,6 @@ class Dashboard extends Component {
 
     render() {
         const { isAuthenticated, name, data, options, vehicleSelected, dataExistsToDisplay } = this.state;
-        console.log(data);
 
         return (
             <div>
