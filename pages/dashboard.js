@@ -27,6 +27,7 @@ class Dashboard extends Component {
             email: '',
             vehiclesOwned: [],
             arduinoID: null,
+            vehicleName: '',
             currDate: null,
             vehicleSelected: false,
             brakingData: [],
@@ -86,7 +87,7 @@ class Dashboard extends Component {
                                     type='radio'
                                     name="selectVehicleRadioButtons"
                                     label={vehiclesOwned[v].id}
-                                    onChange={() => this.setState({ arduinoID: vehiclesOwned[v].id })}
+                                    onChange={() => this.setState({ arduinoID: vehiclesOwned[v].id, vehicleName: vehiclesOwned[v].name })}
                                 />
                             </Col>
                             <Col>
@@ -293,7 +294,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { isAuthenticated, name, data, options, vehicleSelected, dataExistsToDisplay } = this.state;
+        const { isAuthenticated, name, data, options, vehicleSelected, dataExistsToDisplay, vehicleName } = this.state;
 
         return (
             <div>
@@ -353,7 +354,14 @@ class Dashboard extends Component {
                 )}
                 {vehicleSelected && (
                     <Container className="my-5">
-                        <Row>
+                        <Row className="text-center">
+                            <Col>
+                                <h1>
+                                    {vehicleName}
+                                </h1>
+                            </Col>
+                        </Row>
+                        <Row className="mt-4">
                             <Col>
                                 <BrakeInfoCard
                                     topText="Average Brake Rating"
