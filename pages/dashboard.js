@@ -9,6 +9,7 @@ import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Graph from '../components/dashboard/Graph'
+import BrakeInfoCard from '../components/dashboard/BrakeInfoCard'
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
@@ -352,7 +353,35 @@ class Dashboard extends Component {
                 )}
                 {vehicleSelected && (
                     <Container className="my-5">
-                        <Card>
+                        <Row>
+                            <Col>
+                                <BrakeInfoCard
+                                    topText="Average Brake Rating"
+                                    midText="2.2"
+                                    botText="Learn More"
+                                    onClick={()=>alert("hello world")}
+                                    variant="bg-success"
+                                />
+                            </Col>
+                            <Col>
+                                <BrakeInfoCard
+                                    topText="Average Braking Torque"
+                                    midText="15 Nm"
+                                    botText="Learn More"
+                                    variant="bg-warning"
+                                />
+                            </Col>
+                            <Col>
+                                <BrakeInfoCard
+                                    topText="Good Braking Streak"
+                                    midText="5 Days"
+                                    botText="Learn More"
+                                    onClick={()=>alert("hello")}
+                                    variant="bg-secondary"
+                                />
+                            </Col>
+                        </Row>
+                        <Card className="mt-3">
                             <Card.Header>
                                 Deceleration
                             </Card.Header>
