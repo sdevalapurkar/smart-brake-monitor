@@ -61,16 +61,14 @@ class Dashboard extends Component {
         for (let v in vehiclesOwned) {
             myVehicles.push(
                 <Card className="mt-3">
-                    <Card.Body className="p-2">
-                        <Row>
+                    <Card.Body className="p-3">
+                        <Row className="">
                             <Col>
                                 <Form.Check
                                     type='radio'
                                     name="selectVehicleRadioButtons"
+                                    label={vehiclesOwned[v].id}
                                 />
-                            </Col>
-                            <Col>
-                                {vehiclesOwned[v].id}
                             </Col>
                             <Col>
                                 {vehiclesOwned[v].name}
@@ -164,6 +162,27 @@ class Dashboard extends Component {
                                 </h4>
                             </Card.Header>
                             <Card.Body>
+                                <Card
+                                    style={{ border: 'none' }}
+                                    className="px-m font-weight-bold"
+                                >
+                                    <Card.Body className="p-2">
+                                        <Row>
+                                            <Col>
+                                                Freno ID
+                                            </Col>
+                                            <Col>
+                                                Car Name
+                                            </Col>
+                                            <Col>
+                                                Weight
+                                            </Col>
+                                            <Col>
+                                                Tire Specs
+                                            </Col>
+                                        </Row>
+                                    </Card.Body>
+                                </Card>
                                 <Form.Group>
                                     {
                                         // <button onClick={() => this.getBrakingData()}>Click for Vehicle with Freno ID = 12345</button>
