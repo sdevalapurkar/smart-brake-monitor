@@ -31,16 +31,15 @@ class Dashboard extends Component {
             brakingData: [],
             parsedBrakingData: [],
             dataExistsToDisplay: true,
-            data: {
-                datasets: [{
-                    label: 'Average Break Torque',
-                    backgroundColor: 'rgba(252, 161, 3, 0.5)',
-                    borderColor: 'rgb(252, 161, 3)',
-                    data: [7,8,6,7,6,3,3]
-                }]
-            },
+            data: null,
             options: {
+                bezierCurve: false,
                 scales: {
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
@@ -121,6 +120,10 @@ class Dashboard extends Component {
         .then(res => {
             this.setState({ vehicleSelected: true, brakingData: res.data.brakingData }, () => {
                 const parsed = [];
+
+                // Add fake data for visualization purposes
+                parsed.push({x: 0, y: 0})
+
                 this.state.brakingData.forEach(element => {
                     if (moment(element.drive_date).format('YYYY-MM-DD') === this.state.currDate) {
                         parsed.push({ x: element.relative_time_count, y: element.dec_x });
@@ -140,6 +143,7 @@ class Dashboard extends Component {
                             label: 'Average Deceleration',
                             backgroundColor: 'rgba(252, 161, 3, 0.5)',
                             borderColor: 'rgb(252, 161, 3)',
+                            showLine: true,
                         }],
                     }
                 }));
