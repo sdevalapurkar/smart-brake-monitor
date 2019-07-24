@@ -178,7 +178,7 @@ class Dashboard extends Component {
             });
 
             if (finalDataObject.length === 0) {
-                finalDataObject.push({ x: 1, y: avgDecForDay/counter });
+                finalDataObject.push({ x: 1, y: Math.floor(avgDecForDay/counter * 100) / 100 });
             }
 
             console.log(finalDataObject);
@@ -191,7 +191,30 @@ class Dashboard extends Component {
                         backgroundColor: 'rgba(252, 161, 3, 0.5)',
                         borderColor: 'rgb(252, 161, 3)',
                     }],
-                }
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Deceleration'
+                              }
+                        }],
+                        xAxes: [{
+                            ...prevState.xAxes,
+                            ticks: {
+                                beginAtZero: true
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Days'
+                              }
+                        }]
+                    }
+                },
             }));
         }
 
