@@ -175,7 +175,7 @@ class Dashboard extends Component {
                                                 Car Name
                                             </Col>
                                             <Col>
-                                                Weight
+                                                Weight (kg)
                                             </Col>
                                             <Col>
                                                 Tire Specs
