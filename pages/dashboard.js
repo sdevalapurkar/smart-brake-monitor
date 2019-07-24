@@ -24,7 +24,7 @@ class Dashboard extends Component {
             name: '',
             email: '',
             vehiclesOwned: [],
-            arduinoID: 12345,
+            arduinoID: null,
             currDate: null,
             vehicleSelected: false,
             brakingData: [],
@@ -68,6 +68,7 @@ class Dashboard extends Component {
                                     type='radio'
                                     name="selectVehicleRadioButtons"
                                     label={vehiclesOwned[v].id}
+                                    onChange={() => this.setState({ arduinoID: vehiclesOwned[v].id })}
                                 />
                             </Col>
                             <Col>
@@ -184,14 +185,11 @@ class Dashboard extends Component {
                                     </Card.Body>
                                 </Card>
                                 <Form.Group>
-                                    {
-                                        // <button onClick={() => this.getBrakingData()}>Click for Vehicle with Freno ID = 12345</button>
-                                    }
                                     {this.createCarRow()}
                                 </Form.Group>
                                 <Row className="text-right">
                                     <Col>
-                                        <Button variant="outline-success">
+                                        <Button variant="outline-success" onClick={() => this.getBrakingData()}>
                                             View Data
                                         </Button>
                                     </Col>
