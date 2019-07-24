@@ -157,28 +157,37 @@ class Dashboard extends Component {
             }));
         } else {
             let finalDataObject = [];
+            finalDataObject.push({x: 0, y: 0});
             let date = moment(updatedParsed[0].drive_date).format('YYYY-MM-DD');
             let avgDecForDay = 0;
             let counter = 0;
+            let xCount = 1;
             console.log('updatedparsed: ', updatedParsed);
-            updatedParsed.forEach((element, index) => {
+            updatedParsed.forEach(element => {
                 console.log(date);
                 console.log(element.drive_date);
+                console.log('counter here:', counter);
+                console.log('avg here is:', avgDecForDay);
                 console.log(moment(date).isSame(moment(element.drive_date)));
                 if (moment(date).isSame(moment(element.drive_date))) {
                     avgDecForDay += element.dec_x;
                     counter++;
                 } else {
                     console.log('in else case:', avgDecForDay);
-                    finalDataObject.push({ x: index + 1, y: avgDecForDay/counter });
-                    date = moment(element.drive_date);
+                    finalDataObject.push({ x: xCount, y: Math.floor(avgDecForDay/counter * 100) / 100 });
+                    xCount++;
+                    date = moment(element.drive_date).format('YYYY-MM-DD');
                     avgDecForDay = 0;
                     counter = 0;
+                    if (moment(date).isSame(moment(element.drive_date))) {
+                        avgDecForDay += element.dec_x;
+                        counter++;
+                    }
                 }
             });
 
-            if (finalDataObject.length === 0) {
-                finalDataObject.push({ x: 1, y: Math.floor(avgDecForDay/counter * 100) / 100 });
+            if (counter !== 0) {
+                finalDataObject.push({ x: xCount, y: Math.floor(avgDecForDay/counter * 100) / 100 });
             }
 
             console.log(finalDataObject);
@@ -238,7 +247,7 @@ class Dashboard extends Component {
                 parsed.push({x: 0, y: 0})
 
                 this.state.brakingData.forEach(element => {
-                    if (moment(element.drive_date).format('YYYY-MM-DD') !== this.state.currDate) {
+                    if (moment(element.drive_date).format('YYYY-MM-DD') === this.state.currDate) {
                         parsed.push({ x: element.relative_time_count, y: element.dec_x });
                     }
                 });
