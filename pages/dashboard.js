@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Graph from '../components/dashboard/Graph'
 import axios from 'axios';
@@ -23,7 +24,7 @@ class Dashboard extends Component {
             name: '',
             email: '',
             vehiclesOwned: [],
-            arduinoID: 12345,
+            arduinoID: 111,
             currDate: null,
             vehicleSelected: false,
             brakingData: [],
@@ -47,7 +48,9 @@ class Dashboard extends Component {
                 }
             },
             startDate: new Date(),
-            endDate: new Date()
+            endDate: new Date(),
+            startDateTorque: new Date(),
+            endDateTorque: new Date()
         };
 
         this.getBrakingData = this.getBrakingData.bind(this);
@@ -59,9 +62,16 @@ class Dashboard extends Component {
         this.setState({ startDate, endDate });
     }
 
-    handleChangeStart = startDate => this.setState({ startDate });
+    handleChangeTorque = ({ startDateTorque, endDateTorque }) => {
+        startDateTorque = startDateTorque || this.state.startDateTorque;
+        endDateTorque = endDateTorque || this.state.endDateTorque;
+        this.setState({ startDateTorque, endDateTorque });
+    }
 
+    handleChangeStart = startDate => this.handleChange({ startDate });
     handleChangeEnd = endDate => this.handleChange({ endDate });
+    handleChangeStartTorque = startDateTorque => this.handleChangeTorque({ startDateTorque });
+    handleChangeEndTorque = endDateTorque => this.handleChangeTorque({ endDateTorque });
 
     getBrakingData = () => {
         const { arduinoID, name, email, vehiclesOwned } = this.state;
@@ -81,7 +91,7 @@ class Dashboard extends Component {
                     }
                 });
 
-                if (!parsed) {
+                if (parsed.length === 0) {
                     this.setState({ dataExistsToDisplay: false });
                     return;
                 }
@@ -96,9 +106,7 @@ class Dashboard extends Component {
                             borderColor: 'rgb(252, 161, 3)',
                         }],
                     }
-                }), () => {
-                    console.log(this.state.data);
-                });
+                }));
 
                 this.setState({ parsedBrakingData: parsed });
             });
@@ -112,7 +120,6 @@ class Dashboard extends Component {
         if (authToken) {
             axios.post(`${host}:${port}/authstatus`, { headers: { 'Authorization' : `Bearer ${authToken}` } }).then(res => {
                 if (res.status === 200) {
-                    console.log(res.data);
                     const { name, email, vehiclesOwned } = res.data.authData;
                     this.setState({ isAuthenticated: true, name, email, vehiclesOwned, currDate: moment().format('YYYY-MM-DD') });
                 }
@@ -124,6 +131,7 @@ class Dashboard extends Component {
 
     render() {
         const { isAuthenticated, name, data, options, vehicleSelected, dataExistsToDisplay } = this.state;
+        console.log(data);
 
         return (
             <div>
@@ -139,7 +147,7 @@ class Dashboard extends Component {
                 />
                 {!vehicleSelected && (
                     <div>
-                        <button onClick={() => this.getBrakingData()}>Click for Vehicle with Freno ID = 12345</button>
+                        <button onClick={() => this.getBrakingData()}>Click for Vehicle with Freno ID = 111</button>
                     </div>
                 )}
                 {vehicleSelected && (
@@ -176,6 +184,11 @@ class Dashboard extends Component {
                                         </Button>
                                     </Col>
                                 </Row>
+                                {!dataExistsToDisplay && (
+                                    <Alert className='mt-4' key={0} variant='danger'>
+                                        No braking data for this date range, please select a different range.
+                                    </Alert>
+                                )}
                                 {dataExistsToDisplay && (
                                     <Row className="mt-3">
                                         <Col>
@@ -193,14 +206,48 @@ class Dashboard extends Component {
                                 Braking Torque
                             </Card.Header>
                             <Card.Body>
-                                <Row>
-                                    <Col>
-                                        <Graph
-                                            data={data}
-                                            options={options}
+                                <Row className="justify-content-end">
+                                    <Col sm={'auto'} className="px-1">
+                                        <DatePicker
+                                            selected={this.state.startDateTorque}
+                                            selectsStart
+                                            startDate={this.state.startDateTorque}
+                                            endDate={this.state.endDateTorque}
+                                            onChange={this.handleChangeStartTorque}
                                         />
                                     </Col>
+                                    <Col sm={'auto'} className="px-1">
+                                        <DatePicker
+                                            selected={this.state.endDateTorque}
+                                            selectsEnd
+                                            startDate={this.state.startDateTorque}
+                                            endDate={this.state.endDateTorque}
+                                            minDate={this.state.startDateTorque}
+                                            maxDate={new Date()}
+                                            onChange={this.handleChangeEndTorque}
+                                        />
+                                    </Col>
+                                    <Col sm={'auto'} className="px-1 pr-3">
+                                        <Button variant="outline-success btn-sm">
+                                            Update
+                                        </Button>
+                                    </Col>
                                 </Row>
+                                {!dataExistsToDisplay && (
+                                    <Alert className='mt-4' key={0} variant='danger'>
+                                        No braking data for this date range, please select a different range.
+                                    </Alert>
+                                )}
+                                {dataExistsToDisplay && (
+                                    <Row>
+                                        <Col>
+                                            <Graph
+                                                data={data}
+                                                options={options}
+                                            />
+                                        </Col>
+                                    </Row>
+                                )}
                             </Card.Body>
                         </Card>
                     </Container>
