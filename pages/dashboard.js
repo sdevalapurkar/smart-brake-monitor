@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import Graph from '../components/dashboard/Graph'
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
@@ -24,7 +25,7 @@ class Dashboard extends Component {
             name: '',
             email: '',
             vehiclesOwned: [],
-            arduinoID: 111,
+            arduinoID: null,
             currDate: null,
             vehicleSelected: false,
             brakingData: [],
@@ -54,6 +55,41 @@ class Dashboard extends Component {
         };
 
         this.getBrakingData = this.getBrakingData.bind(this);
+    }
+
+    createCarRow = () => {
+        const { vehiclesOwned } = this.state;
+        let myVehicles = [];
+
+        for (let v in vehiclesOwned) {
+            myVehicles.push(
+                <Card className="mt-3">
+                    <Card.Body className="p-3">
+                        <Row className="">
+                            <Col>
+                                <Form.Check
+                                    type='radio'
+                                    name="selectVehicleRadioButtons"
+                                    label={vehiclesOwned[v].id}
+                                    onChange={() => this.setState({ arduinoID: vehiclesOwned[v].id })}
+                                />
+                            </Col>
+                            <Col>
+                                {vehiclesOwned[v].name}
+                            </Col>
+                            <Col>
+                                {vehiclesOwned[v].weight}
+                            </Col>
+                            <Col>
+                                {vehiclesOwned[v].tireSpecs}
+                            </Col>
+                        </Row>
+                    </Card.Body>
+                </Card>
+            );
+        }
+
+        return myVehicles;
     }
 
     handleChange = ({ startDate, endDate }) => {
@@ -146,9 +182,48 @@ class Dashboard extends Component {
                     name={name}
                 />
                 {!vehicleSelected && (
-                    <div>
-                        <button onClick={() => this.getBrakingData()}>Click for Vehicle with Freno ID = 111</button>
-                    </div>
+                    <Container className="my-5">
+                        <Card>
+                            <Card.Header>
+                                <h4 className="m-0">
+                                    Pick a Vehicle
+                                </h4>
+                            </Card.Header>
+                            <Card.Body>
+                                <Card
+                                    style={{ border: 'none' }}
+                                    className="px-m font-weight-bold"
+                                >
+                                    <Card.Body className="p-2">
+                                        <Row>
+                                            <Col>
+                                                Freno ID
+                                            </Col>
+                                            <Col>
+                                                Car Name
+                                            </Col>
+                                            <Col>
+                                                Weight (kg)
+                                            </Col>
+                                            <Col>
+                                                Tire Specs
+                                            </Col>
+                                        </Row>
+                                    </Card.Body>
+                                </Card>
+                                <Form.Group>
+                                    {this.createCarRow()}
+                                </Form.Group>
+                                <Row className="text-right">
+                                    <Col>
+                                        <Button variant="outline-success" onClick={() => this.getBrakingData()}>
+                                            View Data
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            </Card.Body>
+                        </Card>
+                    </Container>
                 )}
                 {vehicleSelected && (
                     <Container className="my-5">
