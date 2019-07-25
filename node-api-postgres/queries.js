@@ -39,13 +39,18 @@ const authenticateUser = (request, response) => {
             return response.status(400).json(results);
         }
 
-        pool.query('SELECT vehicle_name from vehicles where is_activated = $1 and email = $2', [true, email], (error, res) => {
+        pool.query('SELECT vehicle_name, vehicle_weight, tire_specs, vehicle_id from vehicles where is_activated = $1 and email = $2', [true, email], (error, res) => {
             if (error) {
                 console.log('could not retrieve vehicles for user');
             } else {
                 if (res.rows.length) {
                     res.rows.forEach(val => {
-                        vehiclesOwned.push(val.vehicle_name);
+                        vehiclesOwned.push({
+                            name: val.vehicle_name,
+                            id: val.vehicle_id,
+                            weight: val.vehicle_weight,
+                            tireSpecs: val.tire_specs
+                        });
                     });
                 }
             }
@@ -130,16 +135,28 @@ const addVehicle = (request, response) => {
     const email = body.email;
     const carName = body.carName;
     const arduinoID = body.arduinoID;
-    const vehiclesOwned = body.vehiclesOwned;
+    const carWeight = body.carWeight;
+    const tireSpecs = body.tireSpecs;
+    let vehiclesOwned = body.vehiclesOwned;
+    const name = body.name;
 
-    pool.query('INSERT into vehicles (vehicle_name, email, is_activated, vehicle_id) VALUES ($1, $2, $3, $4)', [carName, email, true, arduinoID], (error, results) => {
+    pool.query('INSERT into vehicles (vehicle_name, email, is_activated, vehicle_id, vehicle_weight, tire_specs) VALUES ($1, $2, $3, $4, $5, $6)', [carName, email, true, arduinoID, carWeight, tireSpecs], (error, results) => {
         if (error) {
             return response.status(400).json(results);
         }
 
-        vehiclesOwned.push(carName);
+        if (!vehiclesOwned) {
+            vehiclesOwned = [];
+        }
 
-        jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
+        vehiclesOwned.push({
+            name: carName,
+            id: arduinoID,
+            weight: carWeight,
+            tireSpecs: tireSpecs
+        });
+
+        jwt.sign({ name, email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
             return response.status(200).json({
                 token,
                 vehiclesOwned
@@ -153,15 +170,16 @@ const deleteVehicle = (request, response) => {
     const carName = body.carName;
     let vehiclesOwned = body.vehiclesOwned;
     const email = body.email;
+    const name = body.name;
 
     pool.query('DELETE from vehicles WHERE vehicle_name=$1 and email=$2', [carName, email], (error, results) => {
         if (error) {
             return response.status(400).json(results);
         }
 
-        vehiclesOwned = vehiclesOwned.filter(e => e !== carName);
+        vehiclesOwned = vehiclesOwned.filter(e => e.name !== carName);
 
-        jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
+        jwt.sign({ name, email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
             return response.status(200).json({
                 token,
                 vehiclesOwned
@@ -175,32 +193,52 @@ const editVehicle = (request, response) => {
     const email = body.email;
     const carName = body.carName;
     const arduinoID = body.arduinoID;
-    const oldCarName = body.oldCarName;
+    const carWeight = body.carWeight;
+    const tireSpecs = body.tireSpecs;
     let vehiclesOwned = body.vehiclesOwned;
+    const name = body.userName;
 
-    pool.query('SELECT vehicle_id FROM vehicles WHERE email=$1 and vehicle_name=$2', [email, oldCarName], (error, results) => {
+    pool.query('UPDATE vehicles SET vehicle_name=$1, vehicle_weight=$2, tire_specs=$3 WHERE email=$4 and vehicle_id=$5', [carName, carWeight, tireSpecs, email, arduinoID], (error, results) => {
         if (error) {
             return response.status(400).json(results);
         }
 
-        const oldID = results.rows[0].vehicle_id;
-
-        pool.query('UPDATE vehicles SET vehicle_name=$1, vehicle_id=$2 WHERE email=$3 and vehicle_id=$4', [carName, arduinoID, email, oldID], (error, resu) => {
-            if (error) {
-                return response.status(400).json(resu);
+        vehiclesOwned.forEach((item, i) => {
+            if (item.id === arduinoID) {
+                vehiclesOwned[i].name = carName;
+                vehiclesOwned[i].weight = carWeight;
+                vehiclesOwned[i].tireSpecs = tireSpecs;
             }
+        });
 
-            vehiclesOwned.forEach((item, i) => {
-                if (item === oldCarName) {
-                    vehiclesOwned[i] = carName;
-                }
+        jwt.sign({ name, email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
+            return response.status(200).json({
+                token,
+                vehiclesOwned
             });
+        });
+    });
+}
 
-            jwt.sign({ email, vehiclesOwned }, privateKey, { expiresIn: '2h' }, (err, token) => {
-                return response.status(200).json({
-                    token,
-                    vehiclesOwned
-                });
+const getBrakingData = (request, response) => {
+    const { body } = request;
+    const arduinoID = body.arduinoID;
+    const name = body.name;
+    const email = body.email;
+    const vehiclesOwned = body.vehiclesOwned;
+
+    pool.query('SELECT dec_x, drive_date, relative_time_count from brakingdata where vehicle_id = $1 order by drive_date asc', [arduinoID], (error, results) => {
+        if (error) {
+            return response.status(400).json(results);
+        }
+
+        const brakingData = results.rows;
+
+        jwt.sign({ name, email, vehiclesOwned, brakingData }, privateKey, { expiresIn: '2h' }, (err, token) => {
+            return response.status(200).json({
+                token,
+                vehiclesOwned,
+                brakingData,
             });
         });
     });
@@ -214,4 +252,5 @@ module.exports = {
     addVehicle,
     deleteVehicle,
     editVehicle,
+    getBrakingData,
 }

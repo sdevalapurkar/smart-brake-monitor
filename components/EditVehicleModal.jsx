@@ -14,19 +14,31 @@ class EditVehicleModal extends Component {
         super(props);
 
         this.state = {
-            carName: '',
-            arduinoID: null,
+            carName: (this.props.name).toString(),
+            arduinoID: parseInt(this.props.arduinoID),
             failedEditingVehicle: false,
+            carWeight: parseFloat(this.props.weight),
+            tireSpecs: (this.props.tireSpecs).toString(),
         };
 
         this.editVehicle = this.editVehicle.bind(this);
     }
 
     editVehicle = () => {
-        const { carName, arduinoID } = this.state;
-        const { email, vehiclesOwned, onHide } = this.props;
+        const { carName, arduinoID, carWeight, tireSpecs } = this.state;
+        const { email, vehiclesOwned, onHide, userName } = this.props;
+        const tireSpecFormat = /^[A-Z][0-9]{3}\/[0-9]{2}\/[A-Z][0-9]{2}$/;
 
-        if (!carName || !arduinoID || vehiclesOwned.includes(carName)) {
+        if (
+            carName === this.props.name &&
+            carWeight === this.props.weight &&
+            tireSpecs === this.props.tireSpecs
+        ) {
+            this.setState({ failedEditingVehicle: true });
+            return false;
+        }
+
+        if (isNaN(carWeight) || !tireSpecFormat.test(tireSpecs)) {
             this.setState({ failedEditingVehicle: true });
             return false;
         }
@@ -36,7 +48,9 @@ class EditVehicleModal extends Component {
             carName,
             arduinoID,
             vehiclesOwned,
-            oldCarName: this.props.carName,
+            carWeight,
+            tireSpecs,
+            userName,
         })
         .then(response => {
             const { token } = response.data;
@@ -49,7 +63,7 @@ class EditVehicleModal extends Component {
     }
 
     render() {
-        const { carName, arduinoID, failedEditingVehicle } = this.state;
+        const { carName, arduinoID, failedEditingVehicle, carWeight, tireSpecs } = this.state;
 
         return (
             <div>
@@ -66,25 +80,43 @@ class EditVehicleModal extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
-                            <Form.Group controlId="todo">
+                            <Form.Group>
                                 <Form.Label>Car Name</Form.Label>
                                 <Form.Control
                                     name="carName"
                                     type="text"
-                                    placeholder="Red Tesla Model X"
                                     value={carName}
                                     onChange={evt => this.setState({ carName: evt.target.value })}
                                     required
                                 />
                             </Form.Group>
-                            <Form.Group controlId="todo">
+                            <Form.Group>
                                 <Form.Label>Freno ID</Form.Label>
                                 <Form.Control
-                                    name="carName"
+                                    name="arduinoID"
                                     type="text"
-                                    placeholder="XXXXXXXXX"
                                     value={arduinoID}
-                                    onChange={evt => this.setState({ arduinoID: evt.target.value })}
+                                    onChange={evt => this.setState({ arduinoID: parseFloat(evt.target.value) })}
+                                    disabled
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Vehicle Weight (kg)</Form.Label>
+                                <Form.Control
+                                    name="carWeight"
+                                    type="number"
+                                    value={carWeight}
+                                    onChange={evt => this.setState({ carWeight: parseFloat(evt.target.value) })}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Tire Size</Form.Label>
+                                <Form.Control
+                                    name="tireSpecs"
+                                    type="text"
+                                    value={tireSpecs}
+                                    onChange={evt => this.setState({ tireSpecs: evt.target.value })}
                                     required
                                 />
                             </Form.Group>

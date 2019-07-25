@@ -9,7 +9,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Link from 'next/link';
-import './index.css';
 
 class NavbarBootstrap extends Component {
     constructor(props) {
@@ -24,10 +23,9 @@ class NavbarBootstrap extends Component {
     }
 
     logout = () => {
+        this.setState({ isAuthenticated: false });
         localStorage.removeItem('auth_token');
-        if (this.props.parentComponent === 'index') {
-            location.reload();
-        }
+        location.replace('/');
     }
 
     render() {
@@ -39,8 +37,8 @@ class NavbarBootstrap extends Component {
                 <NavDropdown.Item href="/account" style={{ textAlign: 'center' }}>My Account</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item>
-                    <Link href="/">
-                        <a style={{ color: 'red', textAlign: 'center' }} onClick={() => this.logout()}>Logout</a>
+                    <Link>
+                        <a href="/" style={{ color: 'red', textAlign: 'center' }} onClick={() => this.logout()}>Logout</a>
                     </Link>
                 </NavDropdown.Item>
             </Popover>
@@ -53,36 +51,23 @@ class NavbarBootstrap extends Component {
             <Navbar bg="light" expand="lg">
                 <Navbar.Brand href="/">
                     <img
-                        alt=""
                         src={require('../img/logo.png')}
-                        width="100"
-                        height="50"
-                        className="d-inline-block align-top"
+                        height="50px"
                     />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
-                        &nbsp;
                         <Nav.Link href="/freno">Freno</Nav.Link>
-                        &nbsp;
-                        &nbsp;
                         <Nav.Link href="/ourteam">Our Team</Nav.Link>
-                        &nbsp;
-                        &nbsp;
                         <Nav.Link href="/contact">Contact</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto" />
                     {!isAuthenticated && (
-                        <ButtonToolbar>
-                            <Button variant="outline-info" size="sm" as="input" value="Sign Up" onClick={() => this.setState({ showSignupModal: true })} />
-                            &nbsp;
-                            &nbsp;
+                        <ButtonToolbar className="my-2">
+                            <Button className="mr-3" variant="outline-info" size="sm" as="input" value="Sign Up" onClick={() => this.setState({ showSignupModal: true })} />
                             <Button variant="outline-success" size="sm" as="input" value="Login" onClick={() => this.setState({ showLoginModal: true })} />
                         </ButtonToolbar>
                     )}
@@ -90,11 +75,8 @@ class NavbarBootstrap extends Component {
                         <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
                             <Navbar.Brand>
                                 <img
-                                    alt=""
                                     src={require('../img/profile.png')}
-                                    width="40"
-                                    height="40"
-                                    className="d-inline-block align-top"
+                                    height="40px"
                                     style={{ cursor: 'pointer' }}
                                 />
                             </Navbar.Brand>
