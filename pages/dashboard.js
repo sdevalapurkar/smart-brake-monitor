@@ -35,6 +35,7 @@ class Dashboard extends Component {
             brakingData: [],
             parsedBrakingData: [],
             dataExistsToDisplay: true,
+            torqueDataExistsToDisplay: false,
             data: null,
             torqueData: null,
             torqueOptions: {
@@ -191,7 +192,7 @@ class Dashboard extends Component {
         });
 
         if (parsed.length === 0) {
-            this.setState({ dataExistsToDisplay: false });
+            this.setState({ torqueDataExistsToDisplay: false });
             return;
         }
 
@@ -209,10 +210,10 @@ class Dashboard extends Component {
             }));
         } else {
             let finalDataObject = [];
-            finalDataObject.push({x: 0, y: 0});
             let date = moment(updatedParsed[0].drive_date).format('YYYY-MM-DD');
             let avgTorqueForDay = 0;
             let counter = 0;
+            let lastDate = date;
             let xCount = 1;
             console.log('updatedparsed: ', updatedParsed);
             updatedParsed.forEach(element => {
@@ -232,12 +233,21 @@ class Dashboard extends Component {
                     counter++;
                 } else {
                     console.log(new Date());
+                    console.log('please be right', element.drive_date);
+                    console.log('pleaseee', new Date(element.drive_date));
                     console.log(moment(element.drive_date));
                     console.log('type of new date', typeof(new Date()));
                     console.log('type of mement', typeof(moment(element.drive_date)));
-                    finalDataObject.push({ x: xCount, y: Math.floor(avgTorqueForDay/counter * 100) / 100 });
+                    let tempDate = new Date(element.drive_date);
+                    tempDate.setHours(tempDate.getHours() - 8);
+                    tempDate = tempDate.setHours(0,0,0,0);
+                    finalDataObject.push({ x: tempDate, y: Math.floor(avgTorqueForDay/counter * 100) / 100 });
                     xCount++;
                     date = moment(element.drive_date).format('YYYY-MM-DD');
+                    let newTempDate = new Date(date);
+                    newTempDate.setHours(newTempDate.getHours() + 8);
+                    newTempDate = newTempDate.setHours(0,0,0,0);
+                    lastDate = newTempDate;
                     avgTorqueForDay = 0;
                     counter = 0;
                     if (moment(date).isSame(moment(element.drive_date))) {
@@ -254,7 +264,7 @@ class Dashboard extends Component {
             });
 
             if (counter !== 0) {
-                finalDataObject.push({ x: xCount, y: Math.floor(avgTorqueForDay/counter * 100) / 100 });
+                finalDataObject.push({ x: lastDate, y: Math.floor(avgTorqueForDay/counter * 100) / 100 });
             }
 
             console.log(finalDataObject);
@@ -266,6 +276,7 @@ class Dashboard extends Component {
                         label: 'Braking Torque',
                         backgroundColor: 'rgba(252, 161, 3, 0.5)',
                         borderColor: 'rgb(252, 161, 3)',
+                        showLine: true,
                     }],
                 },
                 torqueOptions: {
@@ -281,18 +292,26 @@ class Dashboard extends Component {
                         }],
                         xAxes: [{
                             ...prevState.xAxes,
-                            ticks: {
-                                beginAtZero: true
+                            type: 'time',
+                            time: {
+                                unit: 'day',
+                                unitStepSize: 1,
+                                displayFormats: {
+                                    'day': 'MMM DD',
+                                },
+                                tooltipFormat: 'MMM DD'
                             },
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Days'
+                                labelString: 'Dates'
                               }
                         }]
                     }
                 },
             }));
         }
+
+        this.setState({ torqueDataExistsToDisplay: true });
     }
 
     updateDeceleration = () => {
@@ -309,6 +328,8 @@ class Dashboard extends Component {
                 parsed.push({ x: element.relative_time_count, y: element.dec_x });
             }
         });
+
+        console.log('parsed maaaaaan: ', parsed);
 
         if (parsed.length === 0) {
             this.setState({ dataExistsToDisplay: false });
@@ -329,9 +350,10 @@ class Dashboard extends Component {
             }));
         } else {
             let finalDataObject = [];
-            finalDataObject.push({x: 0, y: 0});
+            // finalDataObject.push({x: 0, y: 0});
             let date = moment(updatedParsed[0].drive_date).format('YYYY-MM-DD');
             let avgDecForDay = 0;
+            let lastDate = date;
             let counter = 0;
             let xCount = 1;
             console.log('updatedparsed: ', updatedParsed);
@@ -346,9 +368,17 @@ class Dashboard extends Component {
                     counter++;
                 } else {
                     console.log('in else case:', avgDecForDay);
-                    finalDataObject.push({ x: xCount, y: Math.floor(avgDecForDay/counter * 100) / 100 });
+                    let tempDate = new Date(date);
+                    console.log('BUGGGG: ', element.drive_date);
+                    tempDate.setHours(tempDate.getHours() + 8);
+                    tempDate = tempDate.setHours(0,0,0,0);
+                    finalDataObject.push({ x: tempDate, y: Math.floor(avgDecForDay/counter * 100) / 100 });
                     xCount++;
                     date = moment(element.drive_date).format('YYYY-MM-DD');
+                    let newTempDate = new Date(date);
+                    newTempDate.setHours(newTempDate.getHours() + 8);
+                    newTempDate = newTempDate.setHours(0,0,0,0);
+                    lastDate = newTempDate;
                     avgDecForDay = 0;
                     counter = 0;
                     if (moment(date).isSame(moment(element.drive_date))) {
@@ -359,7 +389,7 @@ class Dashboard extends Component {
             });
 
             if (counter !== 0) {
-                finalDataObject.push({ x: xCount, y: Math.floor(avgDecForDay/counter * 100) / 100 });
+                finalDataObject.push({ x: lastDate, y: Math.floor(avgDecForDay/counter * 100) / 100 });
             }
 
             console.log(finalDataObject);
@@ -371,6 +401,7 @@ class Dashboard extends Component {
                         label: 'Average Deceleration',
                         backgroundColor: 'rgba(252, 161, 3, 0.5)',
                         borderColor: 'rgb(252, 161, 3)',
+                        showLine: true,
                     }],
                 },
                 options: {
@@ -386,17 +417,25 @@ class Dashboard extends Component {
                         }],
                         xAxes: [{
                             ...prevState.xAxes,
-                            ticks: {
-                                beginAtZero: true
+                            type: 'time',
+                            time: {
+                                unit: 'day',
+                                unitStepSize: 1,
+                                displayFormats: {
+                                    'day': 'MMM DD',
+                                },
+                                tooltipFormat: 'MMM DD'
                             },
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Days'
+                                labelString: 'Dates'
                               }
                         }]
                     }
                 },
-            }));
+            }), () => {
+                console.log(this.state.data);
+            });
         }
 
         this.setState({ parsedBrakingData: parsed, dataExistsToDisplay: true });
@@ -439,8 +478,10 @@ class Dashboard extends Component {
                     }
                 });
 
-                if (parsed.length === 0) {
-                    this.setState({ dataExistsToDisplay: false });
+                console.log('parsed', parsed);
+
+                if (parsed.length === 1) {
+                    this.setState({ dataExistsToDisplay: false, torqueDataExistsToDisplay: false });
                     return;
                 }
 
@@ -518,7 +559,8 @@ class Dashboard extends Component {
             vehicleName,
             finalAvgBrakingTorque,
             finalAvgBrakeRating,
-            finalBrakeRatingVariant
+            finalBrakeRatingVariant,
+            torqueDataExistsToDisplay
         } = this.state;
 
         return (
@@ -690,12 +732,12 @@ class Dashboard extends Component {
                                         </Button>
                                     </Col>
                                 </Row>
-                                {!dataExistsToDisplay && (
+                                {!torqueDataExistsToDisplay && (
                                     <Alert className='mt-4' key={0} variant='danger'>
                                         No braking data for this date range, please select a different range.
                                     </Alert>
                                 )}
-                                {dataExistsToDisplay && (
+                                {torqueDataExistsToDisplay && (
                                     <Row>
                                         <Col>
                                             <Graph
