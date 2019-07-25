@@ -391,7 +391,9 @@ class Dashboard extends Component {
                         </Row>
                         <Card className="mt-3">
                             <Card.Header>
-                                Deceleration
+                                <h5 className="m-0">
+                                    Deceleration
+                                </h5>
                             </Card.Header>
                             <Card.Body>
                                 <Row className="justify-content-end">
@@ -440,7 +442,9 @@ class Dashboard extends Component {
                         </Card>
                         <Card className="mt-3">
                             <Card.Header>
-                                Braking Torque
+                                <h5 className="m-0">
+                                    Braking Torque
+                                </h5>
                             </Card.Header>
                             <Card.Body>
                                 <Row className="justify-content-end">
