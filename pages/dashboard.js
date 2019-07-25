@@ -98,7 +98,11 @@ class Dashboard extends Component {
             startDate: new Date(),
             endDate: new Date(),
             startDateTorque: new Date(),
-            endDateTorque: new Date()
+            endDateTorque: new Date(),
+            finalAvgBrakingTorque: 0,
+            finalAvgBrakeRating: 0,
+            finalBrakeRatingVariant: '',
+            finalBrakingTorqueVariant: '',
         };
 
         this.getBrakingData = this.getBrakingData.bind(this);
@@ -411,20 +415,26 @@ class Dashboard extends Component {
             this.setState({ vehicleSelected: true, brakingData: res.data.brakingData }, () => {
                 const parsed = [];
                 const torqueParsed = [];
+                let finalBrakingTorque = 0;
+                let finalBrakeRating = 0;
 
                 // Add fake data for visualization purposes
                 parsed.push({x: 0, y: 0})
                 torqueParsed.push({ x: 0, y: 0 });
 
                 this.state.brakingData.forEach(element => {
+                    // calculate wheel radius
+                    const tireSpecsArr = vehicleTireSpecs.split('/');
+                    const sidewallHeight = (parseInt(tireSpecsArr[1]) * parseInt(tireSpecsArr[0].substr(1))) / 100;
+                    const wheelRadius = (0.001) * (((parseInt(tireSpecsArr[2].substr(1)) * 25.4) + (2 * sidewallHeight)) / 2);
+                    // calculate braking torque
+                    const brakingTorque = vehicleWeight * element.dec_x * wheelRadius;
+
+                    finalBrakingTorque += Math.floor(brakingTorque * 100) / 100;
+                    finalBrakeRating += Math.floor(element.dec_x * 100) / 100;
+
                     if (moment(element.drive_date).format('YYYY-MM-DD') === this.state.currDate) {
                         parsed.push({ x: element.relative_time_count, y: element.dec_x });
-                        // calculate wheel radius
-                        const tireSpecsArr = vehicleTireSpecs.split('/');
-                        const sidewallHeight = (parseInt(tireSpecsArr[1]) * parseInt(tireSpecsArr[0].substr(1))) / 100;
-                        const wheelRadius = (0.001) * (((parseInt(tireSpecsArr[2].substr(1)) * 25.4) + (2 * sidewallHeight)) / 2);
-                        // calculate braking torque
-                        const brakingTorque = vehicleWeight * element.dec_x * wheelRadius;
                         torqueParsed.push({ x: element.relative_time_count, y: Math.floor(brakingTorque * 100) / 100 });
                     }
                 });
@@ -457,7 +467,24 @@ class Dashboard extends Component {
                     }
                 }));
 
-                this.setState({ parsedBrakingData: parsed });
+                let variantRating = '';
+
+                if (finalBrakeRating/this.state.brakingData.length < 0.5) {
+                    variantRating = 'bg-success';
+                } else if (finalBrakeRating/this.state.brakingData.length < 0.7) {
+                    variantRating = 'bg-info';
+                } else if (finalBrakeRating/this.state.brakingData.length < 0.9) {
+                    variantRating = 'bg-warning';
+                } else {
+                    variantRating = 'bg-danger';
+                }
+
+                this.setState({
+                    parsedBrakingData: parsed,
+                    finalAvgBrakingTorque: finalBrakingTorque/this.state.brakingData.length,
+                    finalAvgBrakeRating: finalBrakeRating/this.state.brakingData.length,
+                    finalBrakeRatingVariant: variantRating
+                });
             });
         })
         .catch(err => {});
@@ -479,7 +506,20 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { isAuthenticated, name, data, torqueData, options, torqueOptions, vehicleSelected, dataExistsToDisplay, vehicleName } = this.state;
+        const {
+            isAuthenticated,
+            name,
+            data,
+            torqueData,
+            options,
+            torqueOptions,
+            vehicleSelected,
+            dataExistsToDisplay,
+            vehicleName,
+            finalAvgBrakingTorque,
+            finalAvgBrakeRating,
+            finalBrakeRatingVariant
+        } = this.state;
 
         return (
             <div>
@@ -550,27 +590,18 @@ class Dashboard extends Component {
                             <Col>
                                 <BrakeInfoCard
                                     topText="Average Brake Rating"
-                                    midText="2.2"
+                                    midText={finalAvgBrakeRating}
                                     botText="Learn More"
                                     onClick={()=>alert("hello world")}
-                                    variant="bg-success"
+                                    variant={finalBrakeRatingVariant}
                                 />
                             </Col>
                             <Col>
                                 <BrakeInfoCard
                                     topText="Average Braking Torque"
-                                    midText="15 Nm"
+                                    midText={`${finalAvgBrakingTorque} Nm`}
                                     botText="Learn More"
-                                    variant="bg-warning"
-                                />
-                            </Col>
-                            <Col>
-                                <BrakeInfoCard
-                                    topText="Good Braking Streak"
-                                    midText="5 Days"
-                                    botText="Learn More"
-                                    onClick={()=>alert("hello")}
-                                    variant="bg-secondary"
+                                    variant={finalBrakeRatingVariant}
                                 />
                             </Col>
                         </Row>

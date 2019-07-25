@@ -2,7 +2,7 @@ import Card from 'react-bootstrap/Card';
 
 function BrakeInfoCard(props) {
     return (
-        <div>
+        <div style={{ textAlign: "center" }}>
             <Card className={props.variant}>
                 <Card.Body>
                     <h5>
