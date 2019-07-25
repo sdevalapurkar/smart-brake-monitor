@@ -28,12 +28,15 @@ class Dashboard extends Component {
             vehiclesOwned: [],
             arduinoID: null,
             vehicleName: '',
+            vehicleWeight: null,
+            vehicleTireSpecs: null,
             currDate: null,
             vehicleSelected: false,
             brakingData: [],
             parsedBrakingData: [],
             dataExistsToDisplay: true,
             data: null,
+            torqueData: null,
             options: {
                 bezierCurve: false,
                 scales: {
@@ -71,6 +74,7 @@ class Dashboard extends Component {
 
         this.getBrakingData = this.getBrakingData.bind(this);
         this.updateDeceleration = this.updateDeceleration.bind(this);
+        this.updateBrakingTorque = this.updateBrakingTorque.bind(this);
     }
 
     createCarRow = () => {
@@ -87,7 +91,12 @@ class Dashboard extends Component {
                                     type='radio'
                                     name="selectVehicleRadioButtons"
                                     label={vehiclesOwned[v].id}
-                                    onChange={() => this.setState({ arduinoID: vehiclesOwned[v].id, vehicleName: vehiclesOwned[v].name })}
+                                    onChange={() => this.setState({
+                                        arduinoID: vehiclesOwned[v].id,
+                                        vehicleName: vehiclesOwned[v].name,
+                                        vehicleWeight: vehiclesOwned[v].weight,
+                                        vehicleTireSpecs: vehiclesOwned[v].tireSpecs
+                                    })}
                                 />
                             </Col>
                             <Col>
@@ -124,6 +133,130 @@ class Dashboard extends Component {
     handleChangeEnd = endDate => this.handleChange({ endDate });
     handleChangeStartTorque = startDateTorque => this.handleChangeTorque({ startDateTorque });
     handleChangeEndTorque = endDateTorque => this.handleChangeTorque({ endDateTorque });
+
+    updateBrakingTorque = () => {
+        const { startDateTorque, endDateTorque, brakingData, vehicleTireSpecs, vehicleWeight } = this.state;
+        const startDateTorqueUTC = moment(startDateTorque).format('YYYY-MM-DD');
+        const endDateTorqueUTC = moment(endDateTorque).format('YYYY-MM-DD');
+
+        const parsed = [];
+        let updatedParsed = [];
+        brakingData.forEach(element => {
+            let date = moment(element.drive_date).format('YYYY-MM-DD');
+            if (moment(date).isBetween(startDateTorqueUTC, endDateTorqueUTC, null, '[]')) {
+                updatedParsed.push(element);
+
+                // calculate wheel radius
+                const tireSpecsArr = vehicleTireSpecs.split('/');
+                const sidewallHeight = (parseInt(tireSpecsArr[1]) * parseInt(tireSpecsArr[0].substr(1))) / 100;
+                const wheelRadius = (0.001) * (((parseInt(tireSpecsArr[2].substr(1)) * 25.4) + (2 * sidewallHeight)) / 2);
+                // calculate braking torque
+                const brakingTorque = vehicleWeight * element.dec_x * wheelRadius;
+
+                parsed.push({ x: element.relative_time_count, y: Math.floor(brakingTorque * 100) / 100 });
+            }
+        });
+
+        if (parsed.length === 0) {
+            this.setState({ dataExistsToDisplay: false });
+            return;
+        }
+
+        if (moment.duration(moment(endDateTorqueUTC).diff(moment(startDateTorqueUTC))).asDays() < 7) {
+            this.setState(prevState => ({
+                torqueData: {
+                    datasets: [{
+                        ...prevState.datasets,
+                        data: parsed,
+                        label: 'Braking Torque',
+                        backgroundColor: 'rgba(252, 161, 3, 0.5)',
+                        borderColor: 'rgb(252, 161, 3)',
+                    }],
+                }
+            }));
+        } else {
+            let finalDataObject = [];
+            finalDataObject.push({x: 0, y: 0});
+            let date = moment(updatedParsed[0].drive_date).format('YYYY-MM-DD');
+            let avgTorqueForDay = 0;
+            let counter = 0;
+            let xCount = 1;
+            console.log('updatedparsed: ', updatedParsed);
+            updatedParsed.forEach(element => {
+                console.log(date);
+                console.log(element.drive_date);
+                console.log('counter here:', counter);
+                console.log('avg here is:', avgTorqueForDay);
+                console.log(moment(date).isSame(moment(element.drive_date)));
+                if (moment(date).isSame(moment(element.drive_date))) {
+                    // calculate wheel radius
+                    const tireSpecsArr = vehicleTireSpecs.split('/');
+                    const sidewallHeight = (parseInt(tireSpecsArr[1]) * parseInt(tireSpecsArr[0].substr(1))) / 100;
+                    const wheelRadius = (0.001) * (((parseInt(tireSpecsArr[2].substr(1)) * 25.4) + (2 * sidewallHeight)) / 2);
+                    // calculate braking torque
+                    const brakingTorque = vehicleWeight * element.dec_x * wheelRadius;
+                    avgTorqueForDay += brakingTorque;
+                    counter++;
+                } else {
+                    finalDataObject.push({ x: xCount, y: Math.floor(avgTorqueForDay/counter * 100) / 100 });
+                    xCount++;
+                    date = moment(element.drive_date).format('YYYY-MM-DD');
+                    avgTorqueForDay = 0;
+                    counter = 0;
+                    if (moment(date).isSame(moment(element.drive_date))) {
+                        // calculate wheel radius
+                        const tireSpecsArr = vehicleTireSpecs.split('/');
+                        const sidewallHeight = (parseInt(tireSpecsArr[1]) * parseInt(tireSpecsArr[0].substr(1))) / 100;
+                        const wheelRadius = (0.001) * (((parseInt(tireSpecsArr[2].substr(1)) * 25.4) + (2 * sidewallHeight)) / 2);
+                        // calculate braking torque
+                        const brakingTorque = vehicleWeight * element.dec_x * wheelRadius;
+                        avgTorqueForDay += brakingTorque;
+                        counter++;
+                    }
+                }
+            });
+
+            if (counter !== 0) {
+                finalDataObject.push({ x: xCount, y: Math.floor(avgTorqueForDay/counter * 100) / 100 });
+            }
+
+            console.log(finalDataObject);
+            this.setState(prevState => ({
+                torqueData: {
+                    datasets: [{
+                        ...prevState.datasets,
+                        data: finalDataObject,
+                        label: 'Braking Torque',
+                        backgroundColor: 'rgba(252, 161, 3, 0.5)',
+                        borderColor: 'rgb(252, 161, 3)',
+                    }],
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Braking Torque'
+                              }
+                        }],
+                        xAxes: [{
+                            ...prevState.xAxes,
+                            ticks: {
+                                beginAtZero: true
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Days'
+                              }
+                        }]
+                    }
+                },
+            }));
+        }
+    }
 
     updateDeceleration = () => {
         const { startDate, endDate, brakingData } = this.state;
@@ -233,7 +366,7 @@ class Dashboard extends Component {
     }
 
     getBrakingData = () => {
-        const { arduinoID, name, email, vehiclesOwned } = this.state;
+        const { arduinoID, name, email, vehiclesOwned, vehicleTireSpecs, vehicleWeight } = this.state;
 
         axios.post(`${host}:${port}/getBrakingData`, {
             arduinoID,
@@ -244,13 +377,22 @@ class Dashboard extends Component {
         .then(res => {
             this.setState({ vehicleSelected: true, brakingData: res.data.brakingData }, () => {
                 const parsed = [];
+                const torqueParsed = [];
 
                 // Add fake data for visualization purposes
                 parsed.push({x: 0, y: 0})
+                torqueParsed.push({ x: 0, y: 0 });
 
                 this.state.brakingData.forEach(element => {
                     if (moment(element.drive_date).format('YYYY-MM-DD') === this.state.currDate) {
                         parsed.push({ x: element.relative_time_count, y: element.dec_x });
+                        // calculate wheel radius
+                        const tireSpecsArr = vehicleTireSpecs.split('/');
+                        const sidewallHeight = (parseInt(tireSpecsArr[1]) * parseInt(tireSpecsArr[0].substr(1))) / 100;
+                        const wheelRadius = (0.001) * (((parseInt(tireSpecsArr[2].substr(1)) * 25.4) + (2 * sidewallHeight)) / 2);
+                        // calculate braking torque
+                        const brakingTorque = vehicleWeight * element.dec_x * wheelRadius;
+                        torqueParsed.push({ x: element.relative_time_count, y: Math.floor(brakingTorque * 100) / 100 });
                     }
                 });
 
@@ -265,6 +407,16 @@ class Dashboard extends Component {
                             ...prevState.datasets,
                             data: parsed,
                             label: 'Average Deceleration',
+                            backgroundColor: 'rgba(252, 161, 3, 0.5)',
+                            borderColor: 'rgb(252, 161, 3)',
+                            showLine: true,
+                        }],
+                    },
+                    torqueData: {
+                        datasets: [{
+                            ...prevState.datasets,
+                            data: torqueParsed,
+                            label: 'Braking Torque',
                             backgroundColor: 'rgba(252, 161, 3, 0.5)',
                             borderColor: 'rgb(252, 161, 3)',
                             showLine: true,
@@ -294,7 +446,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { isAuthenticated, name, data, options, vehicleSelected, dataExistsToDisplay, vehicleName } = this.state;
+        const { isAuthenticated, name, data, torqueData, options, vehicleSelected, dataExistsToDisplay, vehicleName } = this.state;
 
         return (
             <div>
@@ -469,7 +621,7 @@ class Dashboard extends Component {
                                         />
                                     </Col>
                                     <Col sm={'auto'} className="px-1 pr-3">
-                                        <Button variant="outline-success btn-sm">
+                                        <Button onClick={() => this.updateBrakingTorque()} variant="outline-success btn-sm">
                                             Update
                                         </Button>
                                     </Col>
@@ -483,7 +635,7 @@ class Dashboard extends Component {
                                     <Row>
                                         <Col>
                                             <Graph
-                                                data={data}
+                                                data={torqueData}
                                                 options={options}
                                             />
                                         </Col>
