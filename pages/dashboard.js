@@ -214,14 +214,8 @@ class Dashboard extends Component {
             let avgTorqueForDay = 0;
             let counter = 0;
             let lastDate = date;
-            let xCount = 1;
-            console.log('updatedparsed: ', updatedParsed);
+
             updatedParsed.forEach(element => {
-                console.log(date);
-                console.log(element.drive_date);
-                console.log('counter here:', counter);
-                console.log('avg here is:', avgTorqueForDay);
-                console.log(moment(date).isSame(moment(element.drive_date)));
                 if (moment(date).isSame(moment(element.drive_date))) {
                     // calculate wheel radius
                     const tireSpecsArr = vehicleTireSpecs.split('/');
@@ -232,12 +226,6 @@ class Dashboard extends Component {
                     avgTorqueForDay += brakingTorque;
                     counter++;
                 } else {
-                    console.log(new Date());
-                    console.log('please be right', element.drive_date);
-                    console.log('pleaseee', new Date(element.drive_date));
-                    console.log(moment(element.drive_date));
-                    console.log('type of new date', typeof(new Date()));
-                    console.log('type of mement', typeof(moment(element.drive_date)));
                     let tempDate = new Date(element.drive_date);
                     tempDate.setHours(tempDate.getHours() - 8);
                     tempDate = tempDate.setHours(0,0,0,0);
@@ -267,7 +255,6 @@ class Dashboard extends Component {
                 finalDataObject.push({ x: lastDate, y: Math.floor(avgTorqueForDay/counter * 100) / 100 });
             }
 
-            console.log(finalDataObject);
             this.setState(prevState => ({
                 torqueData: {
                     datasets: [{
@@ -329,8 +316,6 @@ class Dashboard extends Component {
             }
         });
 
-        console.log('parsed maaaaaan: ', parsed);
-
         if (parsed.length === 0) {
             this.setState({ dataExistsToDisplay: false });
             return;
@@ -355,21 +340,13 @@ class Dashboard extends Component {
             let avgDecForDay = 0;
             let lastDate = date;
             let counter = 0;
-            let xCount = 1;
-            console.log('updatedparsed: ', updatedParsed);
+
             updatedParsed.forEach(element => {
-                console.log(date);
-                console.log(element.drive_date);
-                console.log('counter here:', counter);
-                console.log('avg here is:', avgDecForDay);
-                console.log(moment(date).isSame(moment(element.drive_date)));
                 if (moment(date).isSame(moment(element.drive_date))) {
                     avgDecForDay += element.dec_x;
                     counter++;
                 } else {
-                    console.log('in else case:', avgDecForDay);
                     let tempDate = new Date(date);
-                    console.log('BUGGGG: ', element.drive_date);
                     tempDate.setHours(tempDate.getHours() + 8);
                     tempDate = tempDate.setHours(0,0,0,0);
                     finalDataObject.push({ x: tempDate, y: Math.floor(avgDecForDay/counter * 100) / 100 });
@@ -392,7 +369,6 @@ class Dashboard extends Component {
                 finalDataObject.push({ x: lastDate, y: Math.floor(avgDecForDay/counter * 100) / 100 });
             }
 
-            console.log(finalDataObject);
             this.setState(prevState => ({
                 data: {
                     datasets: [{
@@ -433,9 +409,7 @@ class Dashboard extends Component {
                         }]
                     }
                 },
-            }), () => {
-                console.log(this.state.data);
-            });
+            }));
         }
 
         this.setState({ parsedBrakingData: parsed, dataExistsToDisplay: true });
@@ -477,8 +451,6 @@ class Dashboard extends Component {
                         torqueParsed.push({ x: element.relative_time_count, y: Math.floor(brakingTorque * 100) / 100 });
                     }
                 });
-
-                console.log('parsed', parsed);
 
                 if (parsed.length === 1) {
                     this.setState({ dataExistsToDisplay: false, torqueDataExistsToDisplay: false });
@@ -524,8 +496,6 @@ class Dashboard extends Component {
                     finalAvgBrakingTorque: finalBrakingTorque/this.state.brakingData.length,
                     finalAvgBrakeRating: finalBrakeRating/this.state.brakingData.length,
                     finalBrakeRatingVariant: variantRating
-                }, () => {
-                    console.log('YOOOOOOOOOOOO', this.state.finalAvgBrakeRating, this.state.finalAvgBrakingTorque);
                 });
             });
         })
