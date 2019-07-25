@@ -37,6 +37,35 @@ class Dashboard extends Component {
             dataExistsToDisplay: true,
             data: null,
             torqueData: null,
+            torqueOptions: {
+                bezierCurve: false,
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 5
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Braking Torque'
+                          }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Minutes'
+                          }
+                    }]
+                }
+            },
             options: {
                 bezierCurve: false,
                 scales: {
@@ -198,6 +227,10 @@ class Dashboard extends Component {
                     avgTorqueForDay += brakingTorque;
                     counter++;
                 } else {
+                    console.log(new Date());
+                    console.log(moment(element.drive_date));
+                    console.log('type of new date', typeof(new Date()));
+                    console.log('type of mement', typeof(moment(element.drive_date)));
                     finalDataObject.push({ x: xCount, y: Math.floor(avgTorqueForDay/counter * 100) / 100 });
                     xCount++;
                     date = moment(element.drive_date).format('YYYY-MM-DD');
@@ -231,11 +264,11 @@ class Dashboard extends Component {
                         borderColor: 'rgb(252, 161, 3)',
                     }],
                 },
-                options: {
+                torqueOptions: {
                     scales: {
                         yAxes: [{
                             ticks: {
-                                beginAtZero: true
+                                beginAtZero: true,
                             },
                             scaleLabel: {
                                 display: true,
@@ -446,7 +479,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { isAuthenticated, name, data, torqueData, options, vehicleSelected, dataExistsToDisplay, vehicleName } = this.state;
+        const { isAuthenticated, name, data, torqueData, options, torqueOptions, vehicleSelected, dataExistsToDisplay, vehicleName } = this.state;
 
         return (
             <div>
@@ -636,7 +669,7 @@ class Dashboard extends Component {
                                         <Col>
                                             <Graph
                                                 data={torqueData}
-                                                options={options}
+                                                options={torqueOptions}
                                             />
                                         </Col>
                                     </Row>
