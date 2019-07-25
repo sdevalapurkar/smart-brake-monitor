@@ -493,8 +493,8 @@ class Dashboard extends Component {
 
                 this.setState({
                     parsedBrakingData: parsed,
-                    finalAvgBrakingTorque: finalBrakingTorque/this.state.brakingData.length,
-                    finalAvgBrakeRating: finalBrakeRating/this.state.brakingData.length,
+                    finalAvgBrakingTorque: Math.floor(finalBrakingTorque/this.state.brakingData.length * 100) / 100,
+                    finalAvgBrakeRating: Math.floor(finalBrakeRating/this.state.brakingData.length * 100) / 100,
                     finalBrakeRatingVariant: variantRating
                 });
             });
