@@ -482,42 +482,41 @@ class Dashboard extends Component {
 
                 if (parsed.length === 1) {
                     this.setState({ dataExistsToDisplay: false, torqueDataExistsToDisplay: false });
-                    return;
+                } else {
+                    this.setState(prevState => ({
+                        data: {
+                            datasets: [{
+                                ...prevState.datasets,
+                                data: parsed,
+                                label: 'Average Deceleration',
+                                backgroundColor: 'rgba(252, 161, 3, 0.5)',
+                                borderColor: 'rgb(252, 161, 3)',
+                                showLine: true,
+                            }],
+                        },
+                        torqueData: {
+                            datasets: [{
+                                ...prevState.datasets,
+                                data: torqueParsed,
+                                label: 'Braking Torque',
+                                backgroundColor: 'rgba(252, 161, 3, 0.5)',
+                                borderColor: 'rgb(252, 161, 3)',
+                                showLine: true,
+                            }],
+                        }
+                    }));
                 }
-
-                this.setState(prevState => ({
-                    data: {
-                        datasets: [{
-                            ...prevState.datasets,
-                            data: parsed,
-                            label: 'Average Deceleration',
-                            backgroundColor: 'rgba(252, 161, 3, 0.5)',
-                            borderColor: 'rgb(252, 161, 3)',
-                            showLine: true,
-                        }],
-                    },
-                    torqueData: {
-                        datasets: [{
-                            ...prevState.datasets,
-                            data: torqueParsed,
-                            label: 'Braking Torque',
-                            backgroundColor: 'rgba(252, 161, 3, 0.5)',
-                            borderColor: 'rgb(252, 161, 3)',
-                            showLine: true,
-                        }],
-                    }
-                }));
 
                 let variantRating = '';
 
                 if (finalBrakeRating/this.state.brakingData.length < 0.5) {
-                    variantRating = 'bg-success';
+                    variantRating = 'text-success border-success';
                 } else if (finalBrakeRating/this.state.brakingData.length < 0.7) {
-                    variantRating = 'bg-info';
+                    variantRating = 'text-info border-info';
                 } else if (finalBrakeRating/this.state.brakingData.length < 0.9) {
-                    variantRating = 'bg-warning';
+                    variantRating = 'text-warning border-warning';
                 } else {
-                    variantRating = 'bg-danger';
+                    variantRating = 'text-danger border-danger';
                 }
 
                 this.setState({
@@ -525,6 +524,8 @@ class Dashboard extends Component {
                     finalAvgBrakingTorque: finalBrakingTorque/this.state.brakingData.length,
                     finalAvgBrakeRating: finalBrakeRating/this.state.brakingData.length,
                     finalBrakeRatingVariant: variantRating
+                }, () => {
+                    console.log('YOOOOOOOOOOOO', this.state.finalAvgBrakeRating, this.state.finalAvgBrakingTorque);
                 });
             });
         })
@@ -621,13 +622,6 @@ class Dashboard extends Component {
                 )}
                 {vehicleSelected && (
                     <Container className="my-5">
-                        <Row className="text-center">
-                            <Col>
-                                <h1>
-                                    {vehicleName}
-                                </h1>
-                            </Col>
-                        </Row>
                         <Row className="mt-4">
                             <Col>
                                 <BrakeInfoCard
@@ -650,7 +644,7 @@ class Dashboard extends Component {
                         <Card className="mt-3">
                             <Card.Header>
                                 <h5 className="m-0">
-                                    Deceleration
+                                    {`Deceleration for ${vehicleName}`}
                                 </h5>
                             </Card.Header>
                             <Card.Body>
@@ -701,7 +695,7 @@ class Dashboard extends Component {
                         <Card className="mt-3">
                             <Card.Header>
                                 <h5 className="m-0">
-                                    Braking Torque
+                                    {`Braking Torque for ${vehicleName}`}
                                 </h5>
                             </Card.Header>
                             <Card.Body>
