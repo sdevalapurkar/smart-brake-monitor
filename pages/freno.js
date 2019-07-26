@@ -114,9 +114,9 @@ class Freno extends Component {
                         </Col>
                     </Row>
                     <Row className="justify-content-center">
-                        <Col >
+                        <Col>
                             <CardDeck>
-                                <Card style={{ width: '18rem' }}>
+                                <Card style={{ width: '18rem', border: '6px solid #ADAFB2' }}  className="p-1">
                                   <Card.Img variant="top" src={require('../img/accelerometer.jpg')} />
                                   <Card.Body>
                                     <Card.Title>Accelerometer</Card.Title>
@@ -130,7 +130,7 @@ class Freno extends Component {
                                       <Card.Link href="https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B008BOPN40">Amazon</Card.Link>
                                   </Card.Footer>
                                 </Card>
-                                <Card style={{ width: '18rem' }}>
+                                <Card style={{ width: '18rem', border: '6px solid #ADAFB2' }}  className="p-1">
                                   <Card.Img variant="top" src={require('../img/arduino_mega.jpg')} />
                                   <Card.Body>
                                     <Card.Title>Microcontroller</Card.Title>
@@ -144,7 +144,7 @@ class Freno extends Component {
                                       <Card.Link href="https://www.amazon.com/ELEGOO-ATmega2560-ATMEGA16U2-Projects-Compliant/dp/B01H4ZLZLQ/ref=sr_1_4?keywords=arduino+mega&qid=1564082728&s=electronics&sr=1-4">Amazon</Card.Link>
                                   </Card.Footer>
                                 </Card>
-                                <Card style={{ width: '18rem' }} >
+                                <Card style={{ width: '18rem', border: '6px solid #ADAFB2' }}  className="p-1">
                                   <Card.Img variant="top" src={require('../img/usb_module.jpg')} />
                                   <Card.Body>
                                     <Card.Title>USB Module</Card.Title>
@@ -165,7 +165,7 @@ class Freno extends Component {
                     <Row className="justify-content-center">
                         <Col>
                             <CardDeck>
-                                <Card style={{ width: '18rem' }}>
+                                <Card style={{ width: '18rem', border: '6px solid #ADAFB2' }}  className="p-1">
                                   <Card.Img variant="top" src={require('../img/led_strip.jpg')} />
                                   <Card.Body>
                                     <Card.Title>LED Light Strip</Card.Title>
@@ -179,7 +179,7 @@ class Freno extends Component {
                                       <Card.Link href="https://www.amazon.com/ELEGOO-ATmega2560-ATMEGA16U2-Projects-Compliant/dp/B01H4ZLZLQ/ref=sr_1_4?keywords=arduino+mega&qid=1564082728&s=electronics&sr=1-4">Amazon</Card.Link>
                                   </Card.Footer>
                                 </Card>
-                                <Card style={{ width: '18rem' }}>
+                                <Card style={{ width: '18rem', border: '6px solid #ADAFB2' }}  className="p-1">
                                   <Card.Img variant="top" src={require('../img/usb_module.jpg')} />
                                   <Card.Body>
                                     <Card.Title>D Battery Pack</Card.Title>
@@ -191,7 +191,7 @@ class Freno extends Component {
                                       <Card.Link href="https://en.wikipedia.org/wiki/D_battery">Wiki</Card.Link>
                                   </Card.Footer>
                                 </Card>
-                                <Card style={{ width: '18rem' }}>
+                                <Card style={{ width: '18rem', border: '6px solid #ADAFB2' }}  className="p-1">
                                   <Card.Img variant="top" src={require('../img/usb_stick.jpg')} />
                                   <Card.Body>
                                     <Card.Title>USB Stick</Card.Title>
