@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import NavbarBootstrap from '../components/NavbarBootstrap';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -50,162 +48,160 @@ class Freno extends Component {
                 />
                 <NavbarBootstrap isAuthenticated={isAuthenticated} name={name} />
 
-                <Container className="my-3">
-
-                    <Row className="justify-content-center">
-                        <Col className="text-center">
-                            <h1>
-                                FRENO
-                            </h1>
-                            <h1>
-                                The Smart Brake Monitor
-                            </h1>
-                            <h2>
-                                Accident If You <b>Don't Know</b><br/>
-                                Prevention If You <b>Freno</b><br/>
-                            </h2>
-
-                            <Image src={require('../img/freno.jpg')} fluid/>
-                        </Col>
-                    </Row>
-                </Container>
-
-                <Container className="my-3">
-                    <Row className="justify-content-center">
-                        <Col md={8}>
-                            <h2>
-                                Immediate deceleration dependant brake lighting. Constant brake
-                                data tracking and performace grading. Safer and more efficient driving.
-                                No installation required.
-                            </h2><br />
-                            <h1>Quick Demo</h1>
-                            <YouTube videoId='BtLwoNJ6klE'/>
-                        </Col>
-                    </Row>
-                </Container>
-                <Container className="my-3">
-                    <Row className="justify-content-center">
-                        <Col>
-                            <br />
-                            <h1>
-                                How It Works
-                            </h1><hr />
-                            <p>
-                                Freno uses an accelerometer to monitor deceleration. When deceleration is detected
-                                past a certain threshold the LED Strip will light up depending on the amount of
-                                deceleration. A soft brake with low deceleration would show 25% of the LED Strip lights
-                                lit up, whereas an emergency brake would show 100%. Freno also records any deceleration
-                                to the USB. Upload the text file on the USB to your account on this website. Now all
-                                of your braking data is displayed on the dashboard.
-                            </p>
-                            <h1>
-                                Set Up
-                            </h1><hr />
-                            <p>
-                                Freno is easy to set up. First put the electronics into a box or use one of the boxes we
-                                have provided. Next, lay this box down flat into the trunk or back seat of your vehicle.
-                                Attach the LED strip to your rear window or bumper. Plug in the USB and hit the Arduino
-                                reset button to begin. When finished press the button to write your data to the USB.
-                                Remember to upload the FRENO.txt file on the USB to your BrakesSupreme account.
-                            </p>
-                            <h1>
-                                Parts
-                            </h1><hr/><br />
-                        </Col>
-                    </Row>
-                    <Row className="justify-content-center">
-                        <Col>
-                            <CardDeck>
-                                <Card style={{ width: '18rem', border: '6px solid #ADAFB2' }}  className="p-1">
-                                  <Card.Img variant="top" src={require('../img/accelerometer.jpg')} />
-                                  <Card.Body>
-                                    <Card.Title>Accelerometer</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">MPU 6050</Card.Subtitle>
-                                    <Card.Text>
-                                        Used for triple axis monitoring of acceleration and gyroscopic orientation.
-                                    </Card.Text>
-                                  </Card.Body>
-                                  <Card.Footer>
-                                      <Card.Link href="http://wiki.sunfounder.cc/index.php?title=MPU6050_Module">Wiki</Card.Link>
-                                      <Card.Link href="https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B008BOPN40">Amazon</Card.Link>
-                                  </Card.Footer>
-                                </Card>
-                                <Card style={{ width: '18rem', border: '6px solid #ADAFB2' }}  className="p-1">
-                                  <Card.Img variant="top" src={require('../img/arduino_mega.jpg')} />
-                                  <Card.Body>
-                                    <Card.Title>Microcontroller</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">Arduino Mega</Card.Subtitle>
-                                    <Card.Text>
-                                        Controls the components and runs the code.
-                                    </Card.Text>
-                                  </Card.Body>
-                                  <Card.Footer>
-                                      <Card.Link href="https://en.wikipedia.org/wiki/Arduino">Wiki</Card.Link>
-                                      <Card.Link href="https://www.amazon.com/ELEGOO-ATmega2560-ATMEGA16U2-Projects-Compliant/dp/B01H4ZLZLQ/ref=sr_1_4?keywords=arduino+mega&qid=1564082728&s=electronics&sr=1-4">Amazon</Card.Link>
-                                  </Card.Footer>
-                                </Card>
-                                <Card style={{ width: '18rem', border: '6px solid #ADAFB2' }}  className="p-1">
-                                  <Card.Img variant="top" src={require('../img/usb_module.jpg')} />
-                                  <Card.Body>
-                                    <Card.Title>USB Module</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">IC CH376S</Card.Subtitle>
-                                    <Card.Text>
-                                        Supports USB writing for data capturing.
-                                    </Card.Text>
-                                  </Card.Body>
-                                  <Card.Footer>
-                                      <Card.Link href="https://arduinobasics.blogspot.com/2015/05/ch376s-usb-readwrite-module.html">Documentation</Card.Link>
-                                      <Card.Link href="https://www.amazon.ca/Read-write-Supports-Transfer-Interface-Communication/dp/B00XDLRL0U/ref=sr_1_fkmr0_1?keywords=ice+ch376s&qid=1564109238&s=gateway&sr=8-1-fkmr0">Amazon</Card.Link>
-                                  </Card.Footer>
-                                </Card>
-                            </CardDeck>
-                        </Col>
-                    </Row>
-                    <br />
-                    <Row className="justify-content-center">
-                        <Col>
-                            <CardDeck>
-                                <Card style={{ width: '18rem', border: '6px solid #ADAFB2' }}  className="p-1">
-                                  <Card.Img variant="top" src={require('../img/led_strip.jpg')} />
-                                  <Card.Body>
-                                    <Card.Title>LED Light Strip</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">WS2812</Card.Subtitle>
-                                    <Card.Text>
-                                        40 LED addressable light strip. 60cm long.
-                                    </Card.Text>
-                                  </Card.Body>
-                                  <Card.Footer>
-                                      <Card.Link href="https://en.wikipedia.org/wiki/LED_strip_light">Wiki</Card.Link>
-                                      <Card.Link href="https://www.amazon.com/ELEGOO-ATmega2560-ATMEGA16U2-Projects-Compliant/dp/B01H4ZLZLQ/ref=sr_1_4?keywords=arduino+mega&qid=1564082728&s=electronics&sr=1-4">Amazon</Card.Link>
-                                  </Card.Footer>
-                                </Card>
-                                <Card style={{ width: '18rem', border: '6px solid #ADAFB2' }}  className="p-1">
-                                  <Card.Img variant="top" src={require('../img/usb_module.jpg')} />
-                                  <Card.Body>
-                                    <Card.Title>D Battery Pack</Card.Title>
-                                    <Card.Text>
-                                        Powers the microcontroller and components.
-                                    </Card.Text>
-                                  </Card.Body>
-                                  <Card.Footer>
-                                      <Card.Link href="https://en.wikipedia.org/wiki/D_battery">Wiki</Card.Link>
-                                  </Card.Footer>
-                                </Card>
-                                <Card style={{ width: '18rem', border: '6px solid #ADAFB2' }}  className="p-1">
-                                  <Card.Img variant="top" src={require('../img/usb_stick.jpg')} />
-                                  <Card.Body>
-                                    <Card.Title>USB Stick</Card.Title>
-                                    <Card.Text>
-                                        Stores the data.
-                                    </Card.Text>
-                                  </Card.Body>
-                                  <Card.Footer>
-                                      <Card.Link href="https://en.wikipedia.org/wiki/USB">Wiki</Card.Link>
-                                  </Card.Footer>
-                                </Card>
-                            </CardDeck>
-                        </Col>
-                    </Row>
+                <Container className="my-5">
+                    <Card className="mt-5">
+                        <Card.Body className="mb-3">
+                            <Row className="my-5">
+                                <Col className="text-center">
+                                    <h1 className="font-35-bold mb-5 mb-md-0">FRENO</h1>
+                                </Col>
+                                <Col xs={12} md={6}>
+                                    <h3>
+                                        Accident If You <b>Don't Know</b><br/>
+                                        Prevention If You <b>Freno</b>
+                                    </h3>
+                                </Col>
+                            </Row>
+                            <Row className="justify-content-center">
+                                <Col  md={8} className="text-center mb-3 mb-md-0">
+                                    <Image src={require('../img/freno.jpg')} fluid style={{ borderRadius: '1em' }}/>
+                                </Col>
+                            </Row>
+                            <Row className="justify-content-center mt-5">
+                                <Col  md={10} className="text-center mb-3 mb-md-0">
+                                    <h2>
+                                        Immediate deceleration dependant brake lighting. Constant brake
+                                        data tracking and performace grading. Safer and more efficient driving.
+                                        No installation required.
+                                    </h2><br /><br />
+                                    <h1>
+                                        Short Demo
+                                    </h1>
+                                    <YouTube videoId='BtLwoNJ6klE'/>
+                                </Col>
+                            </Row>
+                            <Row className="justify-content-center mt-5">
+                                <Col  md={10} className="mb-3 mb-md-0">
+                                    <h1>
+                                        How It Works
+                                    </h1><hr />
+                                    <p>
+                                        Freno uses an accelerometer to monitor deceleration. When deceleration is detected
+                                        past a certain threshold the LED Strip will light up depending on the amount of
+                                        deceleration. A soft brake with low deceleration would show 25% of the LED Strip lights
+                                        lit up, whereas an emergency brake would show 100%. Freno also records any deceleration
+                                        to the USB. Upload the text file on the USB to your account on this website. Now all
+                                        of your braking data is displayed on the dashboard.
+                                    </p>
+                                    <h1>
+                                        Set Up
+                                    </h1><hr />
+                                    <p>
+                                        Freno is easy to set up. First put the electronics into a box or use one of the boxes we
+                                        have provided. Next, lay this box down flat into the trunk or back seat of your vehicle.
+                                        Attach the LED strip to your rear window or bumper. Plug in the USB and hit the Arduino
+                                        reset button to begin. When finished press the button to write your data to the USB.
+                                        Remember to upload the FRENO.txt file on the USB to your BrakesSupreme account.
+                                    </p>
+                                    <h1>
+                                        Parts
+                                    </h1><hr/><br/>
+                                </Col>
+                            </Row>
+                            <Row className="justify-content-center">
+                                <Col md={10} className="mb-3 mb-md-0">
+                                    <CardDeck>
+                                        <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
+                                          <Card.Img variant="top" src={require('../img/accelerometer.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+                                          <Card.Body>
+                                            <Card.Title>Accelerometer</Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted">MPU 6050</Card.Subtitle>
+                                            <Card.Text>
+                                                Used for triple axis monitoring of acceleration and gyroscopic orientation.
+                                            </Card.Text>
+                                          </Card.Body>
+                                          <Card.Footer>
+                                              <Card.Link href="http://wiki.sunfounder.cc/index.php?title=MPU6050_Module">Wiki</Card.Link>
+                                              <Card.Link href="https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B008BOPN40">Amazon</Card.Link>
+                                          </Card.Footer>
+                                        </Card>
+                                        <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
+                                          <Card.Img variant="top" src={require('../img/arduino_mega.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+                                          <Card.Body>
+                                            <Card.Title>Microcontroller</Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted">Arduino Mega</Card.Subtitle>
+                                            <Card.Text>
+                                                Controls the components and runs the code.
+                                            </Card.Text>
+                                          </Card.Body>
+                                          <Card.Footer>
+                                              <Card.Link href="https://en.wikipedia.org/wiki/Arduino">Wiki</Card.Link>
+                                              <Card.Link href="https://www.amazon.com/ELEGOO-ATmega2560-ATMEGA16U2-Projects-Compliant/dp/B01H4ZLZLQ/ref=sr_1_4?keywords=arduino+mega&qid=1564082728&s=electronics&sr=1-4">Amazon</Card.Link>
+                                          </Card.Footer>
+                                        </Card>
+                                        <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
+                                          <Card.Img variant="top" src={require('../img/usb_module.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+                                          <Card.Body>
+                                            <Card.Title>USB Module</Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted">IC CH376S</Card.Subtitle>
+                                            <Card.Text>
+                                                Supports USB writing for data capturing.
+                                            </Card.Text>
+                                          </Card.Body>
+                                          <Card.Footer>
+                                              <Card.Link href="https://arduinobasics.blogspot.com/2015/05/ch376s-usb-readwrite-module.html">Documentation</Card.Link>
+                                              <Card.Link href="https://www.amazon.ca/Read-write-Supports-Transfer-Interface-Communication/dp/B00XDLRL0U/ref=sr_1_fkmr0_1?keywords=ice+ch376s&qid=1564109238&s=gateway&sr=8-1-fkmr0">Amazon</Card.Link>
+                                          </Card.Footer>
+                                        </Card>
+                                    </CardDeck>
+                                </Col>
+                            </Row>
+                            <Row className="justify-content-center mt-5">
+                                <Col md={10} className="mb-3 mb-md-0" >
+                                    <CardDeck>
+                                        <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
+                                          <Card.Img variant="top" src={require('../img/led_strip.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+                                          <Card.Body>
+                                            <Card.Title>LED Light Strip</Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted">WS2812</Card.Subtitle>
+                                            <Card.Text>
+                                                40 LED addressable light strip. 60cm long.
+                                            </Card.Text>
+                                          </Card.Body>
+                                          <Card.Footer>
+                                              <Card.Link href="https://en.wikipedia.org/wiki/LED_strip_light">Wiki</Card.Link>
+                                              <Card.Link href="https://www.amazon.com/ELEGOO-ATmega2560-ATMEGA16U2-Projects-Compliant/dp/B01H4ZLZLQ/ref=sr_1_4?keywords=arduino+mega&qid=1564082728&s=electronics&sr=1-4">Amazon</Card.Link>
+                                          </Card.Footer>
+                                        </Card>
+                                        <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
+                                          <Card.Img variant="top" src={require('../img/usb_module.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+                                          <Card.Body>
+                                            <Card.Title>D Battery Pack</Card.Title>
+                                            <Card.Text>
+                                                Powers the microcontroller and components.
+                                            </Card.Text>
+                                          </Card.Body>
+                                          <Card.Footer>
+                                              <Card.Link href="https://en.wikipedia.org/wiki/D_battery">Wiki</Card.Link>
+                                          </Card.Footer>
+                                        </Card>
+                                        <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
+                                          <Card.Img variant="top" src={require('../img/usb_stick.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+                                          <Card.Body>
+                                            <Card.Title>USB Stick</Card.Title>
+                                            <Card.Text>
+                                                Stores the data.
+                                            </Card.Text>
+                                          </Card.Body>
+                                          <Card.Footer>
+                                              <Card.Link href="https://en.wikipedia.org/wiki/USB">Wiki</Card.Link>
+                                          </Card.Footer>
+                                        </Card>
+                                    </CardDeck>
+                                </Col>
+                            </Row>
+                        </Card.Body>
+                    </Card>
                 </Container>
             </div>
         );
