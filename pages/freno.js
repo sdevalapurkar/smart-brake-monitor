@@ -6,7 +6,6 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import Background from '../img/background.jpeg';
 import Image from 'react-bootstrap/Image';
 import axios from 'axios';
 import YouTube from 'react-youtube';
@@ -42,7 +41,7 @@ class Freno extends Component {
         const { isAuthenticated, name } = this.state;
 
         return (
-            <div style={{ backgroundImage: `url(${Background})`, maxWidth: '100%', height: '100%' }}>
+            <div style={{ maxWidth: '100%', height: '100%' }}>
                 <link
                     rel="stylesheet"
                     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -63,7 +62,7 @@ class Freno extends Component {
                             </h1>
                             <h2>
                                 Accident If You <b>Don't Know</b><br/>
-                            Prevention If You <b>Freno</b><br/>
+                                Prevention If You <b>Freno</b><br/>
                             </h2>
 
                             <Image src={require('../img/freno.jpg')} fluid/>
@@ -115,43 +114,49 @@ class Freno extends Component {
                         </Col>
                     </Row>
                     <Row className="justify-content-center">
-                        <Col>
+                        <Col >
                             <CardDeck>
                                 <Card style={{ width: '18rem' }}>
-                                  <Card.Img variant="top" src={require('../img/freno.jpg')} />
+                                  <Card.Img variant="top" src={require('../img/accelerometer.jpg')} />
                                   <Card.Body>
                                     <Card.Title>Accelerometer</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">MPU 6050</Card.Subtitle>
                                     <Card.Text>
                                         Used for triple axis monitoring of acceleration and gyroscopic orientation.
                                     </Card.Text>
-                                    <Card.Link href="http://wiki.sunfounder.cc/index.php?title=MPU6050_Module">Wiki</Card.Link>
-                                    <Card.Link href="https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B008BOPN40">Amazon</Card.Link>
                                   </Card.Body>
+                                  <Card.Footer>
+                                      <Card.Link href="http://wiki.sunfounder.cc/index.php?title=MPU6050_Module">Wiki</Card.Link>
+                                      <Card.Link href="https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B008BOPN40">Amazon</Card.Link>
+                                  </Card.Footer>
                                 </Card>
                                 <Card style={{ width: '18rem' }}>
-                                  <Card.Img variant="top" src={require('../img/freno.jpg')} />
+                                  <Card.Img variant="top" src={require('../img/arduino_mega.jpg')} />
                                   <Card.Body>
                                     <Card.Title>Microcontroller</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">Arduino Mega</Card.Subtitle>
                                     <Card.Text>
                                         Controls the components and runs the code.
                                     </Card.Text>
-                                    <Card.Link href="https://en.wikipedia.org/wiki/Arduino">Wiki</Card.Link>
-                                    <Card.Link href="https://www.amazon.com/ELEGOO-ATmega2560-ATMEGA16U2-Projects-Compliant/dp/B01H4ZLZLQ/ref=sr_1_4?keywords=arduino+mega&qid=1564082728&s=electronics&sr=1-4">Amazon</Card.Link>
                                   </Card.Body>
+                                  <Card.Footer>
+                                      <Card.Link href="https://en.wikipedia.org/wiki/Arduino">Wiki</Card.Link>
+                                      <Card.Link href="https://www.amazon.com/ELEGOO-ATmega2560-ATMEGA16U2-Projects-Compliant/dp/B01H4ZLZLQ/ref=sr_1_4?keywords=arduino+mega&qid=1564082728&s=electronics&sr=1-4">Amazon</Card.Link>
+                                  </Card.Footer>
                                 </Card>
                                 <Card style={{ width: '18rem' }} >
-                                  <Card.Img variant="top" src={require('../img/freno.jpg')} />
+                                  <Card.Img variant="top" src={require('../img/usb_module.jpg')} />
                                   <Card.Body>
                                     <Card.Title>USB Module</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">IC CH376S</Card.Subtitle>
                                     <Card.Text>
                                         Supports USB writing for data capturing.
                                     </Card.Text>
-                                    <Card.Link href="http://wiki.sunfounder.cc/index.php?title=MPU6050_Module">Wiki</Card.Link>
-                                    <Card.Link href="https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B008BOPN40">Amazon</Card.Link>
                                   </Card.Body>
+                                  <Card.Footer>
+                                      <Card.Link href="https://arduinobasics.blogspot.com/2015/05/ch376s-usb-readwrite-module.html">Documentation</Card.Link>
+                                      <Card.Link href="https://www.amazon.ca/Read-write-Supports-Transfer-Interface-Communication/dp/B00XDLRL0U/ref=sr_1_fkmr0_1?keywords=ice+ch376s&qid=1564109238&s=gateway&sr=8-1-fkmr0">Amazon</Card.Link>
+                                  </Card.Footer>
                                 </Card>
                             </CardDeck>
                         </Col>
@@ -161,36 +166,42 @@ class Freno extends Component {
                         <Col>
                             <CardDeck>
                                 <Card style={{ width: '18rem' }}>
-                                  <Card.Img variant="top" src={require('../img/freno.jpg')} />
+                                  <Card.Img variant="top" src={require('../img/led_strip.jpg')} />
                                   <Card.Body>
                                     <Card.Title>LED Light Strip</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">WS2812</Card.Subtitle>
                                     <Card.Text>
                                         40 LED addressable light strip. 60cm long.
                                     </Card.Text>
-                                    <Card.Link href="https://en.wikipedia.org/wiki/LED_strip_light">Wiki</Card.Link>
-                                    <Card.Link href="https://www.amazon.com/ELEGOO-ATmega2560-ATMEGA16U2-Projects-Compliant/dp/B01H4ZLZLQ/ref=sr_1_4?keywords=arduino+mega&qid=1564082728&s=electronics&sr=1-4">Amazon</Card.Link>
                                   </Card.Body>
+                                  <Card.Footer>
+                                      <Card.Link href="https://en.wikipedia.org/wiki/LED_strip_light">Wiki</Card.Link>
+                                      <Card.Link href="https://www.amazon.com/ELEGOO-ATmega2560-ATMEGA16U2-Projects-Compliant/dp/B01H4ZLZLQ/ref=sr_1_4?keywords=arduino+mega&qid=1564082728&s=electronics&sr=1-4">Amazon</Card.Link>
+                                  </Card.Footer>
                                 </Card>
                                 <Card style={{ width: '18rem' }}>
-                                  <Card.Img variant="top" src={require('../img/freno.jpg')} />
+                                  <Card.Img variant="top" src={require('../img/usb_module.jpg')} />
                                   <Card.Body>
                                     <Card.Title>D Battery Pack</Card.Title>
                                     <Card.Text>
                                         Powers the microcontroller and components.
                                     </Card.Text>
-                                    <Card.Link href="https://en.wikipedia.org/wiki/D_battery">Wiki</Card.Link>
                                   </Card.Body>
+                                  <Card.Footer>
+                                      <Card.Link href="https://en.wikipedia.org/wiki/D_battery">Wiki</Card.Link>
+                                  </Card.Footer>
                                 </Card>
                                 <Card style={{ width: '18rem' }}>
-                                  <Card.Img variant="top" src={require('../img/freno.jpg')} />
+                                  <Card.Img variant="top" src={require('../img/usb_stick.jpg')} />
                                   <Card.Body>
                                     <Card.Title>USB Stick</Card.Title>
                                     <Card.Text>
                                         Stores the data.
                                     </Card.Text>
-                                    <Card.Link href="https://en.wikipedia.org/wiki/USB">Wiki</Card.Link>
                                   </Card.Body>
+                                  <Card.Footer>
+                                      <Card.Link href="https://en.wikipedia.org/wiki/USB">Wiki</Card.Link>
+                                  </Card.Footer>
                                 </Card>
                             </CardDeck>
                         </Col>
