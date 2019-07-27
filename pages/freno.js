@@ -137,7 +137,7 @@ class Freno extends Component {
                                             </Card.Text>
                                           </Card.Body>
                                           <Card.Footer>
-                                              <Card.Link href="https://en.wikipedia.org/wiki/Arduino">Wiki</Card.Link>
+                                              <Card.Link href="https://www.arduino.cc/en/Guide/ArduinoMega2560">Documentation</Card.Link>
                                               <Card.Link href="https://www.amazon.com/ELEGOO-ATmega2560-ATMEGA16U2-Projects-Compliant/dp/B01H4ZLZLQ/ref=sr_1_4?keywords=arduino+mega&qid=1564082728&s=electronics&sr=1-4">Amazon</Card.Link>
                                           </Card.Footer>
                                         </Card>
