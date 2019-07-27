@@ -64,9 +64,8 @@ class Freno extends Component {
                             </Row>
                             <Row className="justify-content-center">
                                 <Col  md={8} className="text-center mb-3 mb-md-0">
-                                    <Card style={{   borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
-                                        <Image src={require('../img/freno.jpg')} fluid style={{ border: '7px solid #ADAFB2'}} rounded className='p-1'/>
-
+                                    <Card style={{ borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
+                                        <Image src={require('../img/freno.jpg')} fluid style={{ border: '7px solid #ADAFB2'}} rounded className="p-1"/>
                                     </Card>
                                 </Col>
                             </Row>
@@ -74,13 +73,13 @@ class Freno extends Component {
                                 <Col  md={10} className="text-center mb-3 mb-md-0">
                                     <h2>
                                         Immediate deceleration dependant brake lighting. Constant brake
-                                        data tracking and performace grading. Safer and more efficient driving.
+                                        data tracking and performance grading. Safer and more efficient driving.
                                         No installation required.
                                     </h2><br /><br />
                                     <h1>
                                         Short Demo
                                     </h1>
-                                    <YouTube videoId='BtLwoNJ6klE'/>
+                                    <YouTube videoId='BtLwoNJ6klE' opts = {{height: '390', width: '640'}}/>
                                 </Col>
                             </Row>
                             <Row className="justify-content-center mt-5">
@@ -90,11 +89,11 @@ class Freno extends Component {
                                     </h1><hr />
                                     <p>
                                         Freno uses an accelerometer to monitor deceleration. When deceleration is detected
-                                        past a certain threshold the LED Strip will light up depending on the amount of
+                                        past a certain threshold an LED Strip will light up depending on the amount of
                                         deceleration. A soft brake with low deceleration would show 25% of the LED Strip lights
                                         lit up, whereas an emergency brake would show 100%. Freno also records any deceleration
-                                        to the USB. Upload the text file on the USB to your account on this website. All
-                                        of your braking data is displayed on the dashboard.
+                                        to the USB. Upload the .csv file on the USB to your account on this website. Your
+                                        braking data will be displayed on the dashboard page.
                                     </p>
                                     <h1>
                                         Set Up
@@ -104,7 +103,7 @@ class Freno extends Component {
                                         have provided. Next, lay this box down flat into the trunk or back seat of your vehicle.
                                         Attach the LED strip to your rear window or bumper. Plug in the USB and hit the Arduino
                                         reset button to begin. When finished press the button on the breadboard to write your data
-                                        to the USB. Remember to upload the FRENO.txt file on the USB to your BrakesSupreme account.
+                                        to the USB. Remember to upload the FRENO.csv file on the USB to your BrakesSupreme account.
                                     </p>
                                     <h1>
                                         Parts
@@ -132,7 +131,7 @@ class Freno extends Component {
                                           <Card.Img variant="top" src={require('../img/arduino_mega.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
                                           <Card.Body>
                                             <Card.Title>Microcontroller</Card.Title>
-                                            <Card.Subtitle className="mb-2 text-muted">Arduino Mega</Card.Subtitle>
+                                            <Card.Subtitle className="mb-2 text-muted">Arduino Mega 2560</Card.Subtitle>
                                             <Card.Text>
                                                 Controls the components and runs the code.
                                             </Card.Text>
