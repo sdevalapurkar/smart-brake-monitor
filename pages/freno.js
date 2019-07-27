@@ -90,7 +90,7 @@ class Freno extends Component {
                                     <p>
                                         Freno uses an accelerometer to monitor deceleration. When deceleration is detected
                                         past a certain threshold an LED Strip will light up depending on the amount of
-                                        deceleration. A soft brake with low deceleration would show 25% of the LED Strip lights
+                                        deceleration. A soft brake with low deceleration would show 33% of the LED Strip lights
                                         lit up, whereas an emergency brake would show 100%. Freno also records any deceleration
                                         to the USB. Upload the .csv file on the USB to your account on this website. Your
                                         braking data will be displayed on the dashboard page.
@@ -167,7 +167,7 @@ class Freno extends Component {
                                             <Card.Title>LED Light Strip</Card.Title>
                                             <Card.Subtitle className="mb-2 text-muted">WS2812</Card.Subtitle>
                                             <Card.Text>
-                                                40 LED addressable light strip. 60cm long.
+                                                36 LED addressable light strip. 60cm long.
                                             </Card.Text>
                                           </Card.Body>
                                           <Card.Footer>
