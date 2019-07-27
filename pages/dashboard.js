@@ -13,6 +13,8 @@ import BrakeInfoCard from '../components/dashboard/BrakeInfoCard'
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
+import DefaultOptions from '../components/dashboard/DefaultOptions';
+import MultiDayOptions from '../components/dashboard/MultiDayOptions';
 
 const host = 'http://localhost';
 const port = 3001;
@@ -22,94 +24,76 @@ class Dashboard extends Component {
         super(props);
 
         this.state = {
-            isAuthenticated: false,
-            name: '',
-            email: '',
-            vehiclesOwned: [],
             arduinoID: null,
-            vehicleName: '',
+            vehicleName: null,
             vehicleWeight: null,
             vehicleTireSpecs: null,
-            currDate: null,
-            vehicleSelected: false,
-            brakingData: [],
-            parsedBrakingData: [],
-            dataExistsToDisplay: true,
-            torqueDataExistsToDisplay: false,
-            data: null,
-            torqueData: null,
-            torqueOptions: {
-                bezierCurve: false,
-                scales: {
-                    xAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 5
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Braking Torque'
-                          }
-                    }],
-                    xAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Minutes'
-                          }
-                    }]
-                }
-            },
-            options: {
-                bezierCurve: false,
-                scales: {
-                    xAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 5
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Deceleration'
-                          }
-                    }],
-                    xAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Minutes'
-                          }
-                    }]
-                }
-            },
-            startDate: new Date(),
-            endDate: new Date(),
-            startDateTorque: new Date(),
-            endDateTorque: new Date(),
-            finalAvgBrakingTorque: 0,
-            finalAvgBrakeRating: 0,
-            finalBrakeRatingVariant: '',
-            finalBrakingTorqueVariant: '',
+            decelerationDatasets: [{
+                data: null,
+                label: 'Average Deceleration',
+                backgroundColor: 'rgba(252, 161, 3, 0.5)',
+                borderColor: 'rgb(252, 161, 3)',
+                showLine: true
+            }],
+            decelerationData: null,
+            decelerationOptions: DefaultOptions,
+            decelerationStartDate: new Date(),
+            decelerationEndDate: new Date(),
+            decelerationDataExistsToDisplay: false,
+            torqueDataExistsToDisplay: false
         };
-
-        this.getBrakingData = this.getBrakingData.bind(this);
-        this.updateDeceleration = this.updateDeceleration.bind(this);
-        this.updateBrakingTorque = this.updateBrakingTorque.bind(this);
     }
+
+    calculateRating = (totalDeceleration, numDataPoints) => {
+        const ratingRatio = totalDeceleration/numDataPoints;
+
+        if (ratingRatio < 0.5) {
+            return 'text-success border-success';
+        }
+        if (ratingRatio < 0.9) {
+            return 'text-warning border-warning';
+        }
+
+        return 'text-danger border-danger';
+    }
+
+    calculateBrakingTorque = (deceleration) => {
+        const { vehicleTireSpecs, vehicleWeight } = this.state;
+
+        // calculate wheel radius
+        const tireSpecsArr = vehicleTireSpecs.split('/');
+        const sidewallHeight = (parseInt(tireSpecsArr[1]) * parseInt(tireSpecsArr[0].substr(1))) / 100;
+        const wheelRadius = (0.001) * (((parseInt(tireSpecsArr[2].substr(1)) * 25.4) + (2 * sidewallHeight)) / 2);
+
+        // calculate braking torque
+        const brakingTorque = vehicleWeight * deceleration * wheelRadius;
+
+        return brakingTorque;
+    }
+
+    componentDidMount = () => {
+        const authToken = window.localStorage.getItem('auth_token');
+
+        if (authToken) {
+            axios.post(`${host}:${port}/authstatus`, { headers: { 'Authorization' : `Bearer ${authToken}` } }).then(res => {
+                if (res.status === 200) {
+                    const { name, email, vehiclesOwned } = res.data.authData;
+                    this.setState({ isAuthenticated: true, name, email, vehiclesOwned, currDate: moment().format('YYYY-MM-DD') });
+                }
+            }).catch(err => {});
+        } else {
+            location.replace('/');
+        }
+    }
+
+    handleChange = ({ startDate, endDate }) => {
+        startDate = startDate || this.state.decelerationStartDate;
+        endDate = endDate || this.state.decelerationEndDate;
+        this.setState({ decelerationStartDate: startDate, decelerationEndDate: endDate });
+    }
+
+    handleDecelerationChangeStart = startDate => this.handleChange({ startDate });
+    handleDecelerationChangeEnd = endDate => this.handleChange({ endDate });
 
     createCarRow = () => {
         const { vehiclesOwned } = this.state;
@@ -151,272 +135,8 @@ class Dashboard extends Component {
         return myVehicles;
     }
 
-    handleChange = ({ startDate, endDate }) => {
-        startDate = startDate || this.state.startDate;
-        endDate = endDate || this.state.endDate;
-        this.setState({ startDate, endDate });
-    }
-
-    handleChangeTorque = ({ startDateTorque, endDateTorque }) => {
-        startDateTorque = startDateTorque || this.state.startDateTorque;
-        endDateTorque = endDateTorque || this.state.endDateTorque;
-        this.setState({ startDateTorque, endDateTorque });
-    }
-
-    handleChangeStart = startDate => this.handleChange({ startDate });
-    handleChangeEnd = endDate => this.handleChange({ endDate });
-    handleChangeStartTorque = startDateTorque => this.handleChangeTorque({ startDateTorque });
-    handleChangeEndTorque = endDateTorque => this.handleChangeTorque({ endDateTorque });
-
-    updateBrakingTorque = () => {
-        const { startDateTorque, endDateTorque, brakingData, vehicleTireSpecs, vehicleWeight } = this.state;
-        const startDateTorqueUTC = moment(startDateTorque).format('YYYY-MM-DD');
-        const endDateTorqueUTC = moment(endDateTorque).format('YYYY-MM-DD');
-
-        const parsed = [];
-        let updatedParsed = [];
-        brakingData.forEach(element => {
-            let date = moment(element.drive_date).format('YYYY-MM-DD');
-            if (moment(date).isBetween(startDateTorqueUTC, endDateTorqueUTC, null, '[]')) {
-                updatedParsed.push(element);
-
-                // calculate wheel radius
-                const tireSpecsArr = vehicleTireSpecs.split('/');
-                const sidewallHeight = (parseInt(tireSpecsArr[1]) * parseInt(tireSpecsArr[0].substr(1))) / 100;
-                const wheelRadius = (0.001) * (((parseInt(tireSpecsArr[2].substr(1)) * 25.4) + (2 * sidewallHeight)) / 2);
-                // calculate braking torque
-                const brakingTorque = vehicleWeight * element.dec_x * wheelRadius;
-
-                parsed.push({ x: element.relative_time_count, y: Math.floor(brakingTorque * 100) / 100 });
-            }
-        });
-
-        if (parsed.length === 0) {
-            this.setState({ torqueDataExistsToDisplay: false });
-            return;
-        }
-
-        if (moment.duration(moment(endDateTorqueUTC).diff(moment(startDateTorqueUTC))).asDays() < 7) {
-            this.setState(prevState => ({
-                torqueData: {
-                    datasets: [{
-                        ...prevState.datasets,
-                        data: parsed,
-                        label: 'Braking Torque',
-                        backgroundColor: 'rgba(252, 161, 3, 0.5)',
-                        borderColor: 'rgb(252, 161, 3)',
-                    }],
-                }
-            }));
-        } else {
-            let finalDataObject = [];
-            let date = moment(updatedParsed[0].drive_date).format('YYYY-MM-DD');
-            let avgTorqueForDay = 0;
-            let counter = 0;
-            let lastDate = date;
-
-            updatedParsed.forEach(element => {
-                if (moment(date).isSame(moment(element.drive_date))) {
-                    // calculate wheel radius
-                    const tireSpecsArr = vehicleTireSpecs.split('/');
-                    const sidewallHeight = (parseInt(tireSpecsArr[1]) * parseInt(tireSpecsArr[0].substr(1))) / 100;
-                    const wheelRadius = (0.001) * (((parseInt(tireSpecsArr[2].substr(1)) * 25.4) + (2 * sidewallHeight)) / 2);
-                    // calculate braking torque
-                    const brakingTorque = vehicleWeight * element.dec_x * wheelRadius;
-                    avgTorqueForDay += brakingTorque;
-                    counter++;
-                } else {
-                    let tempDate = new Date(element.drive_date);
-                    tempDate.setHours(tempDate.getHours() - 8);
-                    tempDate = tempDate.setHours(0,0,0,0);
-                    finalDataObject.push({ x: tempDate, y: Math.floor(avgTorqueForDay/counter * 100) / 100 });
-                    xCount++;
-                    date = moment(element.drive_date).format('YYYY-MM-DD');
-                    let newTempDate = new Date(date);
-                    newTempDate.setHours(newTempDate.getHours() + 8);
-                    newTempDate = newTempDate.setHours(0,0,0,0);
-                    lastDate = newTempDate;
-                    avgTorqueForDay = 0;
-                    counter = 0;
-                    if (moment(date).isSame(moment(element.drive_date))) {
-                        // calculate wheel radius
-                        const tireSpecsArr = vehicleTireSpecs.split('/');
-                        const sidewallHeight = (parseInt(tireSpecsArr[1]) * parseInt(tireSpecsArr[0].substr(1))) / 100;
-                        const wheelRadius = (0.001) * (((parseInt(tireSpecsArr[2].substr(1)) * 25.4) + (2 * sidewallHeight)) / 2);
-                        // calculate braking torque
-                        const brakingTorque = vehicleWeight * element.dec_x * wheelRadius;
-                        avgTorqueForDay += brakingTorque;
-                        counter++;
-                    }
-                }
-            });
-
-            if (counter !== 0) {
-                finalDataObject.push({ x: lastDate, y: Math.floor(avgTorqueForDay/counter * 100) / 100 });
-            }
-
-            this.setState(prevState => ({
-                torqueData: {
-                    datasets: [{
-                        ...prevState.datasets,
-                        data: finalDataObject,
-                        label: 'Braking Torque',
-                        backgroundColor: 'rgba(252, 161, 3, 0.5)',
-                        borderColor: 'rgb(252, 161, 3)',
-                        showLine: true,
-                    }],
-                },
-                torqueOptions: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                            },
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Braking Torque'
-                              }
-                        }],
-                        xAxes: [{
-                            ...prevState.xAxes,
-                            type: 'time',
-                            time: {
-                                unit: 'day',
-                                unitStepSize: 1,
-                                displayFormats: {
-                                    'day': 'MMM DD',
-                                },
-                                tooltipFormat: 'MMM DD'
-                            },
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Dates'
-                              }
-                        }]
-                    }
-                },
-            }));
-        }
-
-        this.setState({ torqueDataExistsToDisplay: true });
-    }
-
-    updateDeceleration = () => {
-        const { startDate, endDate, brakingData } = this.state;
-        const startDateUTC = moment(startDate).format('YYYY-MM-DD');
-        const endDateUTC = moment(endDate).format('YYYY-MM-DD');
-
-        const parsed = [];
-        let updatedParsed = [];
-        brakingData.forEach(element => {
-            let date = moment(element.drive_date).format('YYYY-MM-DD');
-            if (moment(date).isBetween(startDateUTC, endDateUTC, null, '[]')) {
-                updatedParsed.push(element);
-                parsed.push({ x: element.relative_time_count, y: element.dec_x });
-            }
-        });
-
-        if (parsed.length === 0) {
-            this.setState({ dataExistsToDisplay: false });
-            return;
-        }
-
-        if (moment.duration(moment(endDateUTC).diff(moment(startDateUTC))).asDays() < 7) {
-            this.setState(prevState => ({
-                data: {
-                    datasets: [{
-                        ...prevState.datasets,
-                        data: parsed,
-                        label: 'Average Deceleration',
-                        backgroundColor: 'rgba(252, 161, 3, 0.5)',
-                        borderColor: 'rgb(252, 161, 3)',
-                    }],
-                }
-            }));
-        } else {
-            let finalDataObject = [];
-            // finalDataObject.push({x: 0, y: 0});
-            let date = moment(updatedParsed[0].drive_date).format('YYYY-MM-DD');
-            let avgDecForDay = 0;
-            let lastDate = date;
-            let counter = 0;
-
-            updatedParsed.forEach(element => {
-                if (moment(date).isSame(moment(element.drive_date))) {
-                    avgDecForDay += element.dec_x;
-                    counter++;
-                } else {
-                    let tempDate = new Date(date);
-                    tempDate.setHours(tempDate.getHours() + 8);
-                    tempDate = tempDate.setHours(0,0,0,0);
-                    finalDataObject.push({ x: tempDate, y: Math.floor(avgDecForDay/counter * 100) / 100 });
-                    xCount++;
-                    date = moment(element.drive_date).format('YYYY-MM-DD');
-                    let newTempDate = new Date(date);
-                    newTempDate.setHours(newTempDate.getHours() + 8);
-                    newTempDate = newTempDate.setHours(0,0,0,0);
-                    lastDate = newTempDate;
-                    avgDecForDay = 0;
-                    counter = 0;
-                    if (moment(date).isSame(moment(element.drive_date))) {
-                        avgDecForDay += element.dec_x;
-                        counter++;
-                    }
-                }
-            });
-
-            if (counter !== 0) {
-                finalDataObject.push({ x: lastDate, y: Math.floor(avgDecForDay/counter * 100) / 100 });
-            }
-
-            this.setState(prevState => ({
-                data: {
-                    datasets: [{
-                        ...prevState.datasets,
-                        data: finalDataObject,
-                        label: 'Average Deceleration',
-                        backgroundColor: 'rgba(252, 161, 3, 0.5)',
-                        borderColor: 'rgb(252, 161, 3)',
-                        showLine: true,
-                    }],
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            },
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Deceleration'
-                              }
-                        }],
-                        xAxes: [{
-                            ...prevState.xAxes,
-                            type: 'time',
-                            time: {
-                                unit: 'day',
-                                unitStepSize: 1,
-                                displayFormats: {
-                                    'day': 'MMM DD',
-                                },
-                                tooltipFormat: 'MMM DD'
-                            },
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Dates'
-                              }
-                        }]
-                    }
-                },
-            }));
-        }
-
-        this.setState({ parsedBrakingData: parsed, dataExistsToDisplay: true });
-    }
-
     getBrakingData = () => {
-        const { arduinoID, name, email, vehiclesOwned, vehicleTireSpecs, vehicleWeight } = this.state;
+        const { arduinoID, name, email, vehiclesOwned } = this.state;
 
         axios.post(`${host}:${port}/getBrakingData`, {
             arduinoID,
@@ -426,113 +146,192 @@ class Dashboard extends Component {
         })
         .then(res => {
             this.setState({ vehicleSelected: true, brakingData: res.data.brakingData }, () => {
-                const parsed = [];
+                const decelerationParsed = [];
                 const torqueParsed = [];
-                let finalBrakingTorque = 0;
-                let finalBrakeRating = 0;
+                const numDataPoints = this.state.brakingData.length;
 
-                // Add fake data for visualization purposes
-                parsed.push({x: 0, y: 0})
+                // Add initial data points for the day
+                decelerationParsed.push({x: 0, y: 0})
                 torqueParsed.push({ x: 0, y: 0 });
 
+                let brakingTorque = 0;
+                let totalBrakingTorque = 0;
+                let totalDeceleration = 0;
+
+                // calculate individual and overall deceleration and braking torque
                 this.state.brakingData.forEach(element => {
-                    // calculate wheel radius
-                    const tireSpecsArr = vehicleTireSpecs.split('/');
-                    const sidewallHeight = (parseInt(tireSpecsArr[1]) * parseInt(tireSpecsArr[0].substr(1))) / 100;
-                    const wheelRadius = (0.001) * (((parseInt(tireSpecsArr[2].substr(1)) * 25.4) + (2 * sidewallHeight)) / 2);
-                    // calculate braking torque
-                    const brakingTorque = vehicleWeight * element.dec_x * wheelRadius;
+                    brakingTorque = Math.floor(this.calculateBrakingTorque(element.dec_x) * 100) / 100;
+                    totalBrakingTorque += Math.floor(brakingTorque * 100) / 100;
+                    totalDeceleration += Math.floor(element.dec_x * 100) / 100;
 
-                    finalBrakingTorque += Math.floor(brakingTorque * 100) / 100;
-                    finalBrakeRating += Math.floor(element.dec_x * 100) / 100;
-
+                    // add deceleration and braking torque values for graph if data for the day exists
                     if (moment(element.drive_date).format('YYYY-MM-DD') === this.state.currDate) {
-                        parsed.push({ x: element.relative_time_count, y: element.dec_x });
-                        torqueParsed.push({ x: element.relative_time_count, y: Math.floor(brakingTorque * 100) / 100 });
+                        decelerationParsed.push({ x: element.relative_time_count, y: element.dec_x });
+                        torqueParsed.push({ x: element.relative_time_count, y: brakingTorque });
                     }
                 });
 
-                if (parsed.length === 1) {
-                    this.setState({ dataExistsToDisplay: false, torqueDataExistsToDisplay: false });
-                } else {
-                    this.setState(prevState => ({
-                        data: {
-                            datasets: [{
-                                ...prevState.datasets,
-                                data: parsed,
-                                label: 'Average Deceleration',
-                                backgroundColor: 'rgba(252, 161, 3, 0.5)',
-                                borderColor: 'rgb(252, 161, 3)',
-                                showLine: true,
-                            }],
-                        },
-                        torqueData: {
-                            datasets: [{
-                                ...prevState.datasets,
-                                data: torqueParsed,
-                                label: 'Braking Torque',
-                                backgroundColor: 'rgba(252, 161, 3, 0.5)',
-                                borderColor: 'rgb(252, 161, 3)',
-                                showLine: true,
-                            }],
-                        }
-                    }));
-                }
+                // calculate ratings for avg deceleration and braking torque (for cards)
+                const rating = this.calculateRating(totalDeceleration, numDataPoints);
 
-                let variantRating = '';
-
-                if (finalBrakeRating/this.state.brakingData.length < 0.5) {
-                    variantRating = 'text-success border-success';
-                } else if (finalBrakeRating/this.state.brakingData.length < 0.7) {
-                    variantRating = 'text-info border-info';
-                } else if (finalBrakeRating/this.state.brakingData.length < 0.9) {
-                    variantRating = 'text-warning border-warning';
-                } else {
-                    variantRating = 'text-danger border-danger';
-                }
-
+                // update necessary state for cards
                 this.setState({
-                    parsedBrakingData: parsed,
-                    finalAvgBrakingTorque: Math.floor(finalBrakingTorque/this.state.brakingData.length * 100) / 100,
-                    finalAvgBrakeRating: Math.floor(finalBrakeRating/this.state.brakingData.length * 100) / 100,
-                    finalBrakeRatingVariant: variantRating
+                    finalAvgBrakingTorque: Math.floor(totalBrakingTorque/numDataPoints * 100) / 100,
+                    finalAvgBrakeRating: Math.floor(totalDeceleration/numDataPoints * 100) / 100,
+                    finalBrakeRatingVariant: rating
+                });
+
+                // if no data exists for the day
+                if (decelerationParsed.length === 1) {
+                    this.setState({ decelerationDataExistsToDisplay: false, torqueDataExistsToDisplay: false });
+                    return;
+                }
+
+                this.setState(prevState => ({
+                    decelerationDatasets: prevState.decelerationDatasets.map(
+                        el => true === true? { ...el, data: decelerationParsed }: el
+                    )
+                }), () => {
+                    let tempDataStore = {};
+                    tempDataStore.datasets = this.state.decelerationDatasets;
+                    this.setState({ decelerationData: tempDataStore, decelerationDataExistsToDisplay: true });
                 });
             });
         })
         .catch(err => {});
     }
 
-    componentDidMount = () => {
-        const authToken = window.localStorage.getItem('auth_token');
+    updateDeceleration = () => {
+        const { decelerationStartDate, decelerationEndDate, brakingData } = this.state;
+        const startDateUTC = moment(decelerationStartDate).format('YYYY-MM-DD');
+        const endDateUTC = moment(decelerationEndDate).format('YYYY-MM-DD');
+        const decelerationParsed = [];
+        let updatedDecelerationParsed = [];
 
-        if (authToken) {
-            axios.post(`${host}:${port}/authstatus`, { headers: { 'Authorization' : `Bearer ${authToken}` } }).then(res => {
-                if (res.status === 200) {
-                    const { name, email, vehiclesOwned } = res.data.authData;
-                    this.setState({ isAuthenticated: true, name, email, vehiclesOwned, currDate: moment().format('YYYY-MM-DD') });
-                }
-            }).catch(err => {});
-        } else {
-            location.replace('/');
+        brakingData.forEach(element => {
+            let date = moment(element.drive_date).format('YYYY-MM-DD');
+
+            if (moment(date).isBetween(startDateUTC, endDateUTC, null, '[]')) {
+                updatedDecelerationParsed.push(element);
+                decelerationParsed.push({ x: element.relative_time_count, y: element.dec_x });
+            }
+        });
+
+        if (decelerationParsed.length === 0) {
+            this.setState({ decelerationDataExistsToDisplay: false });
+            return;
         }
+
+        if (moment.duration(moment(endDateUTC).diff(moment(startDateUTC))).asDays() < 2) {
+            this.setState(prevState => ({
+                decelerationDatasets: prevState.decelerationDatasets.map(
+                    el => true === true? { ...el, data: decelerationParsed }: el
+                )
+            }), () => {
+                let tempDataStore = {};
+                tempDataStore.datasets = this.state.decelerationDatasets;
+                this.setState({ decelerationData: tempDataStore, decelerationOptions: DefaultOptions });
+            });
+        } else {
+            let finalDataObject = [];
+            let date = moment(updatedDecelerationParsed[0].drive_date).format('YYYY-MM-DD');
+            let avgDecForDay = 0;
+            let lastDate = date;
+            let counter = 0;
+
+            updatedDecelerationParsed.forEach(element => {
+                if (moment(date).isSame(moment(element.drive_date))) {
+                    avgDecForDay += element.dec_x;
+                    counter++;
+                } else {
+                    let tempDate = new Date(date);
+
+                    tempDate.setHours(tempDate.getHours() + 8);
+                    tempDate = tempDate.setHours(0,0,0,0);
+
+                    finalDataObject.push({ x: tempDate, y: Math.floor(avgDecForDay/counter * 100) / 100 });
+
+                    date = moment(element.drive_date).format('YYYY-MM-DD');
+                    console.log(date);
+                    let newTempDate = new Date(date);
+                    console.log(newTempDate);
+                    // newTempDate.setHours(newTempDate.getHours() + 8);
+                    // newTempDate = newTempDate.setHours(0,0,0,0);
+                    // console.log(newTempDate);
+                    lastDate = newTempDate;
+                    avgDecForDay = 0;
+                    counter = 0;
+
+                    if (moment(date).isSame(moment(element.drive_date))) {
+                        avgDecForDay += element.dec_x;
+                        counter++;
+                    }
+                }
+            });
+
+            console.log('last date', lastDate);
+
+            if (counter !== 0) {
+                finalDataObject.push({ x: lastDate, y: Math.floor(avgDecForDay/counter * 100) / 100 });
+            }
+
+            console.log(finalDataObject);
+
+            this.setState(prevState => ({
+                decelerationDatasets: prevState.decelerationDatasets.map(
+                    el => true === true? { ...el, data: finalDataObject }: el
+                )
+            }), () => {
+                let tempDataStore = {};
+                tempDataStore.datasets = this.state.decelerationDatasets;
+                this.setState({ decelerationData: tempDataStore, decelerationOptions: MultiDayOptions });
+            });
+
+            // this.setState(prevState => ({
+            //     xAxesOptions: prevState.xAxesOptions.map(
+            //         el => true === true? {
+            //             ...el,
+            //             type: 'time',
+            //             time: {
+            //                 unit: 'day',
+            //                 unitStepSize: 1,
+            //                 displayFormats: {
+            //                     'day': 'MMM DD',
+            //                 },
+            //                 tooltipFormat: 'MMM DD'
+            //             },
+            //             ticks: {
+            //                 stepSize: 1
+            //             },
+            //             scaleLabel: {
+            //                 display: true,
+            //                 labelString: 'Dates'
+            //             }
+            //         }: el
+            //     )
+            // }));
+        }
+
+        this.setState({ decelerationDataExistsToDisplay: true });
     }
 
     render() {
         const {
             isAuthenticated,
             name,
-            data,
-            torqueData,
-            options,
-            torqueOptions,
             vehicleSelected,
-            dataExistsToDisplay,
             vehicleName,
-            finalAvgBrakingTorque,
             finalAvgBrakeRating,
             finalBrakeRatingVariant,
-            torqueDataExistsToDisplay
+            finalAvgBrakingTorque,
+            decelerationStartDate,
+            decelerationEndDate,
+            decelerationData,
+            decelerationOptions,
+            decelerationDataExistsToDisplay
         } = this.state;
+
+        console.log('WHAT IS DATAA: ', decelerationData);
 
         return (
             <div>
@@ -611,32 +410,34 @@ class Dashboard extends Component {
                                 />
                             </Col>
                         </Row>
+
                         <Card className="mt-3">
                             <Card.Header>
                                 <h5 className="m-0">
                                     {`Deceleration for ${vehicleName}`}
                                 </h5>
                             </Card.Header>
+
                             <Card.Body>
                                 <Row className="justify-content-end">
                                     <Col sm={'auto'} className="px-1">
                                         <DatePicker
-                                            selected={this.state.startDate}
+                                            selected={decelerationStartDate}
                                             selectsStart
-                                            startDate={this.state.startDate}
-                                            endDate={this.state.endDate}
-                                            onChange={this.handleChangeStart}
+                                            startDate={decelerationStartDate}
+                                            endDate={decelerationEndDate}
+                                            onChange={this.handleDecelerationChangeStart}
                                         />
                                     </Col>
                                     <Col sm={'auto'} className="px-1">
                                         <DatePicker
-                                            selected={this.state.endDate}
+                                            selected={decelerationEndDate}
                                             selectsEnd
-                                            startDate={this.state.startDate}
-                                            endDate={this.state.endDate}
-                                            minDate={this.state.startDate}
+                                            startDate={decelerationStartDate}
+                                            endDate={decelerationEndDate}
+                                            minDate={decelerationStartDate}
                                             maxDate={new Date()}
-                                            onChange={this.handleChangeEnd}
+                                            onChange={this.handleDecelerationChangeEnd}
                                         />
                                     </Col>
                                     <Col sm={'auto'} className="px-1 pr-3">
@@ -645,68 +446,17 @@ class Dashboard extends Component {
                                         </Button>
                                     </Col>
                                 </Row>
-                                {!dataExistsToDisplay && (
+                                {!decelerationDataExistsToDisplay && (
                                     <Alert className='mt-4' key={0} variant='danger'>
                                         No braking data for this date range, please select a different range.
                                     </Alert>
                                 )}
-                                {dataExistsToDisplay && (
+                                {decelerationDataExistsToDisplay && (
                                     <Row className="mt-3">
                                         <Col>
                                             <Graph
-                                                data={data}
-                                                options={options}
-                                            />
-                                        </Col>
-                                    </Row>
-                                )}
-                            </Card.Body>
-                        </Card>
-                        <Card className="mt-3">
-                            <Card.Header>
-                                <h5 className="m-0">
-                                    {`Braking Torque for ${vehicleName}`}
-                                </h5>
-                            </Card.Header>
-                            <Card.Body>
-                                <Row className="justify-content-end">
-                                    <Col sm={'auto'} className="px-1">
-                                        <DatePicker
-                                            selected={this.state.startDateTorque}
-                                            selectsStart
-                                            startDate={this.state.startDateTorque}
-                                            endDate={this.state.endDateTorque}
-                                            onChange={this.handleChangeStartTorque}
-                                        />
-                                    </Col>
-                                    <Col sm={'auto'} className="px-1">
-                                        <DatePicker
-                                            selected={this.state.endDateTorque}
-                                            selectsEnd
-                                            startDate={this.state.startDateTorque}
-                                            endDate={this.state.endDateTorque}
-                                            minDate={this.state.startDateTorque}
-                                            maxDate={new Date()}
-                                            onChange={this.handleChangeEndTorque}
-                                        />
-                                    </Col>
-                                    <Col sm={'auto'} className="px-1 pr-3">
-                                        <Button onClick={() => this.updateBrakingTorque()} variant="outline-success btn-sm">
-                                            Update
-                                        </Button>
-                                    </Col>
-                                </Row>
-                                {!torqueDataExistsToDisplay && (
-                                    <Alert className='mt-4' key={0} variant='danger'>
-                                        No braking data for this date range, please select a different range.
-                                    </Alert>
-                                )}
-                                {torqueDataExistsToDisplay && (
-                                    <Row>
-                                        <Col>
-                                            <Graph
-                                                data={torqueData}
-                                                options={torqueOptions}
+                                                data={decelerationData}
+                                                options={decelerationOptions}
                                             />
                                         </Col>
                                     </Row>
@@ -716,7 +466,7 @@ class Dashboard extends Component {
                     </Container>
                 )}
             </div>
-        )
+        );
     }
 }
 

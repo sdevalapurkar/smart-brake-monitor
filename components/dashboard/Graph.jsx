@@ -1,6 +1,7 @@
 import { Scatter } from 'react-chartjs-2';
 
 function Graph(props) {
+    console.log('props here man', props.data);
     return (
         <div>
             <Scatter
