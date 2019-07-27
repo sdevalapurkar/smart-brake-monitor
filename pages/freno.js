@@ -114,7 +114,7 @@ class Freno extends Component {
                                 <Col md={10} className="mb-3 mb-md-0">
                                     <CardDeck>
                                         <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
-                                          <Card.Img variant="top" src={require('../img/accelerometer.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+                                          <Card.Img variant="top" src={require('../img/accelerometer.png')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
                                           <Card.Body>
                                             <Card.Title>Accelerometer</Card.Title>
                                             <Card.Subtitle className="mb-2 text-muted">MPU 6050</Card.Subtitle>
