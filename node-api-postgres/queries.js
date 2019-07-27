@@ -237,7 +237,6 @@ const getBrakingData = (request, response) => {
         jwt.sign({ name, email, vehiclesOwned, brakingData }, privateKey, { expiresIn: '2h' }, (err, token) => {
             return response.status(200).json({
                 token,
-                vehiclesOwned,
                 brakingData,
             });
         });

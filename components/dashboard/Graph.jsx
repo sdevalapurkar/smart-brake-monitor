@@ -1,24 +1,16 @@
-import React, {Component} from 'react';
+import { Scatter } from 'react-chartjs-2';
 
-
-class Number extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-
-        };
-    }
-
-    render() {
-        // <Line data={this.getDataGraph1()} options={this.getOptionsGraph1()} />
-        return (
-            <div>
-                hello world
-            </div>
-        );
-    }
-
+function Graph(props) {
+    console.log('props here man', props.data);
+    return (
+        <div>
+            <Scatter
+                data={props.data}
+                options={props.options}
+                height={100}
+            />
+        </div>
+    );
 }
 
-export default Number;
+export default Graph;
