@@ -3,7 +3,7 @@ let MultiDayOptions = {
     scales: {
         yAxes: [{
             ticks: {
-                beginAtZero: true
+                callback: function(tick) { return tick.toFixed(2) }
             },
             scaleLabel: {
                 display: true,
@@ -11,6 +11,9 @@ let MultiDayOptions = {
               }
         }],
         xAxes: [{
+            ticks: {
+                callback: function(tick) { return tick.toFixed(2) }
+            },
             type: 'time',
             time: {
                 unit: 'day',
