@@ -11,9 +11,6 @@ function BrakeInfoCard(props) {
                     <h1>
                         {props.midText}
                     </h1>
-                    <div style={{ cursor: 'pointer' }} onClick={props.onClick}>
-                        {props.botText}
-                    </div>
                 </Card.Body>
             </Card>
         </div>
