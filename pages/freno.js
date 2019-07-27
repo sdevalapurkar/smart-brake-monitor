@@ -64,7 +64,10 @@ class Freno extends Component {
                             </Row>
                             <Row className="justify-content-center">
                                 <Col  md={8} className="text-center mb-3 mb-md-0">
-                                    <Image src={require('../img/freno.jpg')} fluid style={{ borderRadius: '1em' }}/>
+                                    <Card style={{   borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
+                                        <Image src={require('../img/freno.jpg')} fluid style={{ border: '7px solid #ADAFB2'}} rounded className='p-1'/>
+
+                                    </Card>
                                 </Col>
                             </Row>
                             <Row className="justify-content-center mt-5">
@@ -90,7 +93,7 @@ class Freno extends Component {
                                         past a certain threshold the LED Strip will light up depending on the amount of
                                         deceleration. A soft brake with low deceleration would show 25% of the LED Strip lights
                                         lit up, whereas an emergency brake would show 100%. Freno also records any deceleration
-                                        to the USB. Upload the text file on the USB to your account on this website. Now all
+                                        to the USB. Upload the text file on the USB to your account on this website. All
                                         of your braking data is displayed on the dashboard.
                                     </p>
                                     <h1>
@@ -100,8 +103,8 @@ class Freno extends Component {
                                         Freno is easy to set up. First put the electronics into a box or use one of the boxes we
                                         have provided. Next, lay this box down flat into the trunk or back seat of your vehicle.
                                         Attach the LED strip to your rear window or bumper. Plug in the USB and hit the Arduino
-                                        reset button to begin. When finished press the button to write your data to the USB.
-                                        Remember to upload the FRENO.txt file on the USB to your BrakesSupreme account.
+                                        reset button to begin. When finished press the button on the breadboard to write your data
+                                        to the USB. Remember to upload the FRENO.txt file on the USB to your BrakesSupreme account.
                                     </p>
                                     <h1>
                                         Parts
