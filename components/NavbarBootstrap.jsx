@@ -58,6 +58,7 @@ class NavbarBootstrap extends Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
+                        <Nav.Link href="/freno">Freno</Nav.Link>
                         <Nav.Link href="/ourteam">Our Team</Nav.Link>
                         <Nav.Link href="/contact">Contact</Nav.Link>
                     </Nav>
