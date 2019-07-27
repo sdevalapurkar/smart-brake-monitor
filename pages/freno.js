@@ -124,7 +124,7 @@ class Freno extends Component {
                                             </Card.Text>
                                           </Card.Body>
                                           <Card.Footer>
-                                              <Card.Link href="http://wiki.sunfounder.cc/index.php?title=MPU6050_Module">Wiki</Card.Link>
+                                              <Card.Link href="https://store.invensense.com/datasheets/invensense/MPU-6050_DataSheet_V3%204.pdf">Documentation</Card.Link>
                                               <Card.Link href="https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B008BOPN40">Amazon</Card.Link>
                                           </Card.Footer>
                                         </Card>
@@ -177,7 +177,7 @@ class Freno extends Component {
                                           </Card.Footer>
                                         </Card>
                                         <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
-                                          <Card.Img variant="top" src={require('../img/usb_module.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+                                          <Card.Img variant="top" src={require('../img/dbattery.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
                                           <Card.Body>
                                             <Card.Title>D Battery Pack</Card.Title>
                                             <Card.Text>
