@@ -192,7 +192,7 @@ class Freno extends Component {
                                           <Card.Body>
                                             <Card.Title>USB Stick</Card.Title>
                                             <Card.Text>
-                                                Stores the data.
+                                                Stores all of the braking data.
                                             </Card.Text>
                                           </Card.Body>
                                           <Card.Footer>
@@ -210,10 +210,71 @@ class Freno extends Component {
                                 <Col md={10} className="mb-3 mb-md-0">
                                     <h2>
                                         References
-                                    </h2><hr />
+                                    </h2><hr /><br/>
+                                    <h4>
+                                        Research
+                                    </h4>
                                     <p>
-                                        Github
+                                        [1] U.S. Dept. of Transportation. National Highway Traffic Safety Administration. "Analyses
+                                        of Rear-End Crashes and Near-Crashes in the 100-Car Naturalistic Driving Study to
+                                        Support Rear-Signaling Countermeasure Development" [Online]. Available: https://
+                                        www.nhtsa.gov/sites/nhtsa.dot.gov/files/analyses20of20rear-end20crashes20and20nearcrashes20dot20hs2081020846.pdf<br/>
+                                        [2] “Electronic Brake Monitoring,” Electronic Brake Monitoring | MGM Brakes. [Online].
+                                        Available: https://mgmbrakes.com/products/product-models/electronic-brakemonitoring/. [Accessed: 16-Jun-2019].<br/>
+                                        [3] D. E. Fumi and I. A. Sultan, “A novel in-vehicle real-time brake-monitoring system,”
+                                        Proceedings of the Institution of Mechanical Engineers, Part D: Journal of Automobile
+                                        Engineering, vol. 223, no. 6, pp. 793–804, 2009<br/>
+                                        [4] I. Alvarez and M. Bowman. "Trusted vehicle telematics using blockchain data analytics"
+                                        U.S. Patent 10 284 654, May 7, 2019.<br/>
+                                        [5] K. Flick. "Vehicle tracker with user notifications and associated methods" U.S. Patent 6
+                                        888 495, May 3, 2005.<br/>
+                                        [6] B. Wallace, R. Goubran, F. Knoefel, S. Marshall, M. Porter and A. Smith, "Driver Unique
+                                        Acceleration Behaviours and Stability over Two Years," 2016 IEEE International
+                                        Congress on Big Data (BigData Congress), San Francisco, CA, 2016, pp. 230-235.<br/>
+                                        [7] F. Monnerat, J. Dias, M. Alves, “Fleet management: A vehicle and driver assignment
+                                        model,” European Journal of Operational Research, vol. 278, no. 1, p. 64-75, March,
+                                        2019. [Online serial]. Available: https://www.sciencedirect.com/science/article/abs/pii/
+                                        S0377221719302607. [Accessed June. 1, 2019].<br/>
+                                        [8] Motus. "Don’t Just Drive. Arrive. A Better Way to Get Going With Motus" [Online].
+                                        Available: https://www.motus.com/<br/>
+                                        [9] D. Shinar, B. Gurion, “Fleet Study Evaluation of an Advance Brake Warning System,”
+                                        Human Factors, vol. 42, no. 3, p. 482-489, Sept, 2000. [Online serial]. Available: https://
+                                        journals-sagepub-com.ezproxy.library.uvic.ca/doi/pdf/10.1518/001872000779698141.
+                                        [Accessed June. 1, 2019].<br/>
+                                        [10] W. W. Wierwille et al. “Evaluation of Enhanced Brake Lights Using Surrogate Safety
+                                        Measures” [Online]. Available: https://pdfs.semanticscholar.org/1a3c/
+                                        70b98dc5df5e6ec49b2e4354948e023c13a6.pdf<br/>
+                                        [11] Facebook Inc. "Getting Started" [Online]. Available: https://reactjs.org/docs/gettingstarted.html<br/>
+                                        [12] Node.js Foundation. "API Reference Documentation" [Online]. Available: https://
+                                        nodejs.org/en/docs/<br/>
+                                        [13] The PostgreSQL Global Development Group. "Documentation" [Online]. Available:
+                                        https://www.postgresql.org/docs/<br/>
+                                        [14] restfulapi.net. "REST API Tutorial" [Online]. Available: https://restfulapi.net/<br/>
+                                        [15] Mozilla and individual contributors. "An overview of HTTP" [Online]. Available: https://
+                                        developer.mozilla.org/en-US/docs/Web/HTTP/Overview<br/>
+                                        [16] Raspberry Pi Foundation. "Raspberry Pi 3 Model B+" [Online]. Available: https://
+                                        www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/<br/>
+                                    </p><br/>
+                                    <h4>Hardware</h4>
+                                    <p>
+                                        [17] https://arduinobasics.blogspot.com/2015/05/ch376s-usb-readwrite-module.html<br/>
+                                        [18] https://www.youtube.com/watch?v=yK3631kMKBU<br/>
+                                        [19] https://www.youtube.com/watch?v=UhYu0k2woRM<br/>
+                                        [20] https://learn.adafruit.com/rgb-led-strips/arduino-code<br/>
+                                        [21] https://randomnerdtutorials.com/guide-for-ws2812b-addressable-rgb-led-strip-with-arduino/<br/>
+                                        [21] https://howtomechatronics.com/tutorials/arduino/arduino-and-mpu6050-accelerometer-and-gyroscope-tutorial/<br/>
+                                        [22] https://maker.pro/arduino/tutorial/how-to-interface-arduino-and-the-mpu-6050-sensor<br/>
+                                    </p><br/>
+                                    <h4>Web Application</h4>
+                                    <p>
+                                        [23] https://devcenter.heroku.com/articles/error-pages<br/>
+                                        [24] https://www.geekality.net/2019/03/13/heroku-deploy-sub-directory/<br/>
+                                        [25] https://devcenter.heroku.com/articles/git<br/>
+                                        [26] https://sciencing.com/calculate-brake-torque-6076252.html<br/>
+                                        [27] https://www.geotab.com/blog/what-is-g-force/<br/>
+                                        [28] https://www.continentaltire.com/news/how-read-tire-sidewall<br/>
                                     </p>
+
                                 </Col>
                             </Row>
                         </Card.Body>
