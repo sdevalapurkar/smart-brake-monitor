@@ -113,13 +113,8 @@ class Freno extends Component {
                             <Row className="justify-content-center">
                                 <Col md={18} lg={18} className="mb-3 mb-md-0" >
                                     <CardDeck>
-<<<<<<< HEAD
-                                        <Card className="freno-card" style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
-                                          <Card.Img variant="top" src={require('../img/accelerometer.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
-=======
                                         <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
                                           <Card.Img variant="top" src={require('../img/accelerometer.png')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
->>>>>>> master
                                           <Card.Body>
                                             <Card.Title>Accelerometer</Card.Title>
                                             <Card.Subtitle className="mb-2 text-muted">MPU 6050</Card.Subtitle>
