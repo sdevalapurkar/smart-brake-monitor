@@ -34,6 +34,7 @@ class NavbarBootstrap extends Component {
 
         const popover = (
             <Popover id="popover-basic" title={name} style={{ textAlign: 'center' }}>
+                <NavDropdown.Item href="/dashboard" style={{ textAlign: 'center' }}>Dashboard</NavDropdown.Item>
                 <NavDropdown.Item href="/account" style={{ textAlign: 'center' }}>My Account</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item>
@@ -61,6 +62,9 @@ class NavbarBootstrap extends Component {
                         <Nav.Link href="/freno">Freno</Nav.Link>
                         <Nav.Link href="/ourteam">Our Team</Nav.Link>
                         <Nav.Link href="/contact">Contact</Nav.Link>
+                        {isAuthenticated && (
+                            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse id="basic-navbar-nav">

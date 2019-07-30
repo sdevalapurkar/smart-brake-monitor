@@ -113,8 +113,13 @@ class Freno extends Component {
                             <Row className="justify-content-center">
                                 <Col md={18} lg={18} className="mb-3 mb-md-0" >
                                     <CardDeck>
+<<<<<<< HEAD
                                         <Card className="freno-card" style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
                                           <Card.Img variant="top" src={require('../img/accelerometer.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+=======
+                                        <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
+                                          <Card.Img variant="top" src={require('../img/accelerometer.png')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+>>>>>>> master
                                           <Card.Body>
                                             <Card.Title>Accelerometer</Card.Title>
                                             <Card.Subtitle className="mb-2 text-muted">MPU 6050</Card.Subtitle>
@@ -128,7 +133,7 @@ class Freno extends Component {
                                           </Card.Footer>
                                         </Card>
                                         <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
-                                          <Card.Img variant="top" src={require('../img/arduino_mega.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+                                          <Card.Img variant="top" src={require('../img/arduino_mega.png')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
                                           <Card.Body>
                                             <Card.Title>Microcontroller</Card.Title>
                                             <Card.Subtitle className="mb-2 text-muted">Arduino Mega 2560</Card.Subtitle>
@@ -142,7 +147,7 @@ class Freno extends Component {
                                           </Card.Footer>
                                         </Card>
                                         <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
-                                          <Card.Img variant="top" src={require('../img/usb_module.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+                                          <Card.Img variant="top" src={require('../img/usb_module.png')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
                                           <Card.Body>
                                             <Card.Title>USB Module</Card.Title>
                                             <Card.Subtitle className="mb-2 text-muted">IC CH376S</Card.Subtitle>
@@ -162,7 +167,7 @@ class Freno extends Component {
                                 <Col md={18} lg={18} className="mb-3 mb-md-0" >
                                     <CardDeck>
                                         <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
-                                          <Card.Img variant="top" src={require('../img/led_strip.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+                                          <Card.Img variant="top" src={require('../img/led_strip.png')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
                                           <Card.Body>
                                             <Card.Title>LED Light Strip</Card.Title>
                                             <Card.Subtitle className="mb-2 text-muted">WS2812</Card.Subtitle>
@@ -176,7 +181,7 @@ class Freno extends Component {
                                           </Card.Footer>
                                         </Card>
                                         <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
-                                          <Card.Img variant="top" src={require('../img/dbattery.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+                                          <Card.Img variant="top" src={require('../img/dbattery.png')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
                                           <Card.Body>
                                             <Card.Title>D Battery Pack</Card.Title>
                                             <Card.Text>
@@ -188,7 +193,7 @@ class Freno extends Component {
                                           </Card.Footer>
                                         </Card>
                                         <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
-                                          <Card.Img variant="top" src={require('../img/usb_stick.jpg')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
+                                          <Card.Img variant="top" src={require('../img/usb_stick.png')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
                                           <Card.Body>
                                             <Card.Title>USB Stick</Card.Title>
                                             <Card.Text>
