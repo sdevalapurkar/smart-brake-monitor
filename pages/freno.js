@@ -49,13 +49,13 @@ class Freno extends Component {
                 <NavbarBootstrap isAuthenticated={isAuthenticated} name={name} />
 
                 <Container className="my-5">
-                    <Card className="mt-5">
+                    <Card className="mt-5 justify-content-center">
                         <Card.Body className="mb-3">
                             <Row className="my-5">
                                 <Col className="text-center">
                                     <h1 className="font-35-bold mb-5 mb-md-0">FRENO</h1>
                                 </Col>
-                                <Col xs={12} md={6}>
+                                <Col xs={12} md={6} className="text-center">
                                     <h3>
                                         Accident If You <b>Don't Know</b><br/>
                                         Prevention If You <b>Freno</b>
@@ -79,11 +79,11 @@ class Freno extends Component {
                                     <h1>
                                         Short Demo
                                     </h1>
-                                    <YouTube videoId='BtLwoNJ6klE' opts = {{height: '390', width: '640'}}/>
+                                    <YouTube videoId='BtLwoNJ6klE' className="freno-video" opts = {{height: '390', width: '640'}} />
                                 </Col>
                             </Row>
                             <Row className="justify-content-center mt-5">
-                                <Col  md={10} className="mb-3 mb-md-0">
+                                <Col md={10} className="mb-3 mb-md-0">
                                     <h1>
                                         How It Works
                                     </h1><hr />
@@ -111,7 +111,7 @@ class Freno extends Component {
                                 </Col>
                             </Row>
                             <Row className="justify-content-center">
-                                <Col md={10} className="mb-3 mb-md-0">
+                                <Col md={18} lg={18} className="mb-3 mb-md-0" >
                                     <CardDeck>
                                         <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
                                           <Card.Img variant="top" src={require('../img/accelerometer.png')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
@@ -137,7 +137,7 @@ class Freno extends Component {
                                             </Card.Text>
                                           </Card.Body>
                                           <Card.Footer>
-                                              <Card.Link href="https://en.wikipedia.org/wiki/Arduino">Wiki</Card.Link>
+                                              <Card.Link href="https://www.arduino.cc/en/Guide/ArduinoMega2560">Documentation</Card.Link>
                                               <Card.Link href="https://www.amazon.com/ELEGOO-ATmega2560-ATMEGA16U2-Projects-Compliant/dp/B01H4ZLZLQ/ref=sr_1_4?keywords=arduino+mega&qid=1564082728&s=electronics&sr=1-4">Amazon</Card.Link>
                                           </Card.Footer>
                                         </Card>
@@ -159,7 +159,7 @@ class Freno extends Component {
                                 </Col>
                             </Row>
                             <Row className="justify-content-center mt-5">
-                                <Col md={10} className="mb-3 mb-md-0" >
+                                <Col md={18} lg={18} className="mb-3 mb-md-0" >
                                     <CardDeck>
                                         <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
                                           <Card.Img variant="top" src={require('../img/led_strip.png')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
@@ -200,6 +200,20 @@ class Freno extends Component {
                                           </Card.Footer>
                                         </Card>
                                     </CardDeck>
+                                </Col>
+                            </Row>
+                        </Card.Body>
+                    </Card>
+                    <Card className="mt-5 justify-content-center">
+                        <Card.Body className="mb-3">
+                            <Row className="justify-content-center mt-5">
+                                <Col md={10} className="mb-3 mb-md-0">
+                                    <h2>
+                                        References
+                                    </h2><hr />
+                                    <p>
+                                        Github
+                                    </p>
                                 </Col>
                             </Row>
                         </Card.Body>

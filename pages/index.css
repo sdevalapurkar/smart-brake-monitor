@@ -36,6 +36,16 @@
     .font-35-bold {
         font-size: 2.5em;
     }
+
+    .team-image {
+        max-height: 196px;
+        max-width: 196px;
+    }
+
+    .freno-video {
+        max-height: 280px;
+        max-width: 375px;
+    }
 }
 
 .team-image {
@@ -68,6 +78,15 @@
     .text-ack-title {
         font-size: 1.1rem;
     }
+
+    .freno-video {
+        max-height: 250px;
+        max-width: 300px;
+    }
+
+    .freno-card {
+        width: 11rem;
+    }
 }
 
 @media only screen and (max-width: 992px) {
@@ -75,11 +94,34 @@
         max-height: 176px;
         max-width: 176px;
     }
+
+    .freno-video {
+        max-height: 250px;
+        max-width: 475px;
+    }
+
 }
 
-@media only screen and (max-width: 768px) {
-    .team-image {
-        max-height: 196px;
-        max-width: 196px;
+
+
+@media only screen and (max-width: 375px) {
+    .freno-video {
+        max-height: 160px;
+        max-width: 285px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .freno-video {
+        max-height: 190px;
+        max-width: 355px;
+    }
+}
+
+
+@media only screen and (max-width: 320px) {
+    .freno-video {
+        max-height: 115px;
+        max-width: 205px;
     }
 }
