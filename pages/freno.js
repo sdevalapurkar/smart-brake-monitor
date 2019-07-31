@@ -218,12 +218,11 @@ class Freno extends Component {
                                     <p>
                                         [1] U.S. Dept. of Transportation. National Highway Traffic Safety Administration. "Analyses
                                         of Rear-End Crashes and Near-Crashes in the 100-Car Naturalistic Driving Study to
-                                        Support Rear-Signaling Countermeasure Development" [Online]. Available: <a href="https://
-                                        www.nhtsa.gov/sites/nhtsa.dot.gov/files/analyses20of20rear-end20crashes20and20nearcrashes20dot20hs2081020846.pdf">https://
-                                        www.nhtsa.gov/sites/nhtsa.dot.gov/files/analyses20of20rear-end20crashes20and20nearcrashes20dot20hs2081020846.pdf</a><br/><br/>
+                                        Support Rear-Signaling Countermeasure Development" [Online]. Available: <a href="https://www.nhtsa.gov/sites/nhtsa.dot.gov/files/analyses20of20rear-end20crashes20and20near-crashes20dot20hs2081020846.pdf">
+                                        https://www.nhtsa.gov/sites/nhtsa.dot.gov/files/analyses20of20rear-end20crashes20and20near-crashes20dot20hs2081020846.pdf</a><br/><br/>
                                         [2] “Electronic Brake Monitoring,” Electronic Brake Monitoring | MGM Brakes. [Online].
-                                        Available: <a href="https://mgmbrakes.com/products/product-models/electronic-brakemonitoring/">https://mgmbrakes.com/products/product-
-                                        models/electronic-brakemonitoring/</a>. [Accessed: 16-Jun-2019].<br/><br/>
+                                        Available: <a href="https://mgmbrakes.com/products/product-models/electronic-brake-monitoring/">
+                                        https://mgmbrakes.com/products/product-models/electronic-brake-monitoring/</a>. [Accessed: 16-Jun-2019].<br/><br/>
                                         [3] D. E. Fumi and I. A. Sultan, “A novel in-vehicle real-time brake-monitoring system,”
                                         Proceedings of the Institution of Mechanical Engineers, Part D: Journal of Automobile
                                         Engineering, vol. 223, no. 6, pp. 793–804, 2009<br/><br/>
@@ -236,31 +235,27 @@ class Freno extends Component {
                                         Congress on Big Data (BigData Congress), San Francisco, CA, 2016, pp. 230-235.<br/><br/>
                                         [7] F. Monnerat, J. Dias, M. Alves, “Fleet management: A vehicle and driver assignment
                                         model,” European Journal of Operational Research, vol. 278, no. 1, p. 64-75, March,
-                                        2019. [Online serial]. Available: <a href="https://www.sciencedirect.com/science/article/abs/pii/
-                                        S0377221719302607">https://www.sciencedirect.com/science/article/abs/pii/
-                                        S0377221719302607</a>. [Accessed June. 1, 2019].<br/><br/>
+                                        2019. [Online serial]. Available: <a href="https://www.sciencedirect.com/science/article/abs/pii/S0377221719302607">
+                                        https://www.sciencedirect.com/science/article/abs/pii/S0377221719302607</a>. [Accessed June. 1, 2019].<br/><br/>
                                         [8] Motus. "Don’t Just Drive. Arrive. A Better Way to Get Going With Motus" [Online].
                                         Available: <a href="https://www.motus.com/">https://www.motus.com/</a><br/><br/>
                                         [9] D. Shinar, B. Gurion, “Fleet Study Evaluation of an Advance Brake Warning System,”
-                                        Human Factors, vol. 42, no. 3, p. 482-489, Sept, 2000. [Online serial]. Available: <a href="https://
-                                        journals-sagepub-com.ezproxy.library.uvic.ca/doi/pdf/10.1518/001872000779698141">https://journals-sagepub-com.ezproxy.library.uvic.ca/doi/pdf/10.1518/001872000779698141</a>.
+                                        Human Factors, vol. 42, no. 3, p. 482-489, Sept, 2000. [Online serial]. Available: <a href="https://journals-sagepub-com.ezproxy.library.uvic.ca/doi/pdf/10.1518/001872000779698141">
+                                        https://journals-sagepub-com.ezproxy.library.uvic.ca/doi/pdf/10.1518/001872000779698141</a>.
                                         [Accessed June. 1, 2019].<br/><br/>
                                         [10] W. W. Wierwille et al. “Evaluation of Enhanced Brake Lights Using Surrogate Safety
-                                        Measures” [Online]. "Available: <a href="https://pdfs.semanticscholar.org/1a3c/
-                                        70b98dc5df5e6ec49b2e4354948e023c13a6.pdf">https://pdfs.semanticscholar.org/1a3c/
-                                        70b98dc5df5e6ec49b2e4354948e023c13a6.pdf</a><br/><br/>
-                                        [11] Facebook Inc. "Getting Started" [Online]. Available: <a href="https://reactjs.org/docs/gettingstarted.html">
-                                        https://reactjs.org/docs/gettingstarted.html</a><br/><br/>
-                                        [12] Node.js Foundation. "API Reference Documentation" [Online]. Available: <a href="https://
-                                        nodejs.org/en/docs/">https://nodejs.org/en/docs/</a><br/><br/>
+                                        Measures” [Online]. "Available: <a href="https://pdfs.semanticscholar.org/1a3c/70b98dc5df5e6ec49b2e4354948e023c13a6.pdf">
+                                        https://pdfs.semanticscholar.org/1a3c/70b98dc5df5e6ec49b2e4354948e023c13a6.pdf</a><br/><br/>
+                                        [11] Facebook Inc. "Getting Started" [Online]. Available: <a href="https://reactjs.org/docs/getting-started.html">
+                                        https://reactjs.org/docs/getting-started.html</a><br/><br/>
+                                        [12] Node.js Foundation. "API Reference Documentation" [Online]. Available: <a href="https://nodejs.org/en/docs/">https://nodejs.org/en/docs/</a><br/><br/>
                                         [13] The PostgreSQL Global Development Group. "Documentation" [Online]. Available:
                                         <a href="https://www.postgresql.org/docs/">https://www.postgresql.org/docs/</a><br/><br/>
                                         [14] restfulapi.net. "REST API Tutorial" [Online]. Available: <a href="https://restfulapi.net/">https://restfulapi.net/</a><br/><br/>
-                                        [15] Mozilla and individual contributors. "An overview of HTTP" [Online]. Available: <a href="https://
-                                        developer.mozilla.org/en-US/docs/Web/HTTP/Overview">https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview</a><br/><br/>
-                                        [16] Raspberry Pi Foundation. "Raspberry Pi 3 Model B+" [Online]. Available: <a href="https://
-                                        www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/">https://
-                                        www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/</a><br/><br/>
+                                        [15] Mozilla and individual contributors. "An overview of HTTP" [Online]. Available: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview">
+                                        https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview</a><br/><br/>
+                                        [16] Raspberry Pi Foundation. "Raspberry Pi 3 Model B+" [Online]. Available: <a href="https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/">
+                                        https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/</a><br/><br/>
                                     </p>
                                     <h4>Hardware</h4>
                                     <p><br/>
