@@ -9,6 +9,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Link from 'next/link';
+import '../pages/index.css';
 
 class NavbarBootstrap extends Component {
     constructor(props) {
@@ -57,7 +58,7 @@ class NavbarBootstrap extends Component {
                     />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Collapse className="center-mobile" id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/freno">Freno</Nav.Link>
                         <Nav.Link href="/ourteam">Our Team</Nav.Link>
@@ -67,7 +68,7 @@ class NavbarBootstrap extends Component {
                         )}
                     </Nav>
                 </Navbar.Collapse>
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Collapse className="center-mobile" id="basic-navbar-nav">
                     <Nav className="mr-auto" />
                     {!isAuthenticated && (
                         <ButtonToolbar className="my-2">

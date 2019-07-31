@@ -102,15 +102,6 @@
 
 }
 
-
-
-@media only screen and (max-width: 375px) {
-    .freno-video {
-        max-height: 160px;
-        max-width: 285px;
-    }
-}
-
 @media only screen and (max-width: 425px) {
     .freno-video {
         max-height: 190px;
@@ -118,10 +109,16 @@
     }
 }
 
-
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 375px) {
     .freno-video {
         max-height: 115px;
         max-width: 205px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .center-mobile {
+        text-align: center;
+        display: inline-block;
     }
 }
