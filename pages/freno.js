@@ -257,22 +257,22 @@ class Freno extends Component {
                                     </p><br/>
                                     <h4>Hardware</h4>
                                     <p>
-                                        [17] https://arduinobasics.blogspot.com/2015/05/ch376s-usb-readwrite-module.html<br/>
-                                        [18] https://www.youtube.com/watch?v=yK3631kMKBU<br/>
-                                        [19] https://www.youtube.com/watch?v=UhYu0k2woRM<br/>
-                                        [20] https://learn.adafruit.com/rgb-led-strips/arduino-code<br/>
-                                        [21] https://randomnerdtutorials.com/guide-for-ws2812b-addressable-rgb-led-strip-with-arduino/<br/>
-                                        [21] https://howtomechatronics.com/tutorials/arduino/arduino-and-mpu6050-accelerometer-and-gyroscope-tutorial/<br/>
-                                        [22] https://maker.pro/arduino/tutorial/how-to-interface-arduino-and-the-mpu-6050-sensor<br/>
+                                        [17] Arduino Basics. "CH376S USB Read/Write Module" [Online]. Available: <a href="https://arduinobasics.blogspot.com/2015/05/ch376s-usb-readwrite-module.html">https://arduinobasics.blogspot.com/2015/05/ch376s-usb-readwrite-module.html</a><br/>
+                                        [18] Arduino Basics. "How to use CH376S USB read/write module" [Video file]. Available: https://www.youtube.com/watch?v=yK3631kMKBU<br/>
+                                        [19] How To Mechatronics. "How To Control WS2812B Individually Addressable LEDs using Arduino" [Video file]. Available: https://www.youtube.com/watch?v=UhYu0k2woRM<br/>
+                                        [20] Adafruit. "RGB LED Strips - Arduino Code" [Online]. Available: https://learn.adafruit.com/rgb-led-strips/arduino-code<br/>
+                                        [21] Random Nerd Tutorials. "Guide for WS2812B Addressable RGB LED Strip with Arduino" [Online]. Available: https://randomnerdtutorials.com/guide-for-ws2812b-addressable-rgb-led-strip-with-arduino/<br/>
+                                        [22] How To Mechatronics. "Arduino and MPU6050 Accelerometer and Gyroscope Tutorial" [Online]. Available: https://howtomechatronics.com/tutorials/arduino/arduino-and-mpu6050-accelerometer-and-gyroscope-tutorial/<br/>
+                                        [23] Maker Pro. "How to Interface Arduino and the MPU 6050 Sensor" [Online]. Available: https://maker.pro/arduino/tutorial/how-to-interface-arduino-and-the-mpu-6050-sensor<br/>
                                     </p><br/>
                                     <h4>Web Application</h4>
                                     <p>
-                                        [23] https://devcenter.heroku.com/articles/error-pages<br/>
-                                        [24] https://www.geekality.net/2019/03/13/heroku-deploy-sub-directory/<br/>
-                                        [25] https://devcenter.heroku.com/articles/git<br/>
-                                        [26] https://sciencing.com/calculate-brake-torque-6076252.html<br/>
-                                        [27] https://www.geotab.com/blog/what-is-g-force/<br/>
-                                        [28] https://www.continentaltire.com/news/how-read-tire-sidewall<br/>
+                                        [24] Heroku Dev Center. "Error Pages" [Online]. Available: https://devcenter.heroku.com/articles/error-pages<br/>
+                                        [25] Geekality. "Heroku Deploy Sub Directory" [Online]. Available: https://www.geekality.net/2019/03/13/heroku-deploy-sub-directory/<br/>
+                                        [26] Heroku Dev Center. "Git" [Online]. Available: https://devcenter.heroku.com/articles/git<br/>
+                                        [27] Sciencing. "Calculate Brake Torque" [Online]. Available: https://sciencing.com/calculate-brake-torque-6076252.html<br/>
+                                        [28] Geotab. "What is G-Force and How is it Related to Harsh Driving?" [Online]. Available: https://www.geotab.com/blog/what-is-g-force/<br/>
+                                        [29] Continental Tire. "How To Read A Tire Sidewall" [Online]. Available: https://www.continentaltire.com/news/how-read-tire-sidewall<br/>
                                     </p>
 
                                 </Col>
