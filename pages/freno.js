@@ -79,11 +79,11 @@ class Freno extends Component {
                                     <h1>
                                         Short Demo
                                     </h1>
-                                    <YouTube videoId='BtLwoNJ6klE' className="freno-video" opts = {{height: '390', width: '640'}} />
+                                    <YouTube videoId='BtLwoNJ6klE' className="freno-video"/>
                                 </Col>
                             </Row>
                             <Row className="justify-content-center mt-5">
-                                <Col md={10} className="mb-3 mb-md-0">
+                                <Col md={10} className="mb-md-0">
                                     <h1>
                                         How It Works
                                     </h1><hr />
@@ -145,7 +145,7 @@ class Freno extends Component {
                                           <Card.Img variant="top" src={require('../img/usb_module.png')} style={{ borderRadius: '1em 1em 0em 0em' }}/>
                                           <Card.Body>
                                             <Card.Title>USB Module</Card.Title>
-                                            <Card.Subtitle className="mb-2 text-muted">IC CH376S</Card.Subtitle>
+                                            <Card.Subtitle className="text-muted">IC CH376S</Card.Subtitle>
                                             <Card.Text>
                                                 Supports USB writing for data capturing.
                                             </Card.Text>
@@ -158,7 +158,7 @@ class Freno extends Component {
                                     </CardDeck>
                                 </Col>
                             </Row>
-                            <Row className="justify-content-center mt-5">
+                            <Row className="justify-content-center">
                                 <Col md={18} lg={18} className="mb-3 mb-md-0" >
                                     <CardDeck>
                                         <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
@@ -208,53 +208,54 @@ class Freno extends Component {
                         <Card.Body className="mb-3">
                             <Row className="justify-content-center mt-5">
                                 <Col md={10} className="mb-3 mb-md-0">
-                                    <h2>
+                                    <h1>
                                         References
-                                    </h2><hr /><br/>
+                                    </h1><hr /><br/>
                                     <h4>
                                         Research
                                     </h4>
+                                    <br/>
                                     <p>
                                         [1] U.S. Dept. of Transportation. National Highway Traffic Safety Administration. "Analyses
                                         of Rear-End Crashes and Near-Crashes in the 100-Car Naturalistic Driving Study to
                                         Support Rear-Signaling Countermeasure Development" [Online]. Available: https://
-                                        www.nhtsa.gov/sites/nhtsa.dot.gov/files/analyses20of20rear-end20crashes20and20nearcrashes20dot20hs2081020846.pdf<br/>
+                                        www.nhtsa.gov/sites/nhtsa.dot.gov/files/analyses20of20rear-end20crashes20and20nearcrashes20dot20hs2081020846.pdf<br/><br/>
                                         [2] “Electronic Brake Monitoring,” Electronic Brake Monitoring | MGM Brakes. [Online].
-                                        Available: https://mgmbrakes.com/products/product-models/electronic-brakemonitoring/. [Accessed: 16-Jun-2019].<br/>
+                                        Available: https://mgmbrakes.com/products/product-models/electronic-brakemonitoring/. [Accessed: 16-Jun-2019].<br/><br/>
                                         [3] D. E. Fumi and I. A. Sultan, “A novel in-vehicle real-time brake-monitoring system,”
                                         Proceedings of the Institution of Mechanical Engineers, Part D: Journal of Automobile
-                                        Engineering, vol. 223, no. 6, pp. 793–804, 2009<br/>
+                                        Engineering, vol. 223, no. 6, pp. 793–804, 2009<br/><br/>
                                         [4] I. Alvarez and M. Bowman. "Trusted vehicle telematics using blockchain data analytics"
-                                        U.S. Patent 10 284 654, May 7, 2019.<br/>
+                                        U.S. Patent 10 284 654, May 7, 2019.<br/><br/>
                                         [5] K. Flick. "Vehicle tracker with user notifications and associated methods" U.S. Patent 6
-                                        888 495, May 3, 2005.<br/>
+                                        888 495, May 3, 2005.<br/><br/>
                                         [6] B. Wallace, R. Goubran, F. Knoefel, S. Marshall, M. Porter and A. Smith, "Driver Unique
                                         Acceleration Behaviours and Stability over Two Years," 2016 IEEE International
-                                        Congress on Big Data (BigData Congress), San Francisco, CA, 2016, pp. 230-235.<br/>
+                                        Congress on Big Data (BigData Congress), San Francisco, CA, 2016, pp. 230-235.<br/><br/>
                                         [7] F. Monnerat, J. Dias, M. Alves, “Fleet management: A vehicle and driver assignment
                                         model,” European Journal of Operational Research, vol. 278, no. 1, p. 64-75, March,
                                         2019. [Online serial]. Available: https://www.sciencedirect.com/science/article/abs/pii/
-                                        S0377221719302607. [Accessed June. 1, 2019].<br/>
+                                        S0377221719302607. [Accessed June. 1, 2019].<br/><br/>
                                         [8] Motus. "Don’t Just Drive. Arrive. A Better Way to Get Going With Motus" [Online].
-                                        Available: https://www.motus.com/<br/>
+                                        Available: https://www.motus.com/<br/><br/>
                                         [9] D. Shinar, B. Gurion, “Fleet Study Evaluation of an Advance Brake Warning System,”
                                         Human Factors, vol. 42, no. 3, p. 482-489, Sept, 2000. [Online serial]. Available: https://
                                         journals-sagepub-com.ezproxy.library.uvic.ca/doi/pdf/10.1518/001872000779698141.
-                                        [Accessed June. 1, 2019].<br/>
+                                        [Accessed June. 1, 2019].<br/><br/>
                                         [10] W. W. Wierwille et al. “Evaluation of Enhanced Brake Lights Using Surrogate Safety
                                         Measures” [Online]. Available: https://pdfs.semanticscholar.org/1a3c/
-                                        70b98dc5df5e6ec49b2e4354948e023c13a6.pdf<br/>
-                                        [11] Facebook Inc. "Getting Started" [Online]. Available: https://reactjs.org/docs/gettingstarted.html<br/>
+                                        70b98dc5df5e6ec49b2e4354948e023c13a6.pdf<br/><br/>
+                                        [11] Facebook Inc. "Getting Started" [Online]. Available: https://reactjs.org/docs/gettingstarted.html<br/><br/>
                                         [12] Node.js Foundation. "API Reference Documentation" [Online]. Available: https://
-                                        nodejs.org/en/docs/<br/>
+                                        nodejs.org/en/docs/<br/><br/>
                                         [13] The PostgreSQL Global Development Group. "Documentation" [Online]. Available:
-                                        https://www.postgresql.org/docs/<br/>
-                                        [14] restfulapi.net. "REST API Tutorial" [Online]. Available: https://restfulapi.net/<br/>
+                                        https://www.postgresql.org/docs/<br/><br/>
+                                        [14] restfulapi.net. "REST API Tutorial" [Online]. Available: https://restfulapi.net/<br/><br/>
                                         [15] Mozilla and individual contributors. "An overview of HTTP" [Online]. Available: https://
-                                        developer.mozilla.org/en-US/docs/Web/HTTP/Overview<br/>
+                                        developer.mozilla.org/en-US/docs/Web/HTTP/Overview<br/><br/>
                                         [16] Raspberry Pi Foundation. "Raspberry Pi 3 Model B+" [Online]. Available: https://
-                                        www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/<br/>
-                                    </p><br/>
+                                        www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/<br/><br/>
+                                    </p>
                                     <h4>Hardware</h4>
                                     <p>
                                         [17] Arduino Basics. "CH376S USB Read/Write Module" [Online]. Available: <a href="https://arduinobasics.blogspot.com/2015/05/ch376s-usb-readwrite-module.html">https://arduinobasics.blogspot.com/2015/05/ch376s-usb-readwrite-module.html</a><br/>
