@@ -79,7 +79,7 @@ class Freno extends Component {
                                     <h1>
                                         Short Demo
                                     </h1>
-                                    <YouTube videoId='BtLwoNJ6klE' className="freno-video"/>
+                                    <YouTube videoId='EKKhHSFBLxI' className="freno-video"/>
                                 </Col>
                             </Row>
                             <Row className="justify-content-center mt-5">
