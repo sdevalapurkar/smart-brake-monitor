@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import SignupModal from './SignupModal';
 import LoginModal from './LoginModal';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -68,13 +67,13 @@ class NavbarBootstrap extends Component {
                         )}
                     </Nav>
                 </Navbar.Collapse>
-                <Navbar.Collapse className="center-mobile" id="basic-navbar-nav">
+                <Navbar.Collapse  id="basic-navbar-nav">
                     <Nav className="mr-auto" />
                     {!isAuthenticated && (
-                        <ButtonToolbar className="my-2">
+                        <div className="my-2 center-mobile">
                             <Button className="mr-3" variant="outline-info" size="sm" as="input" value="Sign Up" onClick={() => this.setState({ showSignupModal: true })} />
                             <Button variant="outline-success" size="sm" as="input" value="Login" onClick={() => this.setState({ showLoginModal: true })} />
-                        </ButtonToolbar>
+                        </div>
                     )}
                     {isAuthenticated && (
                         <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
