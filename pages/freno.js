@@ -218,10 +218,11 @@ class Freno extends Component {
                                     <p>
                                         [1] U.S. Dept. of Transportation. National Highway Traffic Safety Administration. "Analyses
                                         of Rear-End Crashes and Near-Crashes in the 100-Car Naturalistic Driving Study to
-                                        Support Rear-Signaling Countermeasure Development" [Online]. Available: https://
-                                        www.nhtsa.gov/sites/nhtsa.dot.gov/files/analyses20of20rear-end20crashes20and20nearcrashes20dot20hs2081020846.pdf<br/><br/>
+                                        Support Rear-Signaling Countermeasure Development" [Online]. Available: <a href="https://www.nhtsa.gov/sites/nhtsa.dot.gov/files/analyses20of20rear-end20crashes20and20near-crashes20dot20hs2081020846.pdf">
+                                        https://www.nhtsa.gov/sites/nhtsa.dot.gov/files/analyses20of20rear-end20crashes20and20near-crashes20dot20hs2081020846.pdf</a><br/><br/>
                                         [2] “Electronic Brake Monitoring,” Electronic Brake Monitoring | MGM Brakes. [Online].
-                                        Available: https://mgmbrakes.com/products/product-models/electronic-brakemonitoring/. [Accessed: 16-Jun-2019].<br/><br/>
+                                        Available: <a href="https://mgmbrakes.com/products/product-models/electronic-brake-monitoring/">
+                                        https://mgmbrakes.com/products/product-models/electronic-brake-monitoring/</a>. [Accessed: 16-Jun-2019].<br/><br/>
                                         [3] D. E. Fumi and I. A. Sultan, “A novel in-vehicle real-time brake-monitoring system,”
                                         Proceedings of the Institution of Mechanical Engineers, Part D: Journal of Automobile
                                         Engineering, vol. 223, no. 6, pp. 793–804, 2009<br/><br/>
@@ -234,46 +235,46 @@ class Freno extends Component {
                                         Congress on Big Data (BigData Congress), San Francisco, CA, 2016, pp. 230-235.<br/><br/>
                                         [7] F. Monnerat, J. Dias, M. Alves, “Fleet management: A vehicle and driver assignment
                                         model,” European Journal of Operational Research, vol. 278, no. 1, p. 64-75, March,
-                                        2019. [Online serial]. Available: https://www.sciencedirect.com/science/article/abs/pii/
-                                        S0377221719302607. [Accessed June. 1, 2019].<br/><br/>
+                                        2019. [Online serial]. Available: <a href="https://www.sciencedirect.com/science/article/abs/pii/S0377221719302607">
+                                        https://www.sciencedirect.com/science/article/abs/pii/S0377221719302607</a>. [Accessed June. 1, 2019].<br/><br/>
                                         [8] Motus. "Don’t Just Drive. Arrive. A Better Way to Get Going With Motus" [Online].
-                                        Available: https://www.motus.com/<br/><br/>
+                                        Available: <a href="https://www.motus.com/">https://www.motus.com/</a><br/><br/>
                                         [9] D. Shinar, B. Gurion, “Fleet Study Evaluation of an Advance Brake Warning System,”
-                                        Human Factors, vol. 42, no. 3, p. 482-489, Sept, 2000. [Online serial]. Available: https://
-                                        journals-sagepub-com.ezproxy.library.uvic.ca/doi/pdf/10.1518/001872000779698141.
+                                        Human Factors, vol. 42, no. 3, p. 482-489, Sept, 2000. [Online serial]. Available: <a href="https://journals-sagepub-com.ezproxy.library.uvic.ca/doi/pdf/10.1518/001872000779698141">
+                                        https://journals-sagepub-com.ezproxy.library.uvic.ca/doi/pdf/10.1518/001872000779698141</a>.
                                         [Accessed June. 1, 2019].<br/><br/>
                                         [10] W. W. Wierwille et al. “Evaluation of Enhanced Brake Lights Using Surrogate Safety
-                                        Measures” [Online]. Available: https://pdfs.semanticscholar.org/1a3c/
-                                        70b98dc5df5e6ec49b2e4354948e023c13a6.pdf<br/><br/>
-                                        [11] Facebook Inc. "Getting Started" [Online]. Available: https://reactjs.org/docs/gettingstarted.html<br/><br/>
-                                        [12] Node.js Foundation. "API Reference Documentation" [Online]. Available: https://
-                                        nodejs.org/en/docs/<br/><br/>
+                                        Measures” [Online]. "Available: <a href="https://pdfs.semanticscholar.org/1a3c/70b98dc5df5e6ec49b2e4354948e023c13a6.pdf">
+                                        https://pdfs.semanticscholar.org/1a3c/70b98dc5df5e6ec49b2e4354948e023c13a6.pdf</a><br/><br/>
+                                        [11] Facebook Inc. "Getting Started" [Online]. Available: <a href="https://reactjs.org/docs/getting-started.html">
+                                        https://reactjs.org/docs/getting-started.html</a><br/><br/>
+                                        [12] Node.js Foundation. "API Reference Documentation" [Online]. Available: <a href="https://nodejs.org/en/docs/">https://nodejs.org/en/docs/</a><br/><br/>
                                         [13] The PostgreSQL Global Development Group. "Documentation" [Online]. Available:
-                                        https://www.postgresql.org/docs/<br/><br/>
-                                        [14] restfulapi.net. "REST API Tutorial" [Online]. Available: https://restfulapi.net/<br/><br/>
-                                        [15] Mozilla and individual contributors. "An overview of HTTP" [Online]. Available: https://
-                                        developer.mozilla.org/en-US/docs/Web/HTTP/Overview<br/><br/>
-                                        [16] Raspberry Pi Foundation. "Raspberry Pi 3 Model B+" [Online]. Available: https://
-                                        www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/<br/><br/>
+                                        <a href="https://www.postgresql.org/docs/">https://www.postgresql.org/docs/</a><br/><br/>
+                                        [14] restfulapi.net. "REST API Tutorial" [Online]. Available: <a href="https://restfulapi.net/">https://restfulapi.net/</a><br/><br/>
+                                        [15] Mozilla and individual contributors. "An overview of HTTP" [Online]. Available: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview">
+                                        https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview</a><br/><br/>
+                                        [16] Raspberry Pi Foundation. "Raspberry Pi 3 Model B+" [Online]. Available: <a href="https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/">
+                                        https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/</a><br/><br/>
                                     </p>
                                     <h4>Hardware</h4>
-                                    <p>
-                                        [17] Arduino Basics. "CH376S USB Read/Write Module" [Online]. Available: <a href="https://arduinobasics.blogspot.com/2015/05/ch376s-usb-readwrite-module.html">https://arduinobasics.blogspot.com/2015/05/ch376s-usb-readwrite-module.html</a><br/>
-                                        [18] Arduino Basics. "How to use CH376S USB read/write module" [Video file]. Available: https://www.youtube.com/watch?v=yK3631kMKBU<br/>
-                                        [19] How To Mechatronics. "How To Control WS2812B Individually Addressable LEDs using Arduino" [Video file]. Available: https://www.youtube.com/watch?v=UhYu0k2woRM<br/>
-                                        [20] Adafruit. "RGB LED Strips - Arduino Code" [Online]. Available: https://learn.adafruit.com/rgb-led-strips/arduino-code<br/>
-                                        [21] Random Nerd Tutorials. "Guide for WS2812B Addressable RGB LED Strip with Arduino" [Online]. Available: https://randomnerdtutorials.com/guide-for-ws2812b-addressable-rgb-led-strip-with-arduino/<br/>
-                                        [22] How To Mechatronics. "Arduino and MPU6050 Accelerometer and Gyroscope Tutorial" [Online]. Available: https://howtomechatronics.com/tutorials/arduino/arduino-and-mpu6050-accelerometer-and-gyroscope-tutorial/<br/>
-                                        [23] Maker Pro. "How to Interface Arduino and the MPU 6050 Sensor" [Online]. Available: https://maker.pro/arduino/tutorial/how-to-interface-arduino-and-the-mpu-6050-sensor<br/>
-                                    </p><br/>
+                                    <p><br/>
+                                        [17] Arduino Basics. "CH376S USB Read/Write Module" [Online]. Available: <a href="https://arduinobasics.blogspot.com/2015/05/ch376s-usb-readwrite-module.html">https://arduinobasics.blogspot.com/2015/05/ch376s-usb-readwrite-module.html</a><br/><br/>
+                                        [18] Arduino Basics. "How to use CH376S USB read/write module" [Video file]. Available: <a href="https://www.youtube.com/watch?v=yK3631kMKBU">https://www.youtube.com/watch?v=yK3631kMKBU</a><br/><br/>
+                                        [19] How To Mechatronics. "How To Control WS2812B Individually Addressable LEDs using Arduino" [Video file]. Available: <a href="https://www.youtube.com/watch?v=UhYu0k2woRM">https://www.youtube.com/watch?v=UhYu0k2woRM</a><br/><br/>
+                                        [20] Adafruit. "RGB LED Strips - Arduino Code" [Online]. Available: <a href="https://learn.adafruit.com/rgb-led-strips/arduino-code">https://learn.adafruit.com/rgb-led-strips/arduino-code</a><br/><br/>
+                                        [21] Random Nerd Tutorials. "Guide for WS2812B Addressable RGB LED Strip with Arduino" [Online]. Available: <a href="https://randomnerdtutorials.com/guide-for-ws2812b-addressable-rgb-led-strip-with-arduino/">https://randomnerdtutorials.com/guide-for-ws2812b-addressable-rgb-led-strip-with-arduino/</a><br/><br/>
+                                        [22] How To Mechatronics. "Arduino and MPU6050 Accelerometer and Gyroscope Tutorial" [Online]. Available: <a href="https://howtomechatronics.com/tutorials/arduino/arduino-and-mpu6050-accelerometer-and-gyroscope-tutorial/">https://howtomechatronics.com/tutorials/arduino/arduino-and-mpu6050-accelerometer-and-gyroscope-tutorial/</a><br/><br/>
+                                        [23] Maker Pro. "How to Interface Arduino and the MPU 6050 Sensor" [Online]. Available: <a href="https://maker.pro/arduino/tutorial/how-to-interface-arduino-and-the-mpu-6050-sensor">https://maker.pro/arduino/tutorial/how-to-interface-arduino-and-the-mpu-6050-sensor</a><br/><br/>
+                                    </p>
                                     <h4>Web Application</h4>
-                                    <p>
-                                        [24] Heroku Dev Center. "Error Pages" [Online]. Available: https://devcenter.heroku.com/articles/error-pages<br/>
-                                        [25] Geekality. "Heroku Deploy Sub Directory" [Online]. Available: https://www.geekality.net/2019/03/13/heroku-deploy-sub-directory/<br/>
-                                        [26] Heroku Dev Center. "Git" [Online]. Available: https://devcenter.heroku.com/articles/git<br/>
-                                        [27] Sciencing. "Calculate Brake Torque" [Online]. Available: https://sciencing.com/calculate-brake-torque-6076252.html<br/>
-                                        [28] Geotab. "What is G-Force and How is it Related to Harsh Driving?" [Online]. Available: https://www.geotab.com/blog/what-is-g-force/<br/>
-                                        [29] Continental Tire. "How To Read A Tire Sidewall" [Online]. Available: https://www.continentaltire.com/news/how-read-tire-sidewall<br/>
+                                    <p><br/>
+                                        [24] Heroku Dev Center. "Error Pages" [Online]. Available: <a href="https://devcenter.heroku.com/articles/error-pages">https://devcenter.heroku.com/articles/error-pages</a><br/><br/>
+                                        [25] Geekality. "Heroku Deploy Sub Directory" [Online]. Available: <a href="https://www.geekality.net/2019/03/13/heroku-deploy-sub-directory/">https://www.geekality.net/2019/03/13/heroku-deploy-sub-directory/</a><br/><br/>
+                                        [26] Heroku Dev Center. "Git" [Online]. Available: <a href="https://devcenter.heroku.com/articles/git">https://devcenter.heroku.com/articles/git</a><br/><br/>
+                                        [27] Sciencing. "Calculate Brake Torque" [Online]. Available: <a href="https://sciencing.com/calculate-brake-torque-6076252.html">https://sciencing.com/calculate-brake-torque-6076252.html</a><br/><br/>
+                                        [28] Geotab. "What is G-Force and How is it Related to Harsh Driving?" [Online]. Available: <a href="https://www.geotab.com/blog/what-is-g-force/">https://www.geotab.com/blog/what-is-g-force/</a><br/><br/>
+                                        [29] Continental Tire. "How To Read A Tire Sidewall" [Online]. Available: <a href="https://www.continentaltire.com/news/how-read-tire-sidewall">https://www.continentaltire.com/news/how-read-tire-sidewall</a><br/><br/>
                                     </p>
 
                                 </Col>
