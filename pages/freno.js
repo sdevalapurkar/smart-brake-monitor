@@ -158,7 +158,7 @@ class Freno extends Component {
                                     </CardDeck>
                                 </Col>
                             </Row>
-                            <Row className="justify-content-center">
+                            <Row className="marg-top justify-content-center">
                                 <Col md={18} lg={18} className="mb-3 mb-md-0" >
                                     <CardDeck>
                                         <Card style={{ width: '18rem', borderRadius: '1em', boxShadow: '0px 5px 32px -16px' }}>
