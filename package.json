@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@coreui/coreui-plugin-chartjs-custom-tooltips": "^1.3.1",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "react-chartjs-2": "^2.7.6",
     "react-router-dom": "^5.0.1",
     "reactstrap": "^8.0.0"
